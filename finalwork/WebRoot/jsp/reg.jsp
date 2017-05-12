@@ -40,6 +40,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   if(flag == "true"){
                      $("#userInfo").html( value + "已经被使用了,请换一个用户名！");
                   }
+                  else{
+                  	$("#userInfo").html("");
+                  }
               },
               error:function(){  
                         alert("请求出错");  

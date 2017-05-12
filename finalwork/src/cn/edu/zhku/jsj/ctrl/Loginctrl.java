@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+@SuppressWarnings("serial")
 public class Loginctrl extends HttpServlet {
 
 
@@ -33,7 +34,7 @@ public class Loginctrl extends HttpServlet {
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/store?useUnicode=true&characterEncoding=utf8","root","zhijie");
 			String users =(String)request.getParameter("lguserName");
 		    String pass =(String)request.getParameter("lgpwd");
-		    String check = users;
+		    String check = (String)session.getAttribute(users);
 		    String msg = null;
 		    RequestDispatcher rd = null;
 		    if(check == null)
@@ -58,12 +59,12 @@ public class Loginctrl extends HttpServlet {
 			    }
 		    }
 		    else
-			 {
+			{
 		    	msg = "ÄãÒÔµÇÂ½£¬Çë²»ÒªÖØ¸´µÇÂ½";
 			    request.setAttribute("MSG", msg);
 		    	rd = request.getRequestDispatcher("/jsp/result.jsp");
 				rd.forward(request,response);
-			 }
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

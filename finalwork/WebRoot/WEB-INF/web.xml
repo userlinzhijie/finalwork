@@ -37,7 +37,19 @@
   <servlet-mapping>
     <servlet-name>Loginctrl</servlet-name>
     <url-pattern>/Loginctrl</url-pattern>
-  </servlet-mapping>	
+  </servlet-mapping>
+  
+  <filter>
+  	<filter-name>loginfilter</filter-name>
+  	<filter-class>cn.edu.zhku.jsj.ctrl.filter.Loginfilter</filter-class>
+  </filter>
+  <filter-mapping>
+  <filter-name>loginfilter</filter-name>
+  <url-pattern>//Loginctrl</url-pattern>
+  </filter-mapping>
+  
+  
+  	
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
