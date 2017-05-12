@@ -25,7 +25,7 @@ public class Loginfilter implements Filter {
 		String loginmess = (String)session.getAttribute("user");
 		if(loginmess == null)
 		{
-			System.out.println("test");
+			
 		}
 		chain.doFilter(request, response);
 	}
