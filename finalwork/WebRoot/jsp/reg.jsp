@@ -18,10 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	
 	<link rel="stylesheet" type="text/css" href="./css/styles.css">
-	<link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css">
-	<link href="./css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
-	<link href="./css/templatemo_style.css" rel="stylesheet" type="text/css">
-	
+	<link href="./css/reg.css" rel="stylesheet" type="text/css">	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
   	<script type="application/x-javascript"> 
 					addEventListener("load", function() { 
@@ -56,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<script type="text/javascript">
 	function s() {
-		alert("服务协议如下。。。");
+		alert("服务协议如下..");
 	}
 	function c() {
 		if (document.getElementById("checktosubmit").checked)
@@ -66,19 +63,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   </head>
   
+ </body>
  <div id="Container">
 		<div id="Header">
-			<div id="logo"></div>
+			<div id="logo"><p align = "right"><a href ="./jsp/login.jsp">已有账号，请登录</a></p></div>
 		</div>
-		<div id="Midbar">
-			<img src="./img/t1.jpg" width=100px height=50px>
+		<div id="Midbar" >
+			<p align = "center" class = "ziti">欢迎注册
+			<img align = "left" src="./img/t1.jpg" width=100px height=60px></p>
 		</div>
 		<div id="Content">
 			<div id="Content-Mid">
-				<form
-					class="form-horizontal templatemo-create-account templatemo-container"
-					action="#" method="post">
-					<div class="form-inner">
+				<form class="form-horizontal" action="Regctrl" method="post" id = "reg-form">
+					<div>
 						<div class="form-group">
 							<div class="col-md-6">
 								<label for="first_name" class="control-label">用户名</label> <input
@@ -102,18 +99,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="form-group">
 							<div class="col-md-12">
 								<label><input type="checkbox" onclick="c()"
-									id="checktosubmit">我同意 <a onclick=s()
+									id="checktosubmit">我同意</label><a onclick=s()
 									data-toggle="modal" data-target="#templatemo_modal"> 服务协议</a> 和
 									<a onclick="s()" data-toggle="modal"
 									data-target="#templatemo_modal">法律声明.</a>
-								</label>
+								
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-md-12">
 								<input type="submit" value="注册" class="btn btn-info"
-									disabled="true" id="csubmit"> <a href="index.jsp"
-									class="pull-right">返回</a>
+									disabled="true" id="csubmit">
 							</div>
 						</div>
 					</div>

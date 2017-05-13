@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MyHtml.html</title>
+	
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+	<style type="text/css">
+	body{padding:0px; margin:0px; font-size:12px;}
+	#ul1{width:800px; margin:0 auto; height:30px; line-height:30px;list-style:none; background:#CCC;}
+	#ul1 li{float:left; width:100px; text-align:center;}
+	#ul1 li a{text-decoration:none; display:block;}
+	#ul1 li a:hover{background:#FCC;}
+	#ul1 li div{display:none; background:#FCC; height:0;}
+	</style>
+  </head>
+
+ 
+ 
+<script type="text/javascript">
+window.onload=function(){
+    var lis = document.getElementsByTagName("li");
+    for(var i=0; i<lis.length; i++){
+        lis[i].onmouseover = function(){
+            this.getElementsByTagName("div")[0].style.display = "block";
+        };
+        lis[i].onmouseout = function(){
+            this.getElementsByTagName("div")[0].style.display = "none";
+        };
+    }
+};
+ 
+</script>
+  <body>
+    <ul id="ul1">
+    <li>
+          <a href="#">1111111</a>
+          <div><a href="#">01 </a><a href="#">02 </a><a href="#">03</a></div>
+        
+    </li>
+    <li>
+          <a href="#">1111111</a>
+          <div><a href="#">111111111</a><a href="#">111111111</a><a href="#">111111111</a></div>
+    </li>
+    <li>
+          <a href="#">1111111</a>
+         <div><a href="#">111111111</a><a href="#">111111111</a><a href="#">111111111</a></div>
+    </li>
+    <li>
+          <a href="#">1111111</a>
+         <div><a href="#">111111111</a><a href="#">111111111</a><a href="#">111111111</a></div>
+    </li>
+ 
+</ul>
+  </body>
+</html>
