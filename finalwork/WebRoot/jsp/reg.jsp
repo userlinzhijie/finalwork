@@ -20,11 +20,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="./css/styles.css">
 	<link href="./css/reg.css" rel="stylesheet" type="text/css">	
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	<script type="application/x-javascript"> 
-					addEventListener("load", function() { 
-						setTimeout(hideURLbar, 0); }, false);
-					function hideURLbar(){ window.scrollTo(0,1); } 
-	</script>
 	<script type="text/javascript" src="js/jquery-1.11.1.js"></script> 
 	<script type="text/javascript">
 		 function checkname(){  

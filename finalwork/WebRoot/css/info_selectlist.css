@@ -1,0 +1,33 @@
+@CHARSET "UTF-8";
+table.hovertable {  
+    font-family: verdana,arial,sans-serif;
+    font-size:15px;  
+    color:#333333;  
+    border-width: 1px;  
+    border-color: #FFFFFF;  
+    border-collapse: collapse;  
+    position:absolute;
+    top:230px;
+    left:60px;
+}  
+table.hovertable th { 
+	width:200px;
+	height:50px;
+	text-align:center; 
+	vertical-align:center;
+    background-color:#c3dde0;    
+    border-style: solid;  
+    border-color: #a9c6c9;  
+}  
+table.hovertable tr {
+    background-color:#d4e3e5;  
+}  
+table.hovertable td {
+	width:200px;
+	height:50px;
+	text-align:center; 
+	vertical-align:center;
+    border-style: solid;  
+    border-color: #a9c6c9;  
+}
+

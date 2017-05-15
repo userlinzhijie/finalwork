@@ -1,0 +1,23 @@
+@CHARSET "UTF-8";
+.userid{
+	border:0px;
+	background:none;
+	text-align:center;
+}
+
+table.info{
+	width:600px;
+	height:300px;
+	position:absolute;
+	top:190px;
+	left:500px;
+	border-collaspe:collaspe;
+	border:gray solid 2px;
+	font-family:"STFangsong";
+	border-radius:5px;
+	border-color:#6699FF;
+	}
+table.info td{
+	text-indent:5em;
+	width:10px;
+	}
