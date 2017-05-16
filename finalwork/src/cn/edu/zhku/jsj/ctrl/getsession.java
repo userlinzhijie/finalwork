@@ -15,22 +15,21 @@ import net.sf.json.JSONObject;
 public class getsession extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		this.doPost(request, response);
-	}
-
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		HttpSession session=request.getSession();
 		String name = (String)session.getAttribute("user");
-
 		JSONObject resultJson = new JSONObject();
-		resultJson.put("userid", name);
+		resultJson.put("flag", name);
 		out.println(resultJson);
 		out.flush();
 		out.close();
+	}
+
+	public void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		this.doGet(request, response);
 	}
 
 }

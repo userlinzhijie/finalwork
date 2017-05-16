@@ -29,7 +29,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		<div id="Midbar" >
 			<p align = "center" class = "ziti">欢迎登陆
-			<img align = "left" src="./img/t1.jpg" width=100px height=60px></p>
 		</div>
 		<div id="Content">
 			<div id="Content-Mid">

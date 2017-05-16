@@ -9,39 +9,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>个人信息</title>
+    <title>更改密码</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	
-	<link href="css/styles.css" rel="stylesheet" type="text/css" >
 	<link href="css/info_selectlist.css" rel="stylesheet" type="text/css">
+	<link href="css/styles.css" rel="stylesheet" type="text/css" >
 	<link href="css/info.css" rel="stylesheet" type="text/css">
-	<script type="text/javascript" src="js/jquery-1.11.1.js"></script> 
-  	<script language="javascript" type="text/javascript">
-	  	window.onload=function(){
-	  	/* $("input[name=sex][value=保密]").attr("checked",true);
-	  	 $("#truename").val("");*/
-	  	 $.ajax({  
-               type:"get",//请求方式  
-               url:"getsession",//发送请求地址  
-               timeout:30000,//超时时间：30秒  
-               dataType:"json",//设置返回数据的格式  
-               async:false,
-               //请求成功后的回调函数 data为json格式  
-               success:function(data){
-               		var name = data.flag;
-               		$("#userid").val(name);
-               		$("#useridtop").val(name);
-              },
-              error:function(){  
-                    alert("请求出错");
-              }  
-           });
-           
+	
+	<script language="javascript" type="text/javascript">
+	  	window.onload=function(){         
         var lis = document.getElementsByClassName("subme");
 	    for(var i=0; i<lis.length; i++){
 	        lis[i].onmouseover = function(){
@@ -51,11 +31,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            this.getElementsByClassName("submenu")[0].style.display = "none";
 	        };
 	    }
-           };  
+        };  
   	</script>
-	
   </head>
-
   
   <body>
     <div id="Header">
@@ -63,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<p align =right>欢迎回来,<input type="text" class="useridtop" id="useridtop" disabled>&nbsp;&nbsp;
   	<a href = "jsp/exit.jsp">退出登陆</a><p> 
 	</div></div>
- 	<p align = "center" class = "ziti">我的信息</p>
+ 	<p align = "center" class = "ziti">更改密码</p>
  	<ul id="ul1">
 	    <li class="subme">
 	          <a href="jsp/login.jsp">店铺订单</a>
@@ -99,25 +77,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    <td><a href="jsp/apply.jsp">申请开铺</a></td>  
 			</tr>   
 		</table>
-    	
-    	
-    <div class="div1">
-	<form action="Infoctrl" method="post">
+		
+	<div class="div1">
+	<form action="Pwdctrl" method="post">
     	<table class="info">
     	<tr>	
-    		<th colspan="2">我的信息</th>
+    		<th colspan="2">更改密码</th>
     		</tr>
     	<tr>
-    		<td>用户名:</td><td><input type="text"  disabled class="userid" id="userid" name="userid"></td>
-    	</tr>
-    	<tr><td>性别:</td><td><input type ="radio" name="sex" value="男" >男<input type ="radio" name="sex" value="女">女
-    		<input type ="radio" name="sex" value="保密">保密</td>
+    		<td>原本密码</td><td><input type="text"></td>
     		</tr>
     	<tr>
-    		<td>生日:</td><td><input type="date" name="birthday"></td>
+    		<td>新的密码</td><td><input type="password"></td>
     		</tr>
     	<tr>
-    		<td>真实姓名:</td><td><input type="text" name="truename" id="truename" class="truename"></td>
+    		<td>确认密码</td><td><input type="password"></td>
     		</tr>
     	<tr>
     		<th colspan="2"><input type="submit" value="修改" class="infosub"></th>

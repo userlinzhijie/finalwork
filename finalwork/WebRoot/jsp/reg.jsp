@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                type:"get",//请求方式  
                url:"CheckUserNameServlet?userName=" + value,//发送请求地址  
                timeout:30000,//超时时间：30秒  
-               dataType:"json",//设置返回数据的格式  
+               dataType:"json",//设置返回数据的格式 
                //请求成功后的回调函数 data为json格式  
                success:function(data){  
                   var flag = data.flag;
@@ -48,11 +48,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<script type="text/javascript">
 	function s() {
-		alert("服务协议如下..");
+		alert("法律协议如下..");
 	}
 	function c() {
 		if (document.getElementById("checktosubmit").checked)
 			document.getElementById("csubmit").disabled=false;
+		else{
+			document.getElementById("csubmit").disabled=true;
+			}
 	}
 </script>
 
@@ -65,7 +68,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		<div id="Midbar" >
 			<p align = "center" class = "ziti">欢迎注册
-			<img align = "left" src="./img/t1.jpg" width=100px height=60px></p>
 		</div>
 		<div id="Content">
 			<div id="Content-Mid">
@@ -94,10 +96,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="form-group">
 							<div class="col-md-12">
 								<label><input type="checkbox" onclick="c()"
-									id="checktosubmit">我同意</label><a onclick=s()
-									data-toggle="modal" data-target="#templatemo_modal"> 服务协议</a> 和
-									<a onclick="s()" data-toggle="modal"
-									data-target="#templatemo_modal">法律声明.</a>
+									id="checktosubmit">我同意</label><a onclick="s()">法律协议</a>
 								
 							</div>
 						</div>

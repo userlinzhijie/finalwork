@@ -1,4 +1,11 @@
 @CHARSET "UTF-8";
+.useridtop{
+	border:0px;
+	background:none;
+	height:20px;
+	width:5%;
+	text-align:center;
+}
 #Container{
     width:100%;
     margin:0 auto;/*设置整个容器在浏览器中水平居中*/
@@ -136,8 +143,6 @@ a
 	{
 		text-decoration:none;
 	}
-	
-	
 	
 	
 	
