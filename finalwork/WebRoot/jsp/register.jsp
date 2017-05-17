@@ -18,11 +18,11 @@
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
 
-<link rel="stylesheet" type="text/css" href="../css/styles.css">
-<link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="../css/bootstrap-theme.min.css" rel="stylesheet"
+<link rel="stylesheet" type="text/css" href="./css/styles.css">
+<link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="./css/bootstrap-theme.min.css" rel="stylesheet"
 	type="text/css">
-<link href="../css/templatemo_style.css" rel="stylesheet" type="text/css">
+<link href="./css/templatemo_style.css" rel="stylesheet" type="text/css">
 
 
 </head>
@@ -33,7 +33,7 @@
 			<div id="logo"></div>
 		</div>
 		<div id="Midbar">
-			<img src="../img/t1.jpg" width=100px height=50px>
+			<img src="./img/t1.jpg" width=100px height=50px>
 		</div>
 		<div id="Content">
 			<div id="Content-Mid">

@@ -5,12 +5,12 @@
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_6_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/新建文件夹/06-Ajax/workspace/AjaxDemo/WebRoot/WEB-INF/lib/commons-beanutils-1.7.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/新建文件夹/06-Ajax/workspace/AjaxDemo/WebRoot/WEB-INF/lib/commons-collections-3.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/新建文件夹/06-Ajax/workspace/AjaxDemo/WebRoot/WEB-INF/lib/commons-lang-2.5.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/新建文件夹/06-Ajax/workspace/AjaxDemo/WebRoot/WEB-INF/lib/commons-logging.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/新建文件夹/06-Ajax/workspace/AjaxDemo/WebRoot/WEB-INF/lib/ezmorph-1.0.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/新建文件夹/06-Ajax/workspace/AjaxDemo/WebRoot/WEB-INF/lib/json-lib-2.1-jdk15.jar"/>
-	<classpathentry kind="lib" path="D:/工具/课件/mysql-connector-java-5.0.0-beta-bin.jar"/>
+	<classpathentry kind="lib" path="D:/我的文档/GitHub/finalwork/finalwork/WebRoot/WEB-INF/lib/commons-beanutils-1.7.0.jar"/>
+	<classpathentry kind="lib" path="D:/我的文档/GitHub/finalwork/finalwork/WebRoot/WEB-INF/lib/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="D:/我的文档/GitHub/finalwork/finalwork/WebRoot/WEB-INF/lib/commons-lang-2.5.jar"/>
+	<classpathentry kind="lib" path="D:/我的文档/GitHub/finalwork/finalwork/WebRoot/WEB-INF/lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="D:/我的文档/GitHub/finalwork/finalwork/WebRoot/WEB-INF/lib/ezmorph-1.0.3.jar"/>
+	<classpathentry kind="lib" path="D:/我的文档/GitHub/finalwork/finalwork/WebRoot/WEB-INF/lib/json-lib-2.1-jdk15.jar"/>
+	<classpathentry kind="lib" path="D:/我的文档/GitHub/finalwork/finalwork/WebRoot/WEB-INF/lib/mysql-connector-java-5.0.0-beta-bin.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
