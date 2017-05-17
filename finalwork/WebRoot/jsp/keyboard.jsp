@@ -17,10 +17,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<link href="css/styles.css" rel="stylesheet" type="text/css" >
+	<link href="css/keyboard.css" rel="stylesheet" type="text/css" >
 	<link href="./css/selectlist.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="js/jquery-1.11.1.js"></script> 
 	
 	<script language="javascript" type="text/javascript">
 	  	window.onload=function(){
+	  	//折叠菜单函数
         var lis = document.getElementsByClassName("subme");
 	    for(var i=0; i<lis.length; i++){
 	        lis[i].onmouseover = function(){
@@ -29,9 +32,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        lis[i].onmouseout = function(){
 	            this.getElementsByClassName("submenu")[0].style.display = "none";
 	        };
-	    }
-           };  
+	    	}
+	    	
+	    	//ajax读取数据库
+	    	 $.ajax({  
+               type:"get",//请求方式  
+               url:"Getgoods",//发送请求地址  
+               timeout:30000,//超时时间：30秒  
+               dataType:"json",//设置返回数据的格式  
+               async:false,
+               //请求成功后的回调函数 data为json格式  
+               success:function(data){  
+               var objs=eval(data);
+               var obj = objs.Keyboards;
+               var name1=obj[1].name;
+               var brand = ["brand1","brand2"]; 
+               document.getElementById(brand[0]).innerHTML=name1;
+      /*         	alert(name1);
+               	alert(brand[1]);*/
+              },  
+              //请求出错的处理  
+              error:function(){  
+                        alert("请求出错");  
+              }  
+           });  
+			var test="img/SSR.jpg";
+			document.getElementById("img1").src=test;
+			document.getElementById("img2").src=test;
+          };  
   	</script>
+  	
+  	<script type="text/javascript">
+	
+	</script>
 
   </head>
   
@@ -101,8 +134,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</table>
 	 	</div>
 	 		<div class="div1">
-	 			 <input type="image" alt="test" src="Showimg" name="test1" value="1">
-	 			 <input type="image" alt="test" src="Showimg" name="test1" value="2">
+	 		<table class="shoplist">
+	 			<tr>
+				<td><a href=""><table class="shopdetail">
+					<tr>
+					<td><img id="img1" src="" width="30px" height="20px"></td></tr>
+					<tr>
+					<td>xx键盘<span id="brand1"></span></td></tr>
+					<tr>
+					<td>xx<span id="name1"></span></td></tr>
+					<tr>
+					<td>销量<span id="sales1"></span></td></tr>
+					</table></a></td>
+				<td><table class="shopdetail">
+					<tr>
+					<td><img id="img2" src="" width="30px" height="20px"></td></tr>
+					<tr>
+					<td>xx键盘<span id="brand1"></span></td></tr>
+					<tr>
+					<td>xx<span id="name1"></span></td></tr>
+					<tr>
+					<td>销量<span id="sales1"></span></td></tr>
+					</table></td></tr>
+				<tr>
+				<td><table class="shopdetail">
+					<tr>
+					<td><img id="img2" src="" width="30px" height="20px"></td></tr>
+					<tr>
+					<td>xx键盘<span id="brand1"></span></td></tr>
+					<tr>
+					<td>xx<span id="name1"></span></td></tr>
+					<tr>
+					<td>销量<span id="sales1"></span></td></tr>
+					</table></td></tr>
+			</table>
 	 		</div>
 	 	</div>
   </body>
