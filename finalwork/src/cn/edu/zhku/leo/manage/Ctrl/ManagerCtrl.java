@@ -1,12 +1,15 @@
 package cn.edu.zhku.leo.manage.Ctrl;
 
 import java.io.*;
+import java.net.*;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+//import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -30,6 +33,7 @@ public class ManagerCtrl extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		String action = request.getParameter("action");
+		
 		if ("edit".equals(action)) {
 			try {
 				this.edit(request, response);
@@ -69,6 +73,13 @@ public class ManagerCtrl extends HttpServlet {
 		} else if("getone".equals(action)){
 			try {
 				this.getone(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if("gets".equals(action)){
+			try {
+				this.getSession_user(request, response);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -238,6 +249,9 @@ public class ManagerCtrl extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
+		//HttpSession session = request.getSession();
+
+		
 		ManagerService g = new ManagerService();
 		if(request.getParameter("id")==""||request.getParameter("password")==""){
 			response.sendRedirect(request.getContextPath()+ "/html_manager/login.html");
@@ -251,6 +265,10 @@ public class ManagerCtrl extends HttpServlet {
 		m.setPassword(password);
 		
 		if(g.login(m)){
+			//session.setAttribute("user","管理员"+id); 
+			Cookie cookie = new Cookie(URLEncoder.encode("user", "utf-8"),URLEncoder.encode("管理员"+id, "utf-8"));
+			cookie.setMaxAge(60*60*24); 
+			response.addCookie(cookie);
 			response.sendRedirect(request.getContextPath()
 					+ "/html_manager/manager.html");
 		} else {
@@ -259,6 +277,31 @@ public class ManagerCtrl extends HttpServlet {
 		}
 	
 
+	}
+	
+	private void getSession_user(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		PrintWriter out = response.getWriter();
+		//request.setCharacterEncoding("utf-8");
+		//response.setCharacterEncoding("utf-8");
+
+		//HttpSession session = request.getSession();
+		Cookie[] cookies = null;
+		cookies = request.getCookies();
+		
+		//String uid = (String)session.getAttribute("user"); 
+		
+		//String name1 = URLDecoder.decode(cookies[1].getName(),"utf-8");
+		String name = URLDecoder.decode(cookies[0].getName(),"utf-8");
+		String value = URLDecoder.decode(cookies[0].getValue(),"utf-8");
+		
+		for(int i=0;i<cookies.length;i++){
+			name = URLDecoder.decode(cookies[i].getName(),"utf-8");
+			if(name.equals("user")){
+				value = URLDecoder.decode(cookies[i].getValue(),"utf-8");
+			}
+		}
+		out.println(value);
 	}
 	
 	/**
