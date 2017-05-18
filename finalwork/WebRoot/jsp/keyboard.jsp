@@ -55,10 +55,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               error:function(){  
                         alert("请求出错");  
               }  
-           });  
-			var test="img/SSR.jpg";
-			document.getElementById("img1").src=test;
-			document.getElementById("img2").src=test;
+           }); 
+           	var tomcat="/test/upload/";
+			var test="ssr.jpg";
+			document.getElementById("img1").src=tomcat+test;
+			document.getElementById("img2").src="img/SSR.jpg";
           };  
   	</script>
   	
@@ -86,8 +87,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <div class ="submenu"><a href="#">01 </a><a href="#">02 </a><a href="#">03</a></div>        
     </li>
     <li class="subme">
-          <a href="">店铺信息</a>
-          <div class ="submenu"><a href="#">1</a><a href="#">2</a><a href="#">3</a></div>
+          <a href="">店铺中心</a>
+	          <div class ="submenu"><a href="#">店铺信息</a><a href="#">上架货物</a><a href="#">下架货物</a></div>
     </li>
     <li class="subme">
           <a href="">我的订单</a>
