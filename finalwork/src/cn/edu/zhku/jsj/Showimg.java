@@ -1,4 +1,4 @@
-package cn.edu.zhku.jsj.ctrl;
+package cn.edu.zhku.jsj;
 
 import java.io.File;
 import java.io.FileInputStream;

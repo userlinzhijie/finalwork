@@ -1,4 +1,4 @@
-package cn.edu.zhku.jsj.ctrl;
+package cn.edu.zhku.jsj;
 
 import java.io.IOException;
 import java.io.PrintWriter;

@@ -9,19 +9,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>更改密码</title>
+    <title>个人信息</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<link href="css/info_selectlist.css" rel="stylesheet" type="text/css">
-	<link href="css/styles.css" rel="stylesheet" type="text/css" >
-	<link href="css/info.css" rel="stylesheet" type="text/css">
 	
-	<script language="javascript" type="text/javascript">
-	  	window.onload=function(){         
+	<link href="css/styles.css" rel="stylesheet" type="text/css" >
+	<link href="css/info_selectlist.css" rel="stylesheet" type="text/css">
+	<link href="css/info.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="js/jquery-1.11.1.js"></script> 
+  	<script language="javascript" type="text/javascript">
+	  	window.onload=function(){
         var lis = document.getElementsByClassName("subme");
 	    for(var i=0; i<lis.length; i++){
 	        lis[i].onmouseover = function(){
@@ -31,9 +32,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            this.getElementsByClassName("submenu")[0].style.display = "none";
 	        };
 	    }
-        };  
+           };  
   	</script>
+	
   </head>
+
   
   <body>
     <div id="Header">
@@ -41,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<p align =right>欢迎回来,<input type="text" class="useridtop" id="useridtop" disabled>&nbsp;&nbsp;
   	<a href = "jsp/exit.jsp">退出登陆</a><p> 
 	</div></div>
- 	<p align = "center" class = "ziti">更改密码</p>
+ 	<p align = "center" class = "ziti">上架商品</p>
  	<ul id="ul1">
 	    <li class="subme">
 	          <a href="jsp/login.jsp">店铺订单</a>
@@ -65,36 +68,45 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </ul><br><br><br>
     	<table class="hovertable">
 			<tr>  
-			    <th>我的中心</th>  
+			    <th>店铺中心</th>  
 			</tr>  
 			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
-			    <td><a href="jsp/info.jsp">我的信息</a></td>  
+			    <td><a href="jsp/shopinfo.jsp">店铺信息</a></td>  
 			</tr>  
 			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
-			    <td><a href="jsp/changepwd.jsp">更改密码</a></td>  
+			    <td><a href="jsp/putonsale.jsp">上架商品</a></td>  
 			</tr>  
 			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
-			    <td><a href="jsp/apply.jsp">申请开铺</a></td>  
+			    <td><a href="">下架商品</a></td>  
 			</tr>   
 		</table>
-		
-	<div class="div1">
-	<form action="Pwdctrl" method="post">
+    	
+    	
+    <div class="div1">
+	<form action="Upload" method="post">
     	<table class="info">
     	<tr>	
-    		<th colspan="2">更改密码</th>
+    		<th colspan="2">上架商品</th>
     		</tr>
     	<tr>
-    		<td>原本密码</td><td><input type="text"></td>
+    		<td>品牌:</td><td><input type="text" class="brand" id="brand" name="brand"></td>
+    	</tr>
+    	<tr><td>型号:</td><td><input type="text" class="type" id="type" id="type" ></td>
     		</tr>
     	<tr>
-    		<td>新的密码</td><td><input type="password"></td>
+    		<td>颜色:</td><td><input type="text" class="color" id="color" id="color" ></td>
     		</tr>
     	<tr>
-    		<td>确认密码</td><td><input type="password"></td>
+    		<td>传输方式:</td><td><input type="text" name="trans" id="trans" class="trans"></td>
     		</tr>
     	<tr>
-    		<th colspan="2"><input type="submit" value="修改" class="infosub"></th>
+    		<td>商品图片:</td>
+    		</tr>
+    	<tr>
+    		<td colspan="2"><input type="file" name="trans" id="trans" class="trans"></td>
+    		</tr>
+    	<tr>
+    		<th colspan="2"><input type="submit" value="上传" class="infosub"></th>
     		</tr>
     	</table>
     </form>
