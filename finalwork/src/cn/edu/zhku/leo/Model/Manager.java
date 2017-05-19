@@ -1,4 +1,4 @@
-package cn.edu.zhku.leo.manage.model;
+package cn.edu.zhku.leo.Model;
 
 public class Manager {
 	private int id;

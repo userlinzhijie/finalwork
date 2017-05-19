@@ -14,7 +14,10 @@
 <script src="js/html5shiv.js"></script>
 <script src="js/respond.min.js"></script>
 <![endif]-->
-
+<style type="text/css">
+.plus{margin-left:50px;}
+.short{width:300px;}
+</style>
 </head>
 
 <body>
@@ -30,7 +33,8 @@
 				<a class="navbar-brand" href="#"><span>运营商</span>后台管理</a>
 				<ul class="user-menu">
 					<li class="dropdown pull-right">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> 用户名 <span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="s_id"><span class="glyphicon glyphicon-user"></span><label id="session_uid">用户名</label> <span class="caret"></span></a>
+						
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
 							<li><a href="#"><span class="glyphicon glyphicon-cog"></span> 设置</a></li>
@@ -90,23 +94,136 @@
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header"> 顾客管理</h1>
+				<h1 class="page-header">顾客管理</h1>
 			</div>
 		</div><!--/.row-->
 		
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading">顾客管理</div>
+					<div class="panel-heading">顾客管理		
+					</div>
+
 					<div class="panel-body">
-						<table id="studentTable" data-toggle="table" ></table>
+						<table id="studentTable" data-toggle="table"></table>
 					</div>
 				</div>
 			</div>
+		</div><!--/.row-->
 		
-	</div><!--/.row-->
-			
+		<div id='myAlert' class='alert alert-success'><a href='#' class='close' data-dismiss='alert'>&times;</a>
+		<strong>已获取最新数据！</strong>
+		<script>
+		var str=window.location.href;
+		var str1=str.substring(str.indexOf("=")+1);
+		if(str1==1){document.getElementById("myAlert").innerHTML="<a href='#' class='close' data-dismiss='alert'>&times;</a><strong>删除成功！</strong>";}
+		else if(str1==0){document.getElementById("myAlert").innerHTML="<a href='#' class='close' data-dismiss='alert'>&times;</a><strong>删除失败！</strong>";}
+		else if(str1==2){document.getElementById("myAlert").innerHTML="<a href='#' class='close' data-dismiss='alert'>&times;</a><strong>添加成功！</strong>";}
+		else if(str1==3){document.getElementById("myAlert").innerHTML="<a href='#' class='close' data-dismiss='alert'>&times;</a><strong>添加失败！</strong>";}
+		else if(str1==4){document.getElementById("myAlert").innerHTML="<a href='#' class='close' data-dismiss='alert'>&times;</a><strong>修改成功！</strong>";}
+		else if(str1==5){document.getElementById("myAlert").innerHTML="<a href='#' class='close' data-dismiss='alert'>&times;</a><strong>修改失败！</strong>";}
+		</script>
+		</div>
+
+ 
 	</div>	<!--/.main-->
+<!-- 模态框               -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+  
+    <div class="modal-content">
+     <form action="../ManagerCtrl" method="post">
+     <input type="hidden" name="action" value="add">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">添加新的管理员</h4>
+      </div>
+     
+      <div class="modal-body">
+        
+          <div class="form-group">
+            <label for="id" class="control-label">id:</label>
+            <input type="text" class="form-control" id="id" name="id" maxlength=10 onkeyup="this.value=this.value.replace(/\D/g,'')">
+          </div>
+          <div class="form-group">
+            <label for="password" class="control-label">password:</label>
+            <input type="password" class="form-control" id="password" name="password">
+          </div>
+          <div class="form-group">
+            <label for="info" class="control-label">info:</label>
+            <textarea class="form-control" id="info" name="info"></textarea>
+          </div>
+        
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <input type="submit" class="btn btn-primary" value="添加">
+      </div>
+      
+      </form>
+    </div>
+  </div>
+</div>
+<!-- 模态框               -->
+<!-- 模态框               -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog2" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+  
+    <div class="modal-content">
+     <form action="../ManagerCtrl" method="post">
+     <input type="hidden" name="action" value="edit">
+     <input type="hidden" name="id" id="hid" value="">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">修改管理员信息</h4>
+      </div>
+     
+      <div class="modal-body">
+        
+          <div class="form-group">
+            <label for="id" class="control-label">id:</label>
+            <input type="text" class="form-control" id="ide" name="ide">
+          </div>
+          <div class="form-group">
+            <label for="password" class="control-label">password:</label>
+            <input type="password" class="form-control" id="passworde" name="passworde">
+          </div>
+          <div class="form-group">
+            <label for="info" class="control-label">info:</label>
+            <textarea class="form-control" id="infoe" name="infoe"></textarea>
+          </div>
+        
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <input type="submit" class="btn btn-primary" value="修改">
+      </div>
+      
+      </form>
+    </div>
+  </div>
+</div>
+<!-- 模态框               -->
+<!-- search modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog1" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="input-group">
+							<input id="btn-input-search" type="text" class="form-control input-md" placeholder="input id">
+							<span class="input-group-btn">
+								<button class="btn btn-primary btn-md" id="btn-todo" onclick="searchtodo()">search</button>
+							</span>
+						</div>
+						<div class="panel-body">
+						<table id="searchTable" data-toggle="table"></table>
+					</div>
+    </div>
+  </div>
+</div>
+
+
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/chart.min.js"></script>
@@ -127,38 +244,43 @@
 		}(window.jQuery);
 
 		$(window).on('resize', function () {
-		  if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
-		})
+		  if ($(window).width() > 768) $('#sidebar-collapse').collapse('show');
+		});
 		$(window).on('resize', function () {
-		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
-		})
+		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide');
+		});
+		
 	</script>	
+	
 	
 	<script type="text/javascript">
 	$.ajax({  
         type:"get",//请求方式  
-        url:"../ManagerCtrl?action=get",//发送请求地址  
+        url:"../UserCtrl?action=get",//发送请求地址  
         dataType:"json",  
         data:{//发送给数据库的数据  
         },  
         //请求成功后的回调函数有两个参数  
         success:function(data){  
             var objs=eval(data); //解析json对象  
-            var obj = objs.managers;  
+            var obj = objs.users;  
               
             var table = $("#studentTable");  
             table.empty();  
-            table.append('<tr><th>id</th><th>password</th><th>备注</th><th>操作</th></tr>');  
+            table.append('<tr><th>顾客id</th><th>账号</th><th>密码</th><th>操作</th></tr>');  
               
             for(var i=0;i< obj.length;i++){  
                 var id = obj[i].id;
                 var password = obj[i].password;
-                var info = obj[i].info;
-                table.append('<tr><th width=80px>'+id+'</th><th width=100px>'+password+'</th><th width=300px>'+info+'</th><th width=150px> <a href="../ManagerCtrl?action=edit"><button><span class="glyphicon glyphicon-pencil"></span>edit</button></a> <a href="../ManagerCtrl?action=del&id='+id+'"><button class="plus"><span class="glyphicon glyphicon-trash"></span>del</button></a> </th></tr>');
+                var name = obj[i].name;
+                table.append('<tr><th width=80px>'+id+'</th><th width=100px>'+name+'</th><th width=300px>'+password+'</th><th width=150px><button data-toggle="modal" data-target="#exampleModal1" onclick="loadedit('+id+')"><span class="glyphicon glyphicon-pencil" ></span>发信息</button><a href="../UserCtrl?action=del&id='+id+'"><button class="plus"><span class="glyphicon glyphicon-trash"></span>del</button></a> </th></tr>');
             }  
         }  
        }); 
-       </script>
+	</script>
+	<script>
+			$("#session_uid").load("../ManagerCtrl?action=gets");
+	</script>
 </body>
 
 </html>

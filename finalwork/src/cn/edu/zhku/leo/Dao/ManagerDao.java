@@ -1,10 +1,10 @@
-package cn.edu.zhku.leo.manage.Dao;
+package cn.edu.zhku.leo.Dao;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 import cn.edu.zhku.leo.Util.ConnectionManager;
-import cn.edu.zhku.leo.manage.model.*;
+import cn.edu.zhku.leo.Model.*;
 
 public class ManagerDao {
 	

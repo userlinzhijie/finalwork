@@ -99,15 +99,7 @@
 				<div class="panel panel-default">
 					<div class="panel-heading">店铺申请管理</div>
 					<div class="panel-body">
-						<table data-toggle="table" data-url="GetAjaxInfoServlet?action=jsonArray"  data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
-						    <thead>
-						    <tr>
-						        <th data-field="name"  data-sortable="true">Item Name</th>
-						        <th data-field="age" data-sortable="true">Item age</th>
-						        <th data-field="a" data-sortable="true">操作</th>
-						    </tr>
-						    </thead>
-						</table>
+						<table id="shopTable" data-toggle="table"></table>
 					</div>
 				</div>
 			</div>
@@ -141,6 +133,31 @@
 		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
 		})
 	</script>	
+	<script type="text/javascript">
+	$.ajax({  
+        type:"get",//请求方式  
+        url:"../ShopCtrl?action=getapply",//发送请求地址  
+        dataType:"json",  
+        data:{//发送给数据库的数据  
+        },  
+        //请求成功后的回调函数有两个参数  
+        success:function(data){  
+            var objs=eval(data); //解析json对象  
+            var obj = objs.shops;  
+              
+            var table = $("#shopTable");  
+            table.empty();  
+            table.append('<tr><th>顾客id</th><th>店铺id</th><th>状态</th><th>操作</th></tr>');  
+              
+            for(var i=0;i< obj.length;i++){  
+                var a = obj[i].user_id;
+                var b = obj[i].shop_id;
+                var c = "审核中。。。";
+                table.append('<tr><th width=80px>'+a+'</th><th width=100px>'+b+'</th><th width=300px>'+c+'</th><th width=150px><button onclick=""><span class="glyphicon glyphicon-ok" ></span>批准</button></th></tr>');
+            }  
+        }  
+       }); 
+	</script>
 </body>
 
 </html>

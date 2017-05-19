@@ -1,4 +1,4 @@
-package cn.edu.zhku.leo.manage.Ctrl;
+package cn.edu.zhku.leo.Ctrl;
 
 import java.io.*;
 import java.net.*;
@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
-import cn.edu.zhku.leo.manage.Service.*;
-import cn.edu.zhku.leo.manage.model.Manager;
+import cn.edu.zhku.leo.Service.*;
+import cn.edu.zhku.leo.Model.Manager;
 
 public class ManagerCtrl extends HttpServlet {
 
@@ -79,7 +79,7 @@ public class ManagerCtrl extends HttpServlet {
 			}
 		} else if("gets".equals(action)){
 			try {
-				this.getSession_user(request, response);
+				this.getCookie_user(request, response);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -279,7 +279,7 @@ public class ManagerCtrl extends HttpServlet {
 
 	}
 	
-	private void getSession_user(HttpServletRequest request, HttpServletResponse response)
+	private void getCookie_user(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		PrintWriter out = response.getWriter();
 		//request.setCharacterEncoding("utf-8");
@@ -287,21 +287,26 @@ public class ManagerCtrl extends HttpServlet {
 
 		//HttpSession session = request.getSession();
 		Cookie[] cookies = null;
-		cookies = request.getCookies();
 		
 		//String uid = (String)session.getAttribute("user"); 
-		
 		//String name1 = URLDecoder.decode(cookies[1].getName(),"utf-8");
-		String name = URLDecoder.decode(cookies[0].getName(),"utf-8");
-		String value = URLDecoder.decode(cookies[0].getValue(),"utf-8");
 		
-		for(int i=0;i<cookies.length;i++){
-			name = URLDecoder.decode(cookies[i].getName(),"utf-8");
-			if(name.equals("user")){
-				value = URLDecoder.decode(cookies[i].getValue(),"utf-8");
+		if(request.getCookies() == null){
+			String value = "сн©м";
+			out.println(value);
+		}else{
+			cookies = request.getCookies();
+			String name = URLDecoder.decode(cookies[0].getName(),"utf-8");
+			String value = URLDecoder.decode(cookies[0].getValue(),"utf-8");
+			
+			for(int i=0;i<cookies.length;i++){
+				name = URLDecoder.decode(cookies[i].getName(),"utf-8");
+				if(name.equals("user")){
+					value = URLDecoder.decode(cookies[i].getValue(),"utf-8");
+				}
 			}
+			out.println(value);
 		}
-		out.println(value);
 	}
 	
 	/**

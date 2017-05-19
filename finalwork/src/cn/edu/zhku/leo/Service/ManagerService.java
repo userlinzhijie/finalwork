@@ -1,9 +1,9 @@
-package cn.edu.zhku.leo.manage.Service;
+package cn.edu.zhku.leo.Service;
 
 import java.util.ArrayList;
 
-import cn.edu.zhku.leo.manage.Dao.ManagerDao;
-import cn.edu.zhku.leo.manage.model.*;
+import cn.edu.zhku.leo.Dao.ManagerDao;
+import cn.edu.zhku.leo.Model.*;
 
 public class ManagerService {
 	/**
