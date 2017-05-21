@@ -83,9 +83,9 @@ public class ManagerService {
 	 * @throws Exception
 	 * 
 	 */
-	public boolean edit(int id, String info) throws Exception {
+	public boolean edit(Manager m) throws Exception {
 		ManagerDao ld = new ManagerDao();
-		if(ld.edit(id,info)!=0){
+		if(ld.edit(m)!=0){
 			return true;
 		}else{
 			return false;

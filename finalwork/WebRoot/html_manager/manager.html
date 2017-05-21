@@ -18,6 +18,15 @@
 .plus{margin-left:50px;}
 .short{width:300px;}
 </style>
+
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/chart.min.js"></script>
+	<script src="js/chart-data.js"></script>
+	<script src="js/easypiechart.js"></script>
+	<script src="js/easypiechart-data.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="js/bootstrap-table.js"></script>
 </head>
 
 <body>
@@ -32,13 +41,23 @@
 				</button>
 				<a class="navbar-brand" href="#"><span>运营商</span>后台管理</a>
 				<ul class="user-menu">
-					<li class="dropdown pull-right">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="s_id"><span class="glyphicon glyphicon-user"></span><label id="session_uid">用户名</label> <span class="caret"></span></a>
-						
+					<li class="dropdown pull-right"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" id="s_id"><span
+							class="glyphicon glyphicon-user"></span><label>工号</label><label id="session_uid">...</label>
+							<span class="caret"></span>
+					</a> 
+<script>
+	$("#session_uid").load("../ManagerCtrl?action=gets",
+	function() {
+		if (document.getElementById("session_uid").innerHTML == "游客") {
+			alert("请登录！");
+			window.location = "login.html";
+		}
+	});
+</script>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-							<li><a href="#"><span class="glyphicon glyphicon-cog"></span> 设置</a></li>
-							<li><a href="login.html"><span class="glyphicon glyphicon-log-out"></span>退出</a></li>
+							<li><a href="#" data-toggle="modal" data-target="#exampleModal1" onclick="myedit()"><span class="glyphicon glyphicon-cog"></span> 编辑个人信息</a></li>
+							<li><a href="../ManagerCtrl?action=logout"><span class="glyphicon glyphicon-log-out"></span>退出</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -57,29 +76,9 @@
 			<li><a href="customer.html"><span class="glyphicon glyphicon-th"></span> 顾客管理</a></li>
 			<li><a href="store.html"><span class="glyphicon glyphicon-stats"></span> 店铺管理</a></li>
 			<li><a href="apply.html"><span class="glyphicon glyphicon-list-alt"></span> 店铺申请管理</a></li>
-			<li class="parent ">
-				<a href="database.html">
-					<span class="glyphicon glyphicon-list"></span> 数据库管理 <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span> 
-				</a>
-				<ul class="children collapse" id="sub-item-1">
-					<li>
-						<a class="" href="#">
-							<span class="glyphicon glyphicon-share-alt"></span> 订单表
-						</a>
-					</li>
-					<li>
-						<a class="" href="#">
-							<span class="glyphicon glyphicon-share-alt"></span> 个人信息表
-						</a>
-					</li>
-					<li>
-						<a class="" href="#">
-							<span class="glyphicon glyphicon-share-alt"></span> 店铺-顾客关系表
-						</a>
-					</li>
-				</ul>
-			</li>
+			
 			<li role="presentation" class="divider"></li>
+			<li><a href="total.html"><span class="glyphicon glyphicon-list-alt"></span> 数据统计</a></li>
 		</ul>
 		<!--<div class="attribution">More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></div>-->
 	</div><!--/.sidebar-->
@@ -145,15 +144,15 @@
       <div class="modal-body">
         
           <div class="form-group">
-            <label for="id" class="control-label">id:</label>
+            <label for="id" class="control-label">工号:</label>
             <input type="text" class="form-control" id="id" name="id" maxlength=10 onkeyup="this.value=this.value.replace(/\D/g,'')">
           </div>
           <div class="form-group">
-            <label for="password" class="control-label">password:</label>
+            <label for="password" class="control-label">密码:</label>
             <input type="password" class="form-control" id="password" name="password">
           </div>
           <div class="form-group">
-            <label for="info" class="control-label">info:</label>
+            <label for="info" class="control-label">备注:</label>
             <textarea class="form-control" id="info" name="info"></textarea>
           </div>
         
@@ -169,14 +168,15 @@
   </div>
 </div>
 <!-- 模态框               -->
-<!-- 模态框               -->
+<!-- 模态框1               -->
 <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog2" aria-labelledby="exampleModalLabel">
   <div class="modal-dialog" role="document">
   
     <div class="modal-content">
      <form action="../ManagerCtrl" method="post">
-     <input type="hidden" name="action" value="edit">
+     <input type="hidden" name="action" id="action" value="edit">
      <input type="hidden" name="id" id="hid" value="">
+     <input type="hidden" name="password" id="hpassword" value="">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="exampleModalLabel">修改管理员信息</h4>
@@ -185,15 +185,15 @@
       <div class="modal-body">
         
           <div class="form-group">
-            <label for="id" class="control-label">id:</label>
+            <label for="id" class="control-label">工号:</label>
             <input type="text" class="form-control" id="ide" name="ide">
           </div>
           <div class="form-group">
-            <label for="password" class="control-label">password:</label>
+            <label for="password" class="control-label">密码:</label>
             <input type="password" class="form-control" id="passworde" name="passworde">
           </div>
           <div class="form-group">
-            <label for="info" class="control-label">info:</label>
+            <label for="info" class="control-label">备注:</label>
             <textarea class="form-control" id="infoe" name="infoe"></textarea>
           </div>
         
@@ -208,7 +208,7 @@
     </div>
   </div>
 </div>
-<!-- 模态框               -->
+<!-- 模态框 1              -->
 <!-- search modal -->
 <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog1" aria-labelledby="mySmallModalLabel">
   <div class="modal-dialog modal-lg" role="document">
@@ -227,14 +227,6 @@
 </div>
 
 
-	<script src="js/jquery-1.11.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/chart.min.js"></script>
-	<script src="js/chart-data.js"></script>
-	<script src="js/easypiechart.js"></script>
-	<script src="js/easypiechart-data.js"></script>
-	<script src="js/bootstrap-datepicker.js"></script>
-	<script src="js/bootstrap-table.js"></script>
 	<script>
 		$('#calendar').datepicker({
 		});
@@ -289,10 +281,22 @@
         },  
         //请求成功后的回调函数有两个参数  
         success:function(data){  
+         document.getElementById("action").value = "";
+         document.getElementById("exampleModalLabel").value = "";
+         		 document.getElementById("hid").value = "";
+				document.getElementById("hpassword").value = "";
+				document.getElementById("ide").value ="";
+				document.getElementById("ide").disabled=false;
+				document.getElementById("passworde").value ="";
+				document.getElementById("passworde").disabled=false;
+				document.getElementById("infoe").innerHTML = "";
           
 			var objs = eval(data); //解析json对象  
 				var obj = objs.managers;
+				document.getElementById("exampleModalLabel").value = "修改管理员信息";
+				 document.getElementById("action").value = "editinfo";
 				document.getElementById("hid").value = obj[0].id;
+				document.getElementById("hpassword").value = obj[0].password;
 				document.getElementById("ide").value = obj[0].id;
 				document.getElementById("ide").disabled=true;
 				document.getElementById("passworde").value = obj[0].password;
@@ -302,7 +306,39 @@
 			});
 		};
 		
-		
+		function myedit(){
+	var id = document.getElementById("session_uid").innerHTML;
+	$.ajax({  
+       type:"get",//请求方式  
+       url:"../ManagerCtrl?action=getone&id="+id,//发送请求地址  
+       dataType:"json",  
+       data:{//发送给数据库的数据  
+       },  
+       //请求成功后的回调函数有两个参数  
+       success:function(data){  
+      		 document.getElementById("action").value = "";
+      		 document.getElementById("exampleModalLabel").value = "";
+         	 document.getElementById("hid").value = "";
+				document.getElementById("hpassword").value = "";
+				document.getElementById("ide").value ="";
+				document.getElementById("ide").disabled=false;
+				document.getElementById("passworde").value ="";
+				document.getElementById("passworde").disabled=false;
+				document.getElementById("infoe").innerHTML = "";
+		var objs = eval(data); //解析json对象  
+			var obj = objs.managers;
+			 document.getElementById("action").value = "editmy";
+			 document.getElementById("exampleModalLabel").value = "编辑个人信息";
+			document.getElementById("hid").value = obj[0].id;
+			document.getElementById("hpassword").value = obj[0].password;
+			document.getElementById("ide").value = obj[0].id;
+			document.getElementById("ide").disabled=true;
+			document.getElementById("passworde").value = obj[0].password;
+			document.getElementById("infoe").innerHTML = obj[0].info;
+			}
+		});
+	};
+	
 		function searchtodo(){
 		var i = document.getElementById("btn-input-search").value;
 		$.ajax({  
@@ -324,14 +360,12 @@
                 var id = obj[i].id;
                 var password = obj[i].password;
                 var info = obj[i].info;
-                table.append('<tr><th width=80px>'+id+'</th><th width=100px>'+password+'</th><th width=300px>'+info+'</th></tr>');
+                table.append('<tr><th width=80px>'+id+'</th><th width=100px>'+password+'</th><th width=300px>'+info+'</th><th width=150px><button data-toggle="modal" data-target="#exampleModal1" onclick="loadedit('+id+')"><span class="glyphicon glyphicon-pencil" ></span>edit</button><a href="../ManagerCtrl?action=del&id='+id+'"><button class="plus"><span class="glyphicon glyphicon-trash"></span>del</button></a> </th></tr>');
             }  
         }  
        }); }
 	</script>
-	<script>
-			$("#session_uid").load("../ManagerCtrl?action=gets");
-	</script>
+	
 </body>
 
 </html>

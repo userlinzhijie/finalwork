@@ -33,11 +33,10 @@
 				<a class="navbar-brand" href="#"><span>运营商</span>后台管理</a>
 				<ul class="user-menu">
 					<li class="dropdown pull-right">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> 用户名 <span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span><label>工号</label><label id="session_uid">...</label> <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-							<li><a href="#"><span class="glyphicon glyphicon-cog"></span> 设置</a></li>
-							<li><a href="login.html"><span class="glyphicon glyphicon-log-out"></span>退出</a></li>
+							<li><a href="#" data-toggle="modal" data-target="#exampleModal1" onclick="myedit()"><span class="glyphicon glyphicon-cog"></span> 编辑个人信息</a></li>
+							<li><a href="../ManagerCtrl?action=logout"><span class="glyphicon glyphicon-log-out"></span>退出</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -56,29 +55,9 @@
 			<li><a href="customer.html"><span class="glyphicon glyphicon-th"></span> 顾客管理</a></li>
 			<li class="active"><a href="store.html"><span class="glyphicon glyphicon-stats"></span> 店铺管理</a></li>
 			<li><a href="apply.html"><span class="glyphicon glyphicon-list-alt"></span> 店铺申请管理</a></li>
-			<li class="parent ">
-				<a href="database.html">
-					<span class="glyphicon glyphicon-list"></span> 数据库管理 <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span> 
-				</a>
-				<ul class="children collapse" id="sub-item-1">
-					<li>
-						<a class="" href="#">
-							<span class="glyphicon glyphicon-share-alt"></span> 订单表
-						</a>
-					</li>
-					<li>
-						<a class="" href="#">
-							<span class="glyphicon glyphicon-share-alt"></span> 个人信息表
-						</a>
-					</li>
-					<li>
-						<a class="" href="#">
-							<span class="glyphicon glyphicon-share-alt"></span> 店铺-顾客关系表
-						</a>
-					</li>
-				</ul>
-			</li>
+			
 			<li role="presentation" class="divider"></li>
+			<li><a href="total.html"><span class="glyphicon glyphicon-list-alt"></span> 数据统计</a></li>
 		</ul>
 		<!--<div class="attribution">More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></div>-->
 	</div><!--/.sidebar-->
@@ -109,7 +88,47 @@
 		</div><!--/.row-->
 			
 	</div>	<!--/.main-->
-
+<!-- 模态框1               -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog2" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+  
+    <div class="modal-content">
+     <form action="../ManagerCtrl" method="post">
+     <input type="hidden" name="action" id="action" value="edit">
+     <input type="hidden" name="id" id="hid" value="">
+     <input type="hidden" name="password" id="hpassword" value="">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">修改管理员信息</h4>
+      </div>
+     
+      <div class="modal-body">
+        
+          <div class="form-group">
+            <label for="id" class="control-label">工号:</label>
+            <input type="text" class="form-control" id="ide" name="ide">
+          </div>
+          <div class="form-group">
+            <label for="password" class="control-label">密码:</label>
+            <input type="password" class="form-control" id="passworde" name="passworde">
+          </div>
+          <div class="form-group">
+            <label for="info" class="control-label">备注:</label>
+            <textarea class="form-control" id="infoe" name="infoe"></textarea>
+          </div>
+        
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <input type="submit" class="btn btn-primary" value="修改">
+      </div>
+      
+      </form>
+    </div>
+  </div>
+</div>
+<!-- 模态框1               -->
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/chart.min.js"></script>
@@ -158,10 +177,52 @@
                 var c = obj[i].status;
                 if(c==1)c="营业中...";
                 else if(c==2)c="打烊中。。。";
-                table.append('<tr><th width=80px>'+a+'</th><th width=100px>'+b+'</th><th width=300px>'+c+'</th><th width=150px><button onclick=""><span class="glyphicon glyphicon-ok" ></span>start</button><a href=""><button class="plus"><span class="glyphicon glyphicon-remove"></span>stop</button></a> </th></tr>');
+                table.append('<tr><th width=80px>'+a+'</th><th width=100px>'+b+'</th><th width=300px>'+c+'</th><th width=150px><a href="../ShopCtrl?action=start&sid='+b+'"><button><span class="glyphicon glyphicon-ok" ></span>start</button></a> <a href="../ShopCtrl?action=stop&sid='+b+'"><button class="plus"><span class="glyphicon glyphicon-remove"></span>stop</button></a> </th></tr>');
             }  
         }  
        }); 
+	</script>
+	<script>
+		$("#session_uid").load("../ManagerCtrl?action=gets", function() {
+			if (document.getElementById("session_uid").innerHTML == "游客") {
+				alert("请登录！");
+				window.location = "login.html";
+			}
+		});
+		
+		function myedit(){
+	var id = document.getElementById("session_uid").innerHTML;
+	$.ajax({  
+       type:"get",//请求方式  
+       url:"../ManagerCtrl?action=getone&id="+id,//发送请求地址  
+       dataType:"json",  
+       data:{//发送给数据库的数据  
+       },  
+       //请求成功后的回调函数有两个参数  
+       success:function(data){  
+      		 document.getElementById("action").value = "";
+      		 document.getElementById("exampleModalLabel").value = "";
+         	 document.getElementById("hid").value = "";
+				document.getElementById("hpassword").value = "";
+				document.getElementById("ide").value ="";
+				document.getElementById("ide").disabled=false;
+				document.getElementById("passworde").value ="";
+				document.getElementById("passworde").disabled=false;
+				document.getElementById("infoe").innerHTML = "";
+		var objs = eval(data); //解析json对象  
+			var obj = objs.managers;
+			 document.getElementById("action").value = "editmy";
+			 document.getElementById("exampleModalLabel").value = "编辑个人信息";
+			document.getElementById("hid").value = obj[0].id;
+			document.getElementById("hpassword").value = obj[0].password;
+			document.getElementById("ide").value = obj[0].id;
+			document.getElementById("ide").disabled=true;
+			document.getElementById("passworde").value = obj[0].password;
+			document.getElementById("infoe").innerHTML = obj[0].info;
+			}
+		});
+	};
+	
 	</script>
 </body>
 

@@ -15,8 +15,13 @@
 <script src="js/respond.min.js"></script>
 <![endif]-->
 <style type="text/css">
-.plus{margin-left:50px;}
-.short{width:300px;}
+.plus {
+	margin-left: 50px;
+}
+
+.short {
+	width: 300px;
+}
 </style>
 </head>
 
@@ -24,27 +29,30 @@
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="#"><span>运营商</span>后台管理</a>
 				<ul class="user-menu">
-					<li class="dropdown pull-right">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="s_id"><span class="glyphicon glyphicon-user"></span><label>工号</label><label id="session_uid">...</label> <span class="caret"></span></a>
-						
+					<li class="dropdown pull-right"><a href="#"
+						class="dropdown-toggle" data-toggle="dropdown"><span
+							class="glyphicon glyphicon-user"></span><label>工号</label><label id="session_uid">...</label>
+							<span class="caret"></span> </a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="#" data-toggle="modal" data-target="#exampleModal1" onclick="myedit()"><span class="glyphicon glyphicon-cog"></span> 编辑个人信息</a></li>
-							<li><a href="../ManagerCtrl?action=logout"><span class="glyphicon glyphicon-log-out"></span>退出</a></li>
+							<li><a href="../ManagerCtrl?action=logout"><span
+									class="glyphicon glyphicon-log-out"></span>退出</a></li>
 						</ul>
 					</li>
 				</ul>
 			</div>
-		</div><!-- /.container-fluid -->
+		</div>
+		<!-- /.container-fluid -->
 	</nav>
-		
+
 	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<form role="search">
 			<div class="form-group">
@@ -52,60 +60,111 @@
 			</div>
 		</form>
 		<ul class="nav menu">
-			<li><a href="manager.html"><span class="glyphicon glyphicon-dashboard"></span> 运营人员管理</a></li>
-			<li class="active"><a href="customer.html"><span class="glyphicon glyphicon-th"></span> 顾客管理</a></li>
-			<li><a href="store.html"><span class="glyphicon glyphicon-stats"></span> 店铺管理</a></li>
-			<li><a href="apply.html"><span class="glyphicon glyphicon-list-alt"></span> 店铺申请管理</a></li>
-			
+			<li><a href="manager.html"><span
+					class="glyphicon glyphicon-dashboard"></span> 运营人员管理</a></li>
+			<li><a href="customer.html"><span
+					class="glyphicon glyphicon-th"></span> 顾客管理</a></li>
+			<li><a href="store.html"><span
+					class="glyphicon glyphicon-stats"></span> 店铺管理</a></li>
+			<li><a href="apply.html"><span
+					class="glyphicon glyphicon-list-alt"></span> 店铺申请管理</a></li>
+
 			<li role="presentation" class="divider"></li>
-			<li><a href="total.html"><span class="glyphicon glyphicon-list-alt"></span> 数据统计</a></li>
+
+			<li class="active"><a href="total.html"><span
+					class="glyphicon glyphicon-list-alt"></span> 数据统计</a></li>
 		</ul>
 		<!--<div class="attribution">More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></div>-->
-	</div><!--/.sidebar-->
-		
-	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
+	</div>
+	<!--/.sidebar-->
+
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
 			<ol class="breadcrumb">
-				<li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
-				<li class="active">顾客管理</li>
+				<li><a href="#"><span class="glyphicon glyphicon-home"></span>
+				</a></li>
+				<li class="active">数据统计</li>
 			</ol>
-		</div><!--/.row-->
-		
+		</div>
+		<!--/.row-->
+
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header">顾客管理</h1>
+				<h1 class="page-header">数据统计</h1>
 			</div>
-		</div><!--/.row-->
-		
+		</div>
+		<!--/.row-->
+
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading">顾客管理		
-					</div>
-
+					<div class="panel-heading">数据统计</div>
 					<div class="panel-body">
-						<table id="studentTable" data-toggle="table"></table>
+
+						<div class="col-xs-12 col-md-6 col-lg-3">
+							<div class="panel panel-blue panel-widget ">
+								<div class="row no-padding">
+									<div class="col-sm-3 col-lg-5 widget-left">
+										<em class="glyphicon glyphicon-shopping-cart glyphicon-l"></em>
+									</div>
+									<div class="col-sm-9 col-lg-7 widget-right">
+										<div class="large" id="snum1">...</div>
+										<div class="text-muted">店鋪數</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-xs-12 col-md-6 col-lg-3">
+							<div class="panel panel-teal panel-widget">
+								<div class="row no-padding">
+									<div class="col-sm-3 col-lg-5 widget-left">
+										<em class="glyphicon glyphicon-user glyphicon-l"></em>
+									</div>
+									<div class="col-sm-9 col-lg-7 widget-right">
+										<div class="large" id="cnum">...</div>
+										<div class="text-muted">顾客数</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-xs-12 col-md-6 col-lg-3">
+							<div class="panel panel-orange panel-widget">
+								<div class="row no-padding">
+									<div class="col-sm-3 col-lg-5 widget-left">
+										<em class="glyphicon glyphicon-comment glyphicon-l"></em>
+									</div>
+									<div class="col-sm-9 col-lg-7 widget-right">
+										<div class="large" id="snum2">...</div>
+										<div class="text-muted">开店申请数</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-xs-12 col-md-6 col-lg-3">
+							<div class="panel panel-red panel-widget">
+								<div class="row no-padding">
+									<div class="col-sm-3 col-lg-5 widget-left">
+										<em class="glyphicon glyphicon-stats glyphicon-l"></em>
+									</div>
+									<div class="col-sm-9 col-lg-7 widget-right">
+										<div class="large">25.2k</div>
+										<div class="text-muted">訪問量</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
 					</div>
 				</div>
 			</div>
-		</div><!--/.row-->
-		
-		<div id='myAlert' class='alert alert-success'><a href='#' class='close' data-dismiss='alert'>&times;</a>
-		<strong>已获取最新数据！</strong>
-		<script>
-		var str=window.location.href;
-		var str1=str.substring(str.indexOf("=")+1);
-		if(str1==1){document.getElementById("myAlert").innerHTML="<a href='#' class='close' data-dismiss='alert'>&times;</a><strong>删除成功！</strong>";}
-		else if(str1==0){document.getElementById("myAlert").innerHTML="<a href='#' class='close' data-dismiss='alert'>&times;</a><strong>删除失败！</strong>";}
-		else if(str1==2){document.getElementById("myAlert").innerHTML="<a href='#' class='close' data-dismiss='alert'>&times;</a><strong>添加成功！</strong>";}
-		else if(str1==3){document.getElementById("myAlert").innerHTML="<a href='#' class='close' data-dismiss='alert'>&times;</a><strong>添加失败！</strong>";}
-		else if(str1==4){document.getElementById("myAlert").innerHTML="<a href='#' class='close' data-dismiss='alert'>&times;</a><strong>修改成功！</strong>";}
-		else if(str1==5){document.getElementById("myAlert").innerHTML="<a href='#' class='close' data-dismiss='alert'>&times;</a><strong>修改失败！</strong>";}
-		</script>
 		</div>
+		<!--/.row-->
 
- 
-	</div>	<!--/.main-->
+	</div>
+	<!--/.main-->
 <!-- 模态框1               -->
 <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog2" aria-labelledby="exampleModalLabel">
   <div class="modal-dialog" role="document">
@@ -146,9 +205,7 @@
     </div>
   </div>
 </div>
-<!-- 模态框1               -->
-
-
+<!-- 模态框  1             -->
 	<script src="js/jquery-1.11.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/chart.min.js"></script>
@@ -158,51 +215,30 @@
 	<script src="js/bootstrap-datepicker.js"></script>
 	<script src="js/bootstrap-table.js"></script>
 	<script>
-		$('#calendar').datepicker({
-		});
+		$('#calendar').datepicker({});
 
-		!function ($) {
-		    $(document).on("click","ul.nav li.parent > a > span.icon", function(){          
-		        $(this).find('em:first').toggleClass("glyphicon-minus");      
-		    }); 
-		    $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+		!function($) {
+			$(document)
+					.on(
+							"click",
+							"ul.nav li.parent > a > span.icon",
+							function() {
+								$(this).find('em:first').toggleClass(
+										"glyphicon-minus");
+							});
+			$(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
 		}(window.jQuery);
 
-		$(window).on('resize', function () {
-		  if ($(window).width() > 768) $('#sidebar-collapse').collapse('show');
+		$(window).on('resize', function() {
+			if ($(window).width() > 768)
+				$('#sidebar-collapse').collapse('show');
 		});
-		$(window).on('resize', function () {
-		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide');
+		$(window).on('resize', function() {
+			if ($(window).width() <= 767)
+				$('#sidebar-collapse').collapse('hide');
 		});
-		
-	</script>	
-	
-	
-	<script type="text/javascript">
-	$.ajax({  
-        type:"get",//请求方式  
-        url:"../UserCtrl?action=get",//发送请求地址  
-        dataType:"json",  
-        data:{//发送给数据库的数据  
-        },  
-        //请求成功后的回调函数有两个参数  
-        success:function(data){  
-            var objs=eval(data); //解析json对象  
-            var obj = objs.users;  
-              
-            var table = $("#studentTable");  
-            table.empty();  
-            table.append('<tr><th>顾客id</th><th>账号</th><th>密码</th><th>操作</th></tr>');  
-              
-            for(var i=0;i< obj.length;i++){  
-                var id = obj[i].id;
-                var password = obj[i].password;
-                var name = obj[i].name;
-                table.append('<tr><th width=80px>'+id+'</th><th width=100px>'+name+'</th><th width=300px>'+password+'</th><th width=150px><button data-toggle="modal" data-target="#exampleModal1" onclick="loadedit('+id+')"><span class="glyphicon glyphicon-pencil" ></span>发信息</button><a href="../UserCtrl?action=del&id='+id+'"><button class="plus"><span class="glyphicon glyphicon-trash"></span>del</button></a> </th></tr>');
-            }  
-        }  
-       }); 
 	</script>
+	
 	<script>
 		$("#session_uid").load("../ManagerCtrl?action=gets", function() {
 			if (document.getElementById("session_uid").innerHTML == "游客") {
@@ -210,6 +246,9 @@
 				window.location = "login.html";
 			}
 		});
+		$("#snum1").load("../ShopCtrl?action=getNum1");
+		$("#snum2").load("../ShopCtrl?action=getNum2");
+		$("#cnum").load("../UserCtrl?action=getNum");
 		
 		function myedit(){
 	var id = document.getElementById("session_uid").innerHTML;

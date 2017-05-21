@@ -172,16 +172,16 @@ public class ManagerDao {
 		ps.setString(1, String.valueOf(id));
 		rs = ps.executeQuery();
 		
-		rs.next();
-		
-		int id2 = rs.getInt("id");
-		String password = rs.getString("password");
-		String info = rs.getString("info");
-		
 		Manager m = new Manager();
-		m.setId(id2);
-		m.setPassword(password);
-		m.setInfo(info);
+		if(rs.next()){
+			int id2 = rs.getInt("id");
+			String password = rs.getString("password");
+			String info = rs.getString("info");
+			
+			m.setId(id2);
+			m.setPassword(password);
+			m.setInfo(info);
+		}
 		return m;
 	}
 
@@ -193,7 +193,7 @@ public class ManagerDao {
 	 * @throws Exception
 	 * 
 	 */
-	public int edit(int id, String info) throws Exception{
+	public int edit(Manager m) throws Exception{
 		Connection conn = null;
 		PreparedStatement ps = null;
 		int rs =0;
@@ -205,11 +205,12 @@ public class ManagerDao {
 			throw new Exception("数据库连接不成功！");
 		}
 
-		String sqlQuery = "update manager set info=? where id=?";
+		String sqlQuery = "update manager set info=?,password=? where id=?";
 
 		ps = conn.prepareStatement(sqlQuery);
-		ps.setInt(2, id);
-		ps.setString(1, info);
+		ps.setString(1, m.getInfo());
+		ps.setString(2, m.getPassword());
+		ps.setInt(3, m.getId());
 		rs = ps.executeUpdate();
 		
 		return rs;

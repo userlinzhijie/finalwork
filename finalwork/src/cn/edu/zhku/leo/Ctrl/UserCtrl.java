@@ -44,6 +44,13 @@ public class UserCtrl extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else if("getNum".equals(action)){
+			try {
+				this.getNum(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	}
@@ -108,6 +115,30 @@ public class UserCtrl extends HttpServlet {
 		}
 		resultJson.put("users", jsonArray);
 		out.println(resultJson);
+		out.flush();
+		out.close();
+
+	}
+	
+	/**
+	 * 
+	 * 输出顾客数量
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 * 
+	 * 
+	 */
+	private void getNum(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		PrintWriter out = response.getWriter();
+
+		UserService g = new UserService();
+
+		ArrayList<User> a = g.get();
+		
+		out.println(a.size());
 		out.flush();
 		out.close();
 
