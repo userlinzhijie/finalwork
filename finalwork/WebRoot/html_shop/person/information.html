@@ -115,12 +115,13 @@
 
 						<!--个人信息 -->
 						<div class="info-main">
-							<form class="am-form am-form-horizontal">
-
+							<form class="am-form am-form-horizontal" action="../../UserCtrl" method="post">
+								<input type="hidden" name="action" value="edit">
+								<input type="hidden" name="id" value="1">
 								<div class="am-form-group">
 									<label for="user-name2" class="am-form-label">昵称</label>
 									<div class="am-form-content">
-										<input type="text" id="user-name2" placeholder="nickname">
+										<input type="text" id="nickname" name="nickname" placeholder="nickname">
                                           <small>昵称长度不能超过40个汉字</small>
 									</div>
 								</div>
@@ -128,7 +129,7 @@
 								<div class="am-form-group">
 									<label for="user-name" class="am-form-label">姓名</label>
 									<div class="am-form-content">
-										<input type="text" id="user-name2" placeholder="name">
+										<input type="text" id="name" name="name" placeholder="name">
                                          
 									</div>
 								</div>
@@ -137,53 +138,36 @@
 									<label class="am-form-label">性别</label>
 									<div class="am-form-content sex">
 										<label class="am-radio-inline">
-											<input type="radio" name="radio10" value="male" data-am-ucheck> 男
+											<input type="radio" name="sex" id="m" value="1" data-am-ucheck> 男
 										</label>
 										<label class="am-radio-inline">
-											<input type="radio" name="radio10" value="female" data-am-ucheck> 女
+											<input type="radio" name="sex" id="f" value="2" data-am-ucheck> 女
 										</label>
 										<label class="am-radio-inline">
-											<input type="radio" name="radio10" value="secret" data-am-ucheck> 保密
+											<input type="radio" name="sex" id="s" value="0" data-am-ucheck> 保密
 										</label>
 									</div>
 								</div>
 
 								<div class="am-form-group">
-									<label for="user-birth" class="am-form-label">生日</label>
-									<div class="am-form-content birth">
-										<div class="birth-select">
-											<select data-am-selected>
-												<option value="a">2015</option>
-												<option value="b">1987</option>
-											</select>
-											<em>年</em>
-										</div>
-										<div class="birth-select2">
-											<select data-am-selected>
-												<option value="a">12</option>
-												<option value="b">8</option>
-											</select>
-											<em>月</em></div>
-										<div class="birth-select2">
-											<select data-am-selected>
-												<option value="a">21</option>
-												<option value="b">23</option>
-											</select>
-											<em>日</em></div>
+									<label for="user-birth" class="am-form-label">电话</label>
+									<div class="am-form-content">
+										<input id="birth" name="birth" placeholder="birth" type="date">
+
 									</div>
-							
 								</div>
+							
 								<div class="am-form-group">
 									<label for="user-phone" class="am-form-label">电话</label>
 									<div class="am-form-content">
-										<input id="user-phone" placeholder="telephonenumber" type="tel">
+										<input id="telephone" name="telephone" placeholder="telephonenumber" type="tel">
 
 									</div>
 								</div>
 								<div class="am-form-group">
 									<label for="user-email" class="am-form-label">电子邮件</label>
 									<div class="am-form-content">
-										<input id="user-email" placeholder="Email" type="email">
+										<input id="email" name="email" placeholder="Email" type="email">
 
 									</div>
 								</div>
@@ -214,7 +198,7 @@
 									</div>
 								</div>
 								<div class="info-btn">
-									<div class="am-btn am-btn-danger">保存修改</div>
+									<div class="am-btn am-btn-danger"><input type="submit" value="保存修改"></div>
 								</div>
 
 							</form>
@@ -304,5 +288,38 @@
 		</div>
 
 	</body>
-
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript">
+	$.ajax({  
+        type:"get",//请求方式  
+        url:"../../UserCtrl?action=getone&id=1",//发送请求地址  
+        dataType:"json",  
+        data:{//发送给数据库的数据  
+        },  
+        //请求成功后的回调函数有两个参数  
+        success:function(data){  
+            var objs=eval(data); //解析json对象  
+            var obj = objs.users;  
+            
+            var name = obj[0].name;
+            var nickname=obj[0].nickname;
+            var sex=obj[0].sex;
+            var birth=obj[0].birth;
+            var telephone=obj[0].telephone;
+            var email=obj[0].email;
+            
+            document.getElementById("name").value = name;
+            document.getElementById("nickname").value = nickname;
+            document.getElementById("telephone").value = telephone;
+            document.getElementById("email").value = email;
+            if(sex==0)
+            	document.getElementById("s").checked=true;
+            else if(sex==1)
+            	document.getElementById("m").checked=true;
+            else if(sex==2)
+            	document.getElementById("f").checked=true;
+            document.getElementById("birth").value=birth;
+        }
+       }); 
+	</script>
 </html>

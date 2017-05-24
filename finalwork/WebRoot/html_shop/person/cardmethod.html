@@ -113,35 +113,37 @@
 							<div class="u-progress-bar-inner"></div>
 						</div>
 					</div>
-					<form class="am-form am-form-horizontal">
+					<form class="am-form am-form-horizontal" action="../../UserCtrl" method="post">
+					<input type="hidden" name="action" value="add_card">
+					<input type="hidden" name="user_id" value="1">
 						<div class="am-form-group">
 							<label for="user-name" class="am-form-label">真实姓名</label>
 							<div class="am-form-content">
-								<input type="text" id="user-name" placeholder="请输入您的真实姓名">
+								<input type="text" id="user-name" name="name" placeholder="请输入您的真实姓名">
 							</div>
 						</div>
 						<div class="am-form-group">
 							<label for="user-IDcard" class="am-form-label">身份证号</label>
 							<div class="am-form-content">
-								<input type="tel" id="user-IDcard" placeholder="请输入您的身份证信息">
+								<input type="tel" id="user-IDcard" name="id_number" placeholder="请输入您的身份证信息">
 							</div>
 						</div>
 						<div class="am-form-group">
 							<label for="user-BankID" class="am-form-label">银行卡号</label>
 							<div class="am-form-content">
-								<input type="tel" id="user-BankID" placeholder="请输入要绑定的银行卡卡号">
+								<input type="tel" id="user-BankID" name="id" placeholder="请输入要绑定的银行卡卡号">
 							</div>
 						</div>
 						<div class="am-form-group">
 							<label for="user-phone" class="am-form-label">手机号码</label>
 							<div class="am-form-content">
-								<input type="tel" id="user-phone" placeholder="请输入此卡的预留手机号">
+								<input type="tel" id="user-phone" name="phone" placeholder="请输入此卡的预留手机号">
 							</div>
 						</div>	
 						<div class="am-form-group code">
 							<label for="user-new-code" class="am-form-label">验证码</label>
 							<div class="am-form-content">
-								<input type="tel" id="user-new-code" placeholder="短信验证码">
+								<input type="tel" id="user-new-code" name="bank" placeholder="bank">
 							</div>
 							<a class="btn" href="javascript:void(0);" onclick="sendMobileCode();" id="sendMobileCode">
 								<div class="am-btn am-btn-danger">验证码</div>
@@ -150,7 +152,7 @@
 						<div class="info-btn">
 							<div class="am-btn am-btn-danger">开通协议并确定</div>
 						</div>
-
+				<input type="submit" name="submit" value="submit">
 					</form>
 
 				</div>
