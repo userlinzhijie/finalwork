@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>运营-后台管理</title>
+
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/datepicker3.css" rel="stylesheet">
+<link href="css/styles.css" rel="stylesheet">
+<link href="css/bootstrap-table.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<script src="js/respond.min.js"></script>
+<![endif]-->
+
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><span>运营商</span>后台管理</a>
+				<ul class="user-menu">
+					<li class="dropdown pull-right">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span><label>工号</label><label id="session_uid">...</label><span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="#" data-toggle="modal" data-target="#exampleModal1" onclick="myedit()"><span class="glyphicon glyphicon-cog"></span> 编辑个人信息</a></li>
+							<li><a href="../ManagerCtrl?action=logout"><span class="glyphicon glyphicon-log-out"></span>退出</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div><!-- /.container-fluid -->
+	</nav>
+		
+	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<form role="search">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="Search">
+			</div>
+		</form>
+		<ul class="nav menu">
+			<li><a href="manager.html"><span class="glyphicon glyphicon-dashboard"></span> 运营人员管理</a></li>
+			<li><a href="customer.html"><span class="glyphicon glyphicon-th"></span> 顾客管理</a></li>
+			<li><a href="store.html"><span class="glyphicon glyphicon-stats"></span> 店铺管理</a></li>
+			<li  class="active"><a href="apply.html"><span class="glyphicon glyphicon-list-alt"></span> 店铺申请管理</a></li>
+			
+			<li role="presentation" class="divider"></li>
+			<li><a href="total.html"><span class="glyphicon glyphicon-list-alt"></span> 数据统计</a></li>
+		</ul>
+		<!--<div class="attribution">More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></div>-->
+	</div><!--/.sidebar-->
+		
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+				<li class="active"> 店铺申请管理</li>
+			</ol>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header"> 店铺申请管理</h1>
+			</div>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">店铺申请管理</div>
+					<div class="panel-body">
+						<table id="shopTable" data-toggle="table"></table>
+					</div>
+				</div>
+			</div>
+		</div><!--/.row-->
+			
+	</div>	<!--/.main-->
+
+<!-- 模态框1               -->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog2" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+  
+    <div class="modal-content">
+     <form action="../ManagerCtrl" method="post">
+     <input type="hidden" name="action" id="action" value="edit">
+     <input type="hidden" name="id" id="hid" value="">
+     <input type="hidden" name="password" id="hpassword" value="">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">修改管理员信息</h4>
+      </div>
+     
+      <div class="modal-body">
+        
+          <div class="form-group">
+            <label for="id" class="control-label">工号:</label>
+            <input type="text" class="form-control" id="ide" name="ide">
+          </div>
+          <div class="form-group">
+            <label for="password" class="control-label">密码:</label>
+            <input type="password" class="form-control" id="passworde" name="passworde">
+          </div>
+          <div class="form-group">
+            <label for="info" class="control-label">备注:</label>
+            <textarea class="form-control" id="infoe" name="infoe"></textarea>
+          </div>
+        
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <input type="submit" class="btn btn-primary" value="修改">
+      </div>
+      
+      </form>
+    </div>
+  </div>
+</div>
+<!-- 模态框               -->
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/chart.min.js"></script>
+	<script src="js/chart-data.js"></script>
+	<script src="js/easypiechart.js"></script>
+	<script src="js/easypiechart-data.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="js/bootstrap-table.js"></script>
+	<script>
+		$('#calendar').datepicker({
+		});
+
+		!function ($) {
+		    $(document).on("click","ul.nav li.parent > a > span.icon", function(){          
+		        $(this).find('em:first').toggleClass("glyphicon-minus");      
+		    }); 
+		    $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+		}(window.jQuery);
+
+		$(window).on('resize', function () {
+		  if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+		})
+		$(window).on('resize', function () {
+		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+		})
+	</script>	
+	<script type="text/javascript">
+	$.ajax({  
+        type:"get",//请求方式  
+        url:"../ShopCtrl?action=getapply",//发送请求地址  
+        dataType:"json",  
+        data:{//发送给数据库的数据  
+        },  
+        //请求成功后的回调函数有两个参数  
+        success:function(data){  
+            var objs=eval(data); //解析json对象  
+            var obj = objs.shops;  
+              
+            var table = $("#shopTable");  
+            table.empty();  
+            table.append('<tr><th>顾客id</th><th>店铺id</th><th>状态</th><th>操作</th></tr>');  
+              
+            for(var i=0;i< obj.length;i++){  
+                var a = obj[i].user_id;
+                var b = obj[i].shop_id;
+                var c = "审核中。。。";
+                table.append('<tr><th width=80px>'+a+'</th><th width=100px>'+b+'</th><th width=300px>'+c+'</th><th width=150px><a  href="../ShopCtrl?action=agree&shopid='+b+'"><button><span class="glyphicon glyphicon-ok" ></span>批准</button></a></th></tr>');
+            }  
+        }  
+       }); 
+       
+       function myedit(){
+	var id = document.getElementById("session_uid").innerHTML;
+	$.ajax({  
+       type:"get",//请求方式  
+       url:"../ManagerCtrl?action=getone&id="+id,//发送请求地址  
+       dataType:"json",  
+       data:{//发送给数据库的数据  
+       },  
+       //请求成功后的回调函数有两个参数  
+       success:function(data){  
+      		 document.getElementById("action").value = "";
+      		 document.getElementById("exampleModalLabel").value = "";
+         	 document.getElementById("hid").value = "";
+				document.getElementById("hpassword").value = "";
+				document.getElementById("ide").value ="";
+				document.getElementById("ide").disabled=false;
+				document.getElementById("passworde").value ="";
+				document.getElementById("passworde").disabled=false;
+				document.getElementById("infoe").innerHTML = "";
+		var objs = eval(data); //解析json对象  
+			var obj = objs.managers;
+			 document.getElementById("action").value = "editmy";
+			 document.getElementById("exampleModalLabel").value = "编辑个人信息";
+			document.getElementById("hid").value = obj[0].id;
+			document.getElementById("hpassword").value = obj[0].password;
+			document.getElementById("ide").value = obj[0].id;
+			document.getElementById("ide").disabled=true;
+			document.getElementById("passworde").value = obj[0].password;
+			document.getElementById("infoe").innerHTML = obj[0].info;
+			}
+		});
+	};
+	
+	</script>
+	<script>
+		$("#session_uid").load("../ManagerCtrl?action=gets", function() {
+			if (document.getElementById("session_uid").innerHTML == "游客") {
+				alert("请登录！");
+				window.location = "login.html";
+			}
+		});
+	</script>
+</body>
+
+</html>
