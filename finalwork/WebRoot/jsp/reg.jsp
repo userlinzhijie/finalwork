@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    var value = $("#userName").val();
              $.ajax({  
                type:"get",//请求方式  
-               url:"CheckUserNameServlet?userName=" + value,//发送请求地址  
+               url:"Checkctrl?userName=" + value,//发送请求地址  
                timeout:30000,//超时时间：30秒  
                dataType:"json",//设置返回数据的格式 
                //请求成功后的回调函数 data为json格式  
@@ -71,7 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		<div id="Content">
 			<div id="Content-Mid">
-				<form class="form-horizontal" action="Regctrl" method="post" id = "reg-form">
+				<form class="form-horizontal" action="RegCtrl" method="post" id = "reg-form">
 					<div>
 						<div class="form-group">
 							<div class="col-md-6">

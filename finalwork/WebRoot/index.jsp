@@ -119,7 +119,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    <th>可选分类</th>  
 			</tr>  
 			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
-			    <td><a href="jsp/keyboard.jsp">键盘</a></td>  
+			    <td><a href="Pagectrl">键盘</a></td>  
 			</tr>  
 			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
 			    <td><a href="">鼠标</a></td>  

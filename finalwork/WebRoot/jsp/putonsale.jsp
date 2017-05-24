@@ -91,13 +91,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<tr>
     		<td>品牌:</td><td><input type="text" class="brand" id="brand" name="brand"></td>
     	</tr>
-    	<tr><td>型号:</td><td><input type="text" class="type" id="type" id="type" ></td>
+    	<tr><td>型号:</td><td><input type="text" class="type" id="type" id="type" name="type"></td>
     		</tr>
     	<tr>
-    		<td>颜色:</td><td><input type="text" class="color" id="color" id="color" ></td>
+    		<td>颜色:</td><td><input type="text" class="color" id="color" id="color" name="color"></td>
     		</tr>
     	<tr>
-    		<td>传输方式:</td><td><input type="text" name="trans" id="trans" class="trans"></td>
+    		<td>传输方式:</td><td><input type="text" name="trans" id="trans" class="trans" name="trans"></td>
     		</tr>
     	<tr>
     		<td>商品图片:</td>

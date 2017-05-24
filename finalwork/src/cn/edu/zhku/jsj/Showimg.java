@@ -21,7 +21,6 @@ public class Showimg extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-			String test=request.getParameter("test1");
 		 	String filePath = getServletContext().getRealPath("/")+"img\\"+File.separator+"SSR.jpg";
 	        File file = new File(filePath);
 	        // 获取输出流

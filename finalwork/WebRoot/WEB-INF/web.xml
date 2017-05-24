@@ -8,20 +8,8 @@
   <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>CheckUserNameServlet</servlet-name>
-    <servlet-class>cn.edu.zhku.jsj.ctrl.CheckUserNameServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>Regctrl</servlet-name>
-    <servlet-class>cn.edu.zhku.jsj.ctrl.Regctrl</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
     <servlet-name>Loginctrl</servlet-name>
-    <servlet-class>cn.edu.zhku.jsj.ctrl.Loginctrl</servlet-class>
+    <servlet-class>cn.edu.zhku.jsj.lzj.Ctrl.Loginctrl</servlet-class>
   </servlet>
   <servlet>
     <description>This is the description of my J2EE component</description>
@@ -33,19 +21,13 @@
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
     <servlet-name>Infoctrl</servlet-name>
-    <servlet-class>cn.edu.zhku.jsj.ctrl.Infoctrl</servlet-class>
+    <servlet-class>cn.edu.zhku.jsj.lzj.Ctrl.Infoctrl</servlet-class>
   </servlet>
   <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
     <servlet-name>Pwdctrl</servlet-name>
     <servlet-class>cn.edu.zhku.jsj.ctrl.Pwdctrl</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>showimg</servlet-name>
-    <servlet-class>showimg</servlet-class>
   </servlet>
   <servlet>
     <description>This is the description of my J2EE component</description>
@@ -65,6 +47,41 @@
     <servlet-name>Upload</servlet-name>
     <servlet-class>cn.edu.zhku.jsj.ctrl.Upload</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>RegCtrl</servlet-name>
+    <servlet-class>cn.edu.zhku.jsj.lzj.Ctrl.Regctrl</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Checkctrl</servlet-name>
+    <servlet-class>cn.edu.zhku.jsj.lzj.Ctrl.Checkctrl</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Getctrl</servlet-name>
+    <servlet-class>cn.edu.zhku.jsj.lzj.Ctrl.Getctrl</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Uploadctrl</servlet-name>
+    <servlet-class>cn.edu.zhku.jsj.lzj.Ctrl.Uploadctrl</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Pagectrl</servlet-name>
+    <servlet-class>cn.edu.zhku.jsj.lzj.Ctrl.Pagectrl</servlet-class>
+  </servlet>
+
+
+
+
+
 
 
 
@@ -75,14 +92,6 @@
 
 
   
-<servlet-mapping>
-    <servlet-name>CheckUserNameServlet</servlet-name>
-    <url-pattern>/CheckUserNameServlet</url-pattern>
-</servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>Regctrl</servlet-name>
-    <url-pattern>/Regctrl</url-pattern>
-  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Loginctrl</servlet-name>
     <url-pattern>/Loginctrl</url-pattern>
@@ -100,10 +109,6 @@
     <url-pattern>/Pwdctrl</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>showimg</servlet-name>
-    <url-pattern>/showimg</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
     <servlet-name>Showimg</servlet-name>
     <url-pattern>/Showimg</url-pattern>
   </servlet-mapping>
@@ -115,14 +120,34 @@
     <servlet-name>Upload</servlet-name>
     <url-pattern>/Upload</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>RegCtrl</servlet-name>
+    <url-pattern>/RegCtrl</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Checkctrl</servlet-name>
+    <url-pattern>/Checkctrl</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Getctrl</servlet-name>
+    <url-pattern>/Getctrl</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Uploadctrl</servlet-name>
+    <url-pattern>/Uploadctrl</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Pagectrl</servlet-name>
+    <url-pattern>/Pagectrl</url-pattern>
+  </servlet-mapping>
 
   
   <filter>
-  	<filter-name>loginfilter</filter-name>
-  	<filter-class>cn.edu.zhku.jsj.ctrl.filter.Loginfilter</filter-class>
+  	<filter-name>Loginfilter</filter-name>
+  	<filter-class>cn.edu.zhku.jsj.lzj.Filter.Loginfilter</filter-class>
   </filter>
   <filter-mapping>
-  <filter-name>loginfilter</filter-name>
+  <filter-name>Loginfilter</filter-name>
   <url-pattern>//Loginctrl</url-pattern>
   </filter-mapping>
   

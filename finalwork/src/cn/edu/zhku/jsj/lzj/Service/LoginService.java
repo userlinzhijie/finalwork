@@ -17,23 +17,9 @@ public boolean checkUserNameAndPassword(User user) throws Exception{
     	if( newUser.getUserid() != null){
     		result = true;
     	}else{
-    		result=false;
+    		result = false;
     	}
     	
     	return result;
     }
-
-	public static void main(String[] args) {
-	
-	LoginDao ld = new LoginDao();
-	
-		try {
-			if(ld.judge("root", "zhijie")){
-				System.out.println("µÇÂ¼³É¹¦£¡");
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-}
 }

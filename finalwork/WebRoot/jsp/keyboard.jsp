@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -26,40 +27,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  	//折叠菜单函数
         var lis = document.getElementsByClassName("subme");
 	    for(var i=0; i<lis.length; i++){
-	        lis[i].onmouseover = function(){
-	            this.getElementsByClassName("submenu")[0].style.display = "block";
-	        };
-	        lis[i].onmouseout = function(){
-	            this.getElementsByClassName("submenu")[0].style.display = "none";
-	        };
+		        lis[i].onmouseover = function(){
+		            this.getElementsByClassName("submenu")[0].style.display = "block";
+		        };
+		        lis[i].onmouseout = function(){
+		            this.getElementsByClassName("submenu")[0].style.display = "none";
+		        };
 	    	}
-	    	
-	    	//ajax读取数据库
-	    	 $.ajax({  
-               type:"get",//请求方式  
-               url:"Getgoods",//发送请求地址  
-               timeout:30000,//超时时间：30秒  
-               dataType:"json",//设置返回数据的格式  
-               async:false,
-               //请求成功后的回调函数 data为json格式  
-               success:function(data){  
-               var objs=eval(data);
-               var obj = objs.Keyboards;
-               var name1=obj[1].name;
-               var brand = ["brand1","brand2"]; 
-               document.getElementById(brand[0]).innerHTML=name1;
-      /*         	alert(name1);
-               	alert(brand[1]);*/
-              },  
-              //请求出错的处理  
-              error:function(){  
-                        alert("请求出错");  
-              }  
-           }); 
-           	var tomcat="/test/upload/";
-			var test="ssr.jpg";
-			document.getElementById("img1").src=tomcat+test;
-			document.getElementById("img2").src="img/SSR.jpg";
           };  
   	</script>
   	
@@ -137,39 +111,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 		<div class="div1">
 	 		<table class="shoplist">
 	 			<tr>
-				<td><a href=""><table class="shopdetail">
+	 			<c:forEach var="shop" items="${pageBean.data}" varStatus="vs">	
+	 			<c:if test = "${vs.count>=2}"><c:if test = "${(vs.count % 2)==1}">
+	 				<tr>
+	 			</c:if></c:if>		
+				<td>
+				<a href="Pagectrl?page=${shop.id}"><table class="shopdetail">
 					<tr>
 					<td><img id="img1" src="" width="30px" height="20px"></td></tr>
 					<tr>
-					<td>xx键盘<span id="brand1"></span></td></tr>
-					<tr>
-					<td>xx<span id="name1"></span></td></tr>
-					<tr>
-					<td>销量<span id="sales1"></span></td></tr>
-					</table></a></td>
-				<td><table class="shopdetail">
-					<tr>
-					<td><img id="img2" src="" width="30px" height="20px"></td></tr>
-					<tr>
-					<td>xx键盘<span id="brand1"></span></td></tr>
-					<tr>
-					<td>xx<span id="name1"></span></td></tr>
-					<tr>
-					<td>销量<span id="sales1"></span></td></tr>
-					</table></td></tr>
-				<tr>
-				<td><table class="shopdetail">
-					<tr>
-					<td><img id="img2" src="" width="30px" height="20px"></td></tr>
-					<tr>
-					<td>xx键盘<span id="brand1"></span></td></tr>
-					<tr>
-					<td>xx<span id="name1"></span></td></tr>
-					<tr>
-					<td>销量<span id="sales1"></span></td></tr>
-					</table></td></tr>
+					<td>名字：<c:out value="${shop.name}" /></td></tr>
+					</table></a>
+				</td>
+				</c:forEach>
 			</table>
+		<p align="center">
+    	页数${pageBean.curPage}/${pageBean.totalPages}
+    	<c:choose>
+    		<c:when test = "${pageBean.curPage==1}">首页 上一页</c:when>
+    		<c:otherwise>
+    			<a href="Pagectrl?page=1">首页</a>
+    			<a href="Pagectrl?page=${pageBean.curPage-1}">上一页</a>
+    		</c:otherwise>
+    	</c:choose>
+    	<c:choose>
+    		<c:when test="${pageBean.curPage==pageBean.totalPages}">下一页 尾页</c:when>
+    		<c:otherwise>
+    			<a href="Pagectrl?page=${pageBean.curPage+1}">下一页</a>
+    			<a href="Pagectrl?page=${pageBean.totalPages}">尾页</a>
+    		</c:otherwise>
+    	</c:choose>
+    	<form method="post" action="Pagectrl">
+    	<p align="center"><input type="text" name="page"><input type="submit" name="Submit" value="跳转"></p>
+    	</form>
 	 		</div>
-	 	</div>
+	 	</div>	 	
   </body>
 </html>
