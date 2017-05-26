@@ -32,19 +32,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		<div id="Content">
 			<div id="Content-Mid">
-				<form class="form-horizontal" action="Loginctrl" method="post" id = "reg-form">
+				<form class="form-horizontal" action="UserCtrl?action=login" method="post" id="reg-form">
 					<div>
 						<div class="form-group">
 							<div class="col-md-6">
 								<label for="first_name" class="control-label">用户名</label> <input
-									type="text" class="form-control" id="lguserName" name="lguserName"
+									type="text" class="form-control" id="lguserName" name="name"
 									placeholder="输入用户名" /required>								
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-md-6">
 								<label  for="password" class="control-label">密码</label> <input
-									type="password" class="form-control" name="lgpwd"
+									type="password" class="form-control" name="password"
 									placeholder="输入密码" /required>
 							</div>
 						</div>

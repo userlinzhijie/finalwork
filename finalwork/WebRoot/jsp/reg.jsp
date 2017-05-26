@@ -71,12 +71,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 		<div id="Content">
 			<div id="Content-Mid">
-				<form class="form-horizontal" action="RegCtrl" method="post" id = "reg-form">
+				<form class="form-horizontal" action="UserCtrl" method="post" id = "reg-form">
+					<input type="hidden" name="action" value="register"> 
 					<div>
 						<div class="form-group">
 							<div class="col-md-6">
-								<label for="first_name" class="control-label">用户名</label> <input
-									type="text" class="form-control" id="userName" name="userName"
+								<label for="first_name" class="control-label">用户名</label> 
+								<input type="text" class="form-control" id="userName" name="name"
 									placeholder="输入用户名" onchange="checkname()" /required>	
 									<div id="userInfo"></div>							
 							</div>
@@ -84,12 +85,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="form-group">
 							<div class="col-md-6">
 								<label  for="password" class="control-label">密码</label> <input
-									type="password" class="form-control" name="pwd"
+									type="password" class="form-control" name="password"
 									placeholder="输入密码" /required>
 							</div>
 							<div class="col-md-6">
-								<label for="password" class="control-label">确认密码</label> <input
-									type="password" class="form-control" id="password_confirm"
+								<label for="password" class="control-label">确认密码</label> 
+								<input type="password" class="form-control" id="password_confirm" 
 									placeholder="再输入一次密码" /required>
 							</div>
 						</div>
@@ -117,5 +118,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<img src="img/b1.png" width=1200px height=158px>
 		</div>
 	</div>
-</body>
+<body>&nbsp;</body>
 </html> 
