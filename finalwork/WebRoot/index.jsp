@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="./css/playphoto.css" rel="stylesheet" type="text/css">
 	<link href="./css/selectlist.css" rel="stylesheet" type="text/css">
 	
-    
+    <script type="text/javascript" src="js/jquery-1.11.1.js"></script> 
 	<script language="javascript" type="text/javascript">
 	//图片轮转代码 和 菜单折叠代码
 	var s=function(){
@@ -97,7 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	          <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="">下架货物</a></div>
     </li>
     <li class="subme">
-          <a href="">购物车</a>
+          <a href="jsp/cart.jsp">购物车</a>
          <div class ="submenu"><a href="#">1</a><a href="#">2</a><a href="#">3</a></div>
     </li>
     <li class="subme">
