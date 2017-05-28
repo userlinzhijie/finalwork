@@ -4,6 +4,7 @@ public class Shop {
 	private int shop_id;
 	private int user_id;
 	private int status;
+	private String name;
 	public int getShop_id() {
 		return shop_id;
 	}
@@ -21,6 +22,12 @@ public class Shop {
 	}
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }

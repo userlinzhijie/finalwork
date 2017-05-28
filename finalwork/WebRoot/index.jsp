@@ -98,11 +98,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </li>
     <li class="subme">
           <a href="jsp/cart.jsp">购物车</a>
-         <div class ="submenu"><a href="#">1</a><a href="#">2</a><a href="#">3</a></div>
     </li>
     <li class="subme">
           <a href="jsp/info.jsp">我的中心</a>
-	          <div class ="submenu"><a href="jsp/info.jsp">我的信息</a><a href="jsp/changepwd.jsp">更改密码</a><a href="jsp/apply.jsp">申请开铺</a></div>
     </li>
     <li class="subme">
           <a href="#">首页</a>

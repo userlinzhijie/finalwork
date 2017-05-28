@@ -69,7 +69,8 @@ $.ajax({
 	function() {
 		var title = document.getElementById("p_title").innerHTML;
 		if (title == "游客") {
-			document.getElementById("p_title").innerHTML = '<a href="jsp/login.jsp">你好，请登录</a>&nbsp;&nbsp;<a href="jsp/reg.jsp">注册</a>&nbsp;&nbsp;&nbsp;';
+			alert("请登录！");
+			window.location = "jsp/login.jsp";
 		}else{
 			document.getElementById("p_title").innerHTML = '欢迎回来,'+title+'<a href="UserCtrl?action=logout">退出登陆</a>';
 		}
@@ -88,11 +89,9 @@ $.ajax({
 	    </li>
 	    <li class="subme">
 	          <a href="jsp/cart.jsp">购物车</a>
-	         <div class ="submenu"><a href="#">1</a><a href="#">2</a><a href="#">3</a></div>
 	    </li>
 	    <li class="subme">
 	          <a href="jsp/info.jsp">我的中心</a>
-	          <div class ="submenu"><a href="jsp/info.jsp">我的信息</a><a href="jsp/changepwd.jsp">更改密码</a><a href="jsp/apply.jsp">申请开铺</a></div>
 	    </li>
 	    <li class="subme">
 	          <a href="">首页</a>
