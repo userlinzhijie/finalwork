@@ -20,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="css/styles.css" rel="stylesheet" type="text/css" >
 	<link href="css/detail.css" rel="stylesheet" type="text/css" >
 	<link href="css/selectlist.css" rel="stylesheet" type="text/css">
-	
+	<script type="text/javascript" src="js/jquery-1.11.1.js"></script> 
 	<script language="javascript" type="text/javascript">
 		function numberadd(){
 			document.getElementById("number").value++;
@@ -58,13 +58,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body background="img/background2.jpg">
     <div id="Header">
   	<div id="logo">
-    <%String name = (String)session.getAttribute("user"); %>
-  	<%if(name==null){%>	
-  	<p align = "right"><a href="jsp/login.jsp">你好，请登录</a>&nbsp;&nbsp;<a href="jsp/reg.jsp">注册</a>&nbsp;&nbsp;&nbsp;</p>
-  	<%}else{%>
-  	<p align =right>欢迎回来,<%= name %>  <a href = "jsp/exit.jsp">退出登陆</a><p> 
-	<% } %>
+    <p align ="right" >&nbsp;<p> 
+  	<p align ="right" id="p_title">loading...<p> 
 	</div></div>
+	<script>
+	$("#p_title").load("UserCtrl?action=getusercookie",
+	function() {
+		var title = document.getElementById("p_title").innerHTML;
+		if (title == "游客") {
+			document.getElementById("p_title").innerHTML = '<a href="jsp/login.jsp">你好，请登录</a>&nbsp;&nbsp;<a href="jsp/reg.jsp">注册</a>&nbsp;&nbsp;&nbsp;';
+		}else{
+			document.getElementById("p_title").innerHTML = '欢迎回来,'+title+'<a href="UserCtrl?action=logout">退出登陆</a>';
+		}
+	});
+</script>
  	<p align = "center" class = "ziti">商品详情</p>
 	<!-- 上层分割线 -->
 	<ul id="ul1">

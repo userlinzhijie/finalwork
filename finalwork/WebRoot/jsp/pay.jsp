@@ -233,23 +233,23 @@ $.ajax({
     </ul><br><br><br>
     	
     	
-     <div class="div1">
+     <div class="div2">
 		<table class="next" id="pay_table"></table>
 		
     </div>
-	<div class="div1" id="tab1"><!-- goods -->
+	<div class="div2" id="tab1"><!-- goods -->
 		<table class="next" id="good_table"></table>
     </div>
     
-    <div class="div1" id="tab2"><!-- address -->
+    <div class="div2" id="tab2"><!-- address -->
    	
     </div>
     
-    <div class="div1" id="tab3"><!-- card -->
+    <div class="div2" id="tab3"><!-- card -->
     
     </div>
 	
-	<div class="div1" id="tab4"><!-- trans -->
+	<div class="div2" id="tab4"><!-- trans -->
 	<div class="next" id="trans1" onclick="trans(1)">全包办</div>
 	<div class="next" id="trans2" onclick="trans(2)">自己解决</div>
     </div>
@@ -259,7 +259,7 @@ $.ajax({
 	</script>
 
     
-    <div class="div1" id="tab5"><!-- submit -->
+    <div class="div2" id="tab5"><!-- submit -->
     <form action="UserCtrl" method="post">
     <input type="hidden" name="action" value="add_order">
     <input type="hidden" name="address_id" id="aid" value="">

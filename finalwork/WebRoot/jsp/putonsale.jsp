@@ -71,9 +71,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body background="img/background2.jpg">
     <div id="Header">
   	<div id="logo">
-  	<p align =right>欢迎回来,<input type="text" class="useridtop" id="useridtop" disabled>&nbsp;&nbsp;
-  	<a href = "jsp/exit.jsp">退出登陆</a><p> 
+  	<p align ="right" >&nbsp;<p> 
+  	<p align ="right" id="p_title">loading...<p> 
 	</div></div>
+	<script>
+	$("#p_title").load("UserCtrl?action=getusercookie",
+	function() {
+		var title = document.getElementById("p_title").innerHTML;
+		if (title == "游客") {
+			document.getElementById("p_title").innerHTML = '<a href="jsp/login.jsp">你好，请登录</a>&nbsp;&nbsp;<a href="jsp/reg.jsp">注册</a>&nbsp;&nbsp;&nbsp;';
+		}else{
+			document.getElementById("p_title").innerHTML = '欢迎回来,'+title+'<a href="UserCtrl?action=logout">退出登陆</a>';
+		}
+	});
+</script>
  	<p align = "center" class = "ziti">上架商品</p>
  	<ul id="ul1">
 	    <li class="subme">

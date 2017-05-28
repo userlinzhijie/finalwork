@@ -190,22 +190,22 @@ $.ajax({
 		</table>
     	
     	
-    <div class="div1">
+    <div class="div2">
 		<table class="next" id="order_table"></table>
 		
     </div>
-    <div class="div1" id="tab0">
+    <div class="div2" id="tab0">
     </div>
-	<div class="div1" id="tab1">
-    </div>
-    
-    <div class="div1" id="tab2">
+	<div class="div2" id="tab1">
     </div>
     
-    <div class="div1" id="tab3">
+    <div class="div2" id="tab2">
+    </div>
+    
+    <div class="div2" id="tab3">
     </div>
 	
-	<div class="div1" id="tab4">
+	<div class="div2" id="tab4">
     </div>
   </body>
 </html>
