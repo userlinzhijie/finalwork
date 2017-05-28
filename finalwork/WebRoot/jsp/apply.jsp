@@ -146,7 +146,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</tr>
 		</table>
 	
-	<div class="div1">
+	<div class="div2">
 	<form action="UserCtrl" method="post">
 	<input type="hidden" name="action" value="shopapply"> 
 	<input type="hidden" name="user_id" value="<%=value%>">

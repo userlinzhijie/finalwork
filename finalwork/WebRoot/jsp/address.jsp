@@ -129,7 +129,7 @@ $.ajax({
 		</table>
     	
     	
-    <div class="div1">
+    <div class="div2">
 	<form action="UserCtrl" method="post">
 		<input type="hidden" name="action" value="add_address">
 		<input type="hidden" name="user_id" value="<%=value%>">
