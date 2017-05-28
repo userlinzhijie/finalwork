@@ -63,7 +63,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          	
          	div.append('<div class=""><ul class="ul_cart"><li class="ul_cart_goods"><img class="ul_cart_goods_img"><a>'+obj[i].name+'</a></li><li class="ul_cart_black"></li><li class="ul_cart_price">￥'+obj[i].price+'</li><li class="ul_cart_num">×'+obj[i].number+'</li><li class="ul_cart_total">￥'+obj[i].price*obj[i].number+'</li><li class="ul_cart_do"><p><a href="UserCtrl?action=add_collect&user_id=<%=value%>&goods_id='+obj[i].goods_id+'">收藏</a></p><p><a href="UserCtrl?action=del_cart&id='+obj[i].id+'">删除</a></p></li></ul></div>');
          	
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/work
          	str=str.concat(obj[i].goods_id+'_');
          	str1=str1.concat(obj[i].number+'_');
          	}
