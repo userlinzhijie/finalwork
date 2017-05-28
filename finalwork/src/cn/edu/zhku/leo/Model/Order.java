@@ -8,6 +8,7 @@ public class Order {
 	private int transfee;
 	private int status;
 	private String date;
+	private String card_id;
 	public int getId() {
 		return id;
 	}
@@ -49,6 +50,12 @@ public class Order {
 	}
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	public String getCard_id() {
+		return card_id;
+	}
+	public void setCard_id(String card_id) {
+		this.card_id = card_id;
 	}
 
 }

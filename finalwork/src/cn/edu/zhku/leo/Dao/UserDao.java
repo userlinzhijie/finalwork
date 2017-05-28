@@ -5,10 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-import cn.edu.zhku.leo.Model.Address;
-import cn.edu.zhku.leo.Model.Card;
-import cn.edu.zhku.leo.Model.Order;
-import cn.edu.zhku.leo.Model.User;
+import cn.edu.zhku.leo.Model.*;
 import cn.edu.zhku.leo.Util.ConnectionManager;
 
 public class UserDao {
@@ -293,14 +290,16 @@ public class UserDao {
 
 		ps = conn.prepareStatement(sqlQuery);
 		ps.setInt(1, id);
+		try{
 		rs = ps.executeUpdate();
-
+		}catch(Exception e){
+			return false;
+		}
 		if (rs != 0) {
 			return true;
 		} else {
 			return false;
 		}
-
 	}
 
 	public boolean add_card(Card a) throws Exception {
@@ -394,13 +393,17 @@ public class UserDao {
 
 		ps = conn.prepareStatement(sqlQuery);
 		ps.setString(1, id);
-		rs = ps.executeUpdate();
-
+		try {
+			rs = ps.executeUpdate();
+		} catch (Exception e) {
+			return false;
+		}
 		if (rs != 0) {
 			return true;
 		} else {
 			return false;
 		}
+
 	}
 
 	public ArrayList<Order> getAllOrder() throws Exception {
@@ -417,7 +420,7 @@ public class UserDao {
 			throw new Exception("数据库连接不成功！");
 		}
 
-		String sqlQuery = "Select * from order";
+		String sqlQuery = "Select * from `order`";
 
 		ps = conn.prepareStatement(sqlQuery);
 
@@ -449,4 +452,490 @@ public class UserDao {
 
 	}
 
+	public Shop getShop(int user_id) throws Exception {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		// 连接数据库
+		conn = ConnectionManager.getConnection();
+
+		if (conn == null) {
+			throw new Exception("数据库连接不成功！");
+		}
+
+		String sqlQuery = "Select * from shop where user_id = ?";
+
+		ps = conn.prepareStatement(sqlQuery);
+		ps.setInt(1, user_id);
+		rs = ps.executeQuery();
+
+		if (rs.next()) {
+			Shop s = new Shop();
+			s.setShop_id(rs.getInt("shop_id"));
+			s.setStatus(rs.getInt("status"));
+			s.setUser_id(user_id);
+			return s;
+		} else {
+			return null;
+		}
+	}
+
+	public boolean add_shop(Shop s) throws Exception {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int rs = 0;
+
+		// 连接数据库
+		conn = ConnectionManager.getConnection();
+
+		if (conn == null) {
+			throw new Exception("数据库连接不成功！");
+		}
+
+		String sqlQuery = "INSERT into shop VALUES(0,?,?)";
+
+		ps = conn.prepareStatement(sqlQuery);
+
+		ps.setInt(1, s.getUser_id());
+		ps.setInt(2, s.getStatus());
+		try {
+			rs = ps.executeUpdate();
+			if (rs == 0)
+				return false;
+			else
+				return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public boolean register(User u) throws Exception {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int rs = 0;
+
+		// 连接数据库
+		conn = ConnectionManager.getConnection();
+
+		if (conn == null) {
+			throw new Exception("数据库连接不成功！");
+		}
+
+		String sqlQuery = "insert into `user`(`name`,`password`) VALUES (?,?)";
+
+		ps = conn.prepareStatement(sqlQuery);
+
+		ps.setString(1, u.getName());
+		ps.setString(2, u.getPassword());
+		try {
+			rs = ps.executeUpdate();
+			if (rs == 0)
+				return false;
+			else
+				return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public boolean checkByNamePwd(String name, String password)
+			throws Exception {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		// 连接数据库
+		conn = ConnectionManager.getConnection();
+
+		if (conn == null) {
+			throw new Exception("数据库连接不成功！");
+		}
+
+		String sqlQuery = "Select * from user where `name`=? and `password`=?";
+
+		ps = conn.prepareStatement(sqlQuery);
+		ps.setString(1, name);
+		ps.setString(2, password);
+		rs = ps.executeQuery();
+		if (rs.next()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public ArrayList<Cartlog> getCart() throws Exception {
+		ArrayList<Cartlog> a = new ArrayList<Cartlog>();
+
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ResultSet grs = null;
+
+		// 连接数据库
+		conn = ConnectionManager.getConnection();
+
+		if (conn == null) {
+			throw new Exception("数据库连接不成功！");
+		}
+
+		String sqlQuery = "Select * from cart";
+
+		ps = conn.prepareStatement(sqlQuery);
+
+		rs = ps.executeQuery();
+
+		while (rs.next()) {
+			Cartlog c = new Cartlog();
+			c.setId(rs.getInt("id"));
+			c.setGoods_id(rs.getInt("goods_id"));
+			c.setUser_id(rs.getInt("user_id"));
+			c.setNumber(rs.getInt("number"));
+
+			sqlQuery = "SELECT `name`,price from goods where id=?";
+			ps = conn.prepareStatement(sqlQuery);
+			ps.setInt(1, rs.getInt("goods_id"));
+			grs = ps.executeQuery();
+
+			grs.next();
+			c.setName(grs.getString("name"));
+			c.setPrice(grs.getInt("price"));
+
+			a.add(c);
+		}
+		return a;
+	}
+
+	public ArrayList<Goods> getGoodsByOrderId(int order_id) throws Exception {
+		ArrayList<Goods> a = new ArrayList<Goods>();
+
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ResultSet grs = null;
+
+		// 连接数据库
+		conn = ConnectionManager.getConnection();
+
+		if (conn == null) {
+			throw new Exception("数据库连接不成功！");
+		}
+
+		String sqlQuery = "Select * from og where order_id=?";
+
+		ps = conn.prepareStatement(sqlQuery);
+		ps.setInt(1, order_id);
+		rs = ps.executeQuery();
+
+		while (rs.next()) {
+			Goods c = new Goods();
+
+			sqlQuery = "SELECT `name`,price from goods where id=?";
+			ps = conn.prepareStatement(sqlQuery);
+			ps.setInt(1, rs.getInt("goods_id"));
+			grs = ps.executeQuery();
+
+			grs.next();
+			c.setName(grs.getString("name"));
+			c.setPrice(grs.getInt("price"));
+			c.setId(rs.getInt("id"));
+			c.setNumber(rs.getInt("number"));
+			a.add(c);
+		}
+		return a;
+	}
+
+	public boolean del_cart(int id) throws Exception {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int rs = 0;
+
+		// 连接数据库
+		conn = ConnectionManager.getConnection();
+
+		if (conn == null) {
+			throw new Exception("数据库连接不成功！");
+		}
+
+		String sqlQuery = "delete from cart where id=?";
+
+		ps = conn.prepareStatement(sqlQuery);
+		ps.setInt(1, id);
+		rs = ps.executeUpdate();
+
+		if (rs != 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public Goods getGoodsById(int id) throws Exception {
+		Goods c = new Goods();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		// 连接数据库
+		conn = ConnectionManager.getConnection();
+
+		if (conn == null) {
+			throw new Exception("数据库连接不成功！");
+		}
+
+		String sqlQuery = "Select * from goods where id=?";
+
+		ps = conn.prepareStatement(sqlQuery);
+		ps.setInt(1, id);
+		rs = ps.executeQuery();
+
+		while (rs.next()) {
+			c.setName(rs.getString("name"));
+			c.setPrice(rs.getInt("price"));
+			c.setId(rs.getInt("id"));
+			c.setNumber(1);
+		}
+		return c;
+
+	}
+
+	public int add_order(Order c) throws Exception {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int rs = 0;
+		ResultSet r = null;
+		// 连接数据库
+		conn = ConnectionManager.getConnection();
+
+		if (conn == null) {
+			throw new Exception("数据库连接不成功！");
+		}
+
+		String sqlQuery = "INSERT into `order` VALUES(?,?,?,?,?,?,?,?)";
+
+		ps = conn.prepareStatement(sqlQuery);
+		ps.setInt(1, 0);
+		ps.setInt(2, c.getUser_id());
+		ps.setInt(3, c.getAddress_id());
+		ps.setInt(4, c.getTotal());
+		ps.setInt(5, c.getTransfee());
+		ps.setInt(6, c.getStatus());
+		ps.setString(7, c.getDate());
+		ps.setString(8, c.getCard_id());
+		System.out.println(c.getCard_id());
+		rs = ps.executeUpdate();
+		if (rs == 0)
+			return 0;
+		else {
+			sqlQuery = "select max(id) from `order`";
+			ps = conn.prepareStatement(sqlQuery);
+			r = ps.executeQuery();
+			r.next();
+			return r.getInt("max(id)");
+		}
+	}
+
+	public boolean add_og(ArrayList<OG> a) throws Exception {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int rs = 0;
+		// 连接数据库
+		conn = ConnectionManager.getConnection();
+
+		if (conn == null) {
+			throw new Exception("数据库连接不成功！");
+		}
+		for (int i = 0; i < a.size(); i++) {
+			String sqlQuery = "insert into og (goods_id,order_id,number)VALUES(?,?,?)";
+			ps = conn.prepareStatement(sqlQuery);
+			ps.setInt(1, a.get(i).getGoods_id());
+			ps.setInt(2, a.get(i).getOrder_id());
+			ps.setInt(3, a.get(i).getNumber());
+
+			rs = ps.executeUpdate();
+		}
+		if (rs == 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public boolean orderStatusTo(int order_id, int status) throws Exception {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int rs = 0;
+
+		// 连接数据库
+		conn = ConnectionManager.getConnection();
+
+		if (conn == null) {
+			throw new Exception("数据库连接不成功！");
+		}
+
+		String sqlQuery = "update `order` set `status`=? where id=?";
+
+		ps = conn.prepareStatement(sqlQuery);
+		ps.setInt(1, status);
+		ps.setInt(2, order_id);
+
+		rs = ps.executeUpdate();
+		if (rs == 0)
+			return false;
+		else
+			return true;
+	}
+
+	public boolean del_order(int id) throws Exception {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int rs = 0;
+
+		// 连接数据库
+		conn = ConnectionManager.getConnection();
+
+		if (conn == null) {
+			throw new Exception("数据库连接不成功！");
+		}
+
+		String sqlQuery = "delete from og where order_id=?";
+
+		ps = conn.prepareStatement(sqlQuery);
+		ps.setInt(1, id);
+		rs = ps.executeUpdate();
+
+		sqlQuery = "delete from `order` where id=?";
+
+		ps = conn.prepareStatement(sqlQuery);
+		ps.setInt(1, id);
+		rs = ps.executeUpdate();
+
+		if (rs != 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public boolean add_collect(int uid, int gid) throws Exception {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int rs = 0;
+
+		// 连接数据库
+		conn = ConnectionManager.getConnection();
+
+		if (conn == null) {
+			throw new Exception("数据库连接不成功！");
+		}
+
+		String sqlQuery = "INSERT into collect VALUES(0,?,?)";
+
+		ps = conn.prepareStatement(sqlQuery);
+
+		ps.setInt(1, uid);
+		ps.setInt(2, gid);
+
+		rs = ps.executeUpdate();
+		if (rs == 0)
+			return false;
+		else
+			return true;
+	}
+
+	public boolean del_collect(int id) throws Exception {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int rs = 0;
+
+		// 连接数据库
+		conn = ConnectionManager.getConnection();
+
+		if (conn == null) {
+			throw new Exception("数据库连接不成功！");
+		}
+
+		String sqlQuery = "delete from collect where id=?";
+		ps = conn.prepareStatement(sqlQuery);
+		ps.setInt(1, id);
+		rs = ps.executeUpdate();
+
+		if (rs == 0)
+			return false;
+		else
+			return true;
+	}
+
+	public ArrayList<Collect> getCollect(int user_id) throws Exception {
+		ArrayList<Collect> a = new ArrayList<Collect>();
+
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ResultSet crs = null;
+
+		// 连接数据库
+		conn = ConnectionManager.getConnection();
+
+		if (conn == null) {
+			throw new Exception("数据库连接不成功！");
+		}
+
+		String sqlQuery = "Select * from collect where user_id=?";
+
+		ps = conn.prepareStatement(sqlQuery);
+		ps.setInt(1, user_id);
+		rs = ps.executeQuery();
+
+		while (rs.next()) {
+			int id = rs.getInt("id");
+			int uid = rs.getInt("user_id");
+			int gid = rs.getInt("goods_id");
+			Collect m = new Collect();
+
+			m.setId(id);
+			m.setGoods_id(gid);
+			m.setUser_id(uid);
+
+			sqlQuery = "SELECT `name`,price from goods where id=?";
+			ps = conn.prepareStatement(sqlQuery);
+			ps.setInt(1, rs.getInt("goods_id"));
+			crs = ps.executeQuery();
+
+			crs.next();
+			m.setName(crs.getString("name"));
+			m.setPrice(crs.getInt("price"));
+
+			a.add(m);
+		}
+		return a;
+	}
+
+	public boolean add_cart(Cartlog c) throws Exception {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int rs = 0;
+
+		// 连接数据库
+		conn = ConnectionManager.getConnection();
+
+		if (conn == null) {
+			throw new Exception("数据库连接不成功！");
+		}
+
+		String sqlQuery = "INSERT into cart VALUES(0,?,?,?)";
+
+		ps = conn.prepareStatement(sqlQuery);
+
+		ps.setInt(1, c.getGoods_id());
+		ps.setInt(2, c.getUser_id());
+		ps.setInt(3, c.getNumber());
+
+		rs = ps.executeUpdate();
+		if (rs == 0)
+			return false;
+		else
+			return true;
+	}
 }

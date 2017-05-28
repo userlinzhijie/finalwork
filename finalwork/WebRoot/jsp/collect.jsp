@@ -37,33 +37,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<script language="javascript" type="text/javascript">
 	$.ajax({  
         type:"get",//请求方式  
-        url:"UserCtrl?action=getcart&user_id=<%=value %>",//发送请求地址  
+        url:"UserCtrl?action=getcollect&user_id=<%=value %>",//发送请求地址  
         dataType:"json",  
         data:{//发送给数据库的数据  
         },  
         //请求成功后的回调函数有两个参数  
         success:function(data){  
             var objs=eval(data); //解析json对象  
-            var obj = objs.cartlog;  
-            var total=0;
-            var str="";
-            var str1="";
-            length=obj.length;
-            var table=$("#cart_table");
+            var obj = objs.collect;  
+          
+            var table=$("#collect_table");
             table.empty();
-            table.append('<tr><th>商品</th><th>单价</th><th>数量</th><th>小计</th><th>操作</th></tr>');
+            table.append('<tr><th>商品</th><th>单价</th><th colspan="2">操作</th></tr>');
          	for(var i=0;i< obj.length;i++)
          	{
-         	total=total+obj[i].price*obj[i].number;
-         	table.append('<tr><th>'+obj[i].name+'</th><th>￥'+obj[i].price+'</th><th>'+obj[i].number+'</th><th>￥'+obj[i].price*obj[i].number+'</th><th><a href="UserCtrl?action=add_collect&user_id=<%=value%>&goods_id='+obj[i].goods_id+'">收藏</a>/<a href="UserCtrl?action=del_cart&id='+obj[i].id+'">删除</a></th></tr>');
-         	str=str.concat(obj[i].goods_id+'_');
-         	str1=str1.concat(obj[i].number+'_');
+	      		table.append('<tr><th>'+obj[i].name+'</th><th>￥'+obj[i].price+'</th><th><a href="UserCtrl?action=del_collect&id='+obj[i].id+'">删除</a></th><th><a href="UserCtrl?action=add_cart&user_id=<%=value%>&goods_id='+obj[i].goods_id+'&num='+1+'">加入购物车</a></th></tr>');
          	}
-         	str=str.slice(0, str.length-1);
-         	str1=str1.slice(0, str1.length-1);
-         	document.getElementById("array_g").value=str;
-         	document.getElementById("array_n").value=str1;
-         	table.append('<tr><th colspan="3">共计：￥<label id="cc_total">'+total+'</label></th><th colspan="2"><input type="submit" value="结算"></th></tr>');
+         	
         }
        }); 
   	</script>
@@ -110,17 +100,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	          <a href="">首页</a>
 	    </li>
     </ul><br><br><br>
-    	
+    	<table class="hovertable">
+			<tr>  
+			    <th>我的中心</th>  
+			</tr>  
+			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
+			    <td><a href="jsp/info.jsp">我的信息</a></td>  
+			</tr>  
+			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
+			    <td><a href="jsp/changepwd.jsp">更改密码</a></td>  
+			</tr>  
+			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
+			    <td><a href="jsp/apply.jsp">申请开铺</a></td>  
+			</tr>   
+			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
+			    <td><a href="jsp/address.jsp">地址管理</a></td>  
+			</tr>
+			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
+			    <td><a href="jsp/card.jsp">快捷支付</a></td>  
+			</tr>
+			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
+			    <td><a href="jsp/order.jsp">订单管理</a></td>  
+			</tr>
+			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
+			    <td><a href="jsp/collect.jsp">收藏</a></td>  
+			</tr>
+			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
+			    <td><a href="jsp/advice.jsp">意见反馈</a></td>  
+			</tr>
+		</table>
     	
     	
     <div class="div1">
-	<form action="jsp/pay.jsp" method="get">
-		<input type="hidden" name="id" value="<%=value%>">
-		<input type="hidden" name="array_g" id="array_g" value="">
-		<input type="hidden" name="array_n" id="array_n" value="">
-		<table class="info" id="cart_table">
+		<table class="info" id="collect_table">
 		</table>
-	</form>
     </div>
   </body>
 </html>

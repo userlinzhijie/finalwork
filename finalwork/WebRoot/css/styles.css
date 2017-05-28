@@ -144,6 +144,33 @@ a
 		text-decoration:none;
 	}
 	
-	
+	.next{
+	width:800px;
+	height:auto;
+	margin:28px;
+
+	border-collaspe:collaspe;
+	border:gray solid 2px;
+	font-family:"STFangsong";
+	border-radius:5px;
+	border-color:#6699FF;
+	}
+
+.next_active{
+	width:800px;
+	height:auto;
+	margin:28px;
+
+	border-collaspe:collaspe;
+	border:gray solid 2px;
+	font-family:"STFangsong";
+	border-radius:5px;
+	border-color:red;
+	}
+.blue
+{
+	background-color:#ffff66;
+	color:blue;
+}
 	
 	

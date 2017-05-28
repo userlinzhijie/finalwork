@@ -34,40 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 			
 	 %>
-  	<script language="javascript" type="text/javascript">
-	$.ajax({  
-        type:"get",//请求方式  
-        url:"UserCtrl?action=getcart&user_id=<%=value %>",//发送请求地址  
-        dataType:"json",  
-        data:{//发送给数据库的数据  
-        },  
-        //请求成功后的回调函数有两个参数  
-        success:function(data){  
-            var objs=eval(data); //解析json对象  
-            var obj = objs.cartlog;  
-            var total=0;
-            var str="";
-            var str1="";
-            length=obj.length;
-            var table=$("#cart_table");
-            table.empty();
-            table.append('<tr><th>商品</th><th>单价</th><th>数量</th><th>小计</th><th>操作</th></tr>');
-         	for(var i=0;i< obj.length;i++)
-         	{
-         	total=total+obj[i].price*obj[i].number;
-         	table.append('<tr><th>'+obj[i].name+'</th><th>￥'+obj[i].price+'</th><th>'+obj[i].number+'</th><th>￥'+obj[i].price*obj[i].number+'</th><th><a href="UserCtrl?action=add_collect&user_id=<%=value%>&goods_id='+obj[i].goods_id+'">收藏</a>/<a href="UserCtrl?action=del_cart&id='+obj[i].id+'">删除</a></th></tr>');
-         	str=str.concat(obj[i].goods_id+'_');
-         	str1=str1.concat(obj[i].number+'_');
-         	}
-         	str=str.slice(0, str.length-1);
-         	str1=str1.slice(0, str1.length-1);
-         	document.getElementById("array_g").value=str;
-         	document.getElementById("array_n").value=str1;
-         	table.append('<tr><th colspan="3">共计：￥<label id="cc_total">'+total+'</label></th><th colspan="2"><input type="submit" value="结算"></th></tr>');
-        }
-       }); 
-  	</script>
-	
+ 
   </head>
 
   
@@ -114,13 +81,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	
     	
     <div class="div1">
-	<form action="jsp/pay.jsp" method="get">
-		<input type="hidden" name="id" value="<%=value%>">
-		<input type="hidden" name="array_g" id="array_g" value="">
-		<input type="hidden" name="array_n" id="array_n" value="">
 		<table class="info" id="cart_table">
+		<tr><th colspan="2">物流跟踪</th></tr>
+		<tr><td>物流状态:</td><td>已签收</td></tr>
+<tr><td>承运公司：</td><td>天天物流</td></tr>
+<tr><td>快递单号：</td><td>373269427868<td></tr>
+<tr><td>官方电话：</td><td>4001-888-888</td></tr>
+<tr><th>2015-12-19周六15:35:42</th><th>【武汉市】已签收,签收人是青年城签收，感谢使用天天快递，期待再次为您服务 </th></tr>
+<tr><td> 14:27:28</td><td>【武汉市】光谷关山分部派件员正在为您派件</td></tr>
+<tr><td>09:25:51</td><td>【武汉市】快件已到达 光谷关山分部 </td></tr>
+<tr><td>06:56:03</td><td>【武汉市】武汉 已发出 </td></tr>
+<tr><th>2015-12-17周四22:15:23</th><th>【杭州市】杭州集散陆运 已发出</th></tr>
+<tr><td>18:55:25</td><td>【绍兴市】诸暨 已发出 </td></tr>
+<tr><td>18:54:25</td><td>【绍兴市】天天快递 诸暨收件员 已揽件</td> </tr>
+<tr><td>15:49:40</td><td>商家正通知快递公司揽件 </td></tr>
+<tr><td>15:49:40</td><td>您的包裹已出库</td> </tr>
+<tr><td>15:18:15</td><td>您的订单待配货 </td></tr>
+<tr><td>14:27:50</td><td>您的订单开始处理</td> </tr>
 		</table>
-	</form>
     </div>
   </body>
 </html>
