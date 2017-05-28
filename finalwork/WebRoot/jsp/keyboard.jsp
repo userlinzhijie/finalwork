@@ -77,10 +77,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </li>
  	</ul><br>
 	<!-- 下层分割线 -->
- 	<form action = "Pagectrl" method="post">
- 	<p align = "center" >
- 	<input type = "text" name = "search"><input type = "submit" value = "搜索"><br>
- 	</form><br><br>
+ 	<form action = "Pagectrl?page=1" method="post">
+ 	<p align = "center">
+ 	<input type = "text" name = "search"><input type = "submit" value = "搜索"></p><br>
+ 	</form>
+ 	<form action = "Pagectrl?order=desc&type=${type}&search=${search}" method="post">
+ 	<p align = "center"><input type = "submit" value="价格↓" ></form>
+ 	<br>
  	<div>
 	 	<div class="div0"><br>
 		<table class="hovertable">

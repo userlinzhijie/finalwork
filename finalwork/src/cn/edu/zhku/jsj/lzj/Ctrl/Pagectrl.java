@@ -26,6 +26,7 @@ public class Pagectrl extends HttpServlet {
 		String page = request.getParameter("page");
 		String recid = request.getParameter("id");
 		String search = request.getParameter("search");
+		String order =request.getParameter("order");
 		PageService ps = new PageService();
 		int id=0;
 		if(recid!=null && recid.length()>0){
@@ -34,6 +35,17 @@ public class Pagectrl extends HttpServlet {
 		int curPage=1;
 		if(page!=null && page.length()>0){
 			curPage = Integer.parseInt(page);
+		}
+		//排序显示
+		if(order!=null)
+		{
+			try {
+				request.setAttribute("order",order);
+				request.setAttribute("pageBean",ps.goGetOrder(order,type,search,curPage));
+				request.getRequestDispatcher("jsp/search.jsp").forward(request,response);
+			} catch (Exception e) {
+			e.printStackTrace();
+			}
 		}
 		//进入详细界面
 		if(id!=0)
@@ -51,6 +63,13 @@ public class Pagectrl extends HttpServlet {
 			try {
 				request.setAttribute("search",search);
 				request.setAttribute("pageBean",ps.goGetSearch(search,curPage));
+				int result=1;
+				if(ps.goGetSearch(search,curPage).getData().isEmpty())
+				{
+					result=0;				
+					System.out.print("test");
+				}
+				request.setAttribute("result",result);
 				request.getRequestDispatcher("jsp/search.jsp").forward(request,response);
 			} catch (Exception e) {
 			e.printStackTrace();
@@ -60,6 +79,7 @@ public class Pagectrl extends HttpServlet {
 		if(search==null&&page!=null)
 		{
 			try {	
+				request.setAttribute("type",type);
 				request.setAttribute("pageBean",ps.goGetResult(curPage,type));
 				request.getRequestDispatcher("jsp/keyboard.jsp").forward(request,response);
 			} catch (Exception e) {

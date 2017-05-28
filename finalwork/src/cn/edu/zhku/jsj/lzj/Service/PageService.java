@@ -4,6 +4,13 @@ import cn.edu.zhku.jsj.lzj.Dao.PageDao;
 import cn.edu.zhku.jsj.lzj.Model.PageBean;
 
 public class PageService {
+	public PageBean goGetOrder(String order,String type,String search,int page) throws Exception{
+		PageBean pageBean = new PageBean();
+		PageDao pd = new PageDao();
+		pageBean=pd.getOrder(order,type,search,page);
+		return pageBean;
+	}
+	
 	public PageBean goGetResult(int page,String type) throws Exception {
 		PageBean pageBean = new PageBean();
 		PageDao pd = new PageDao();

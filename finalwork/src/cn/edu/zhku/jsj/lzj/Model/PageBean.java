@@ -30,6 +30,8 @@ public class PageBean {
 		}else{
 			totalPages=totalRows/pageSize+1;
 		}
+		if(totalPages<=0)
+			totalPages=1;
 		return totalPages;
 	}
 	public void setTotalPages(int totalPages){
