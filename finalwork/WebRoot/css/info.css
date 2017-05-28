@@ -31,7 +31,67 @@ table.info td{
 		border-bottom: 1px solid rgba(0,0,0,0.25);
 	}
 	
+	table.info_cart{
+	width:90%;
+	height:auto;
+	top:190px;
+	left:500px;
+	border:gray solid 2px;
+	font-family:"STFangsong";
+	border-radius:5px;
+	border-color:#6699FF;
+	}
+table.info_cart th{
+	text-indent:5em;
+	width:300px;
+	height:auto;
+	}
+	table.info_cart tr{
+	text-indent:5em;
+	width:auto;
+	height:auto;
+	}
 	
-	
-	
-	
+	ul.ul_cart {
+	width:90%;
+	min-height:150px;
+	border:gray solid 2px;
+	padding:0px;
+	}
+ul.ul_cart li{
+	float:left;
+	min-height:120px;
+	border:gray solid 2px;
+	margin:10px;
+}
+li.ul_cart_goods{
+	width:30%;
+	float:left;
+}
+img.ul_cart_goods_img{
+	margin:5px;
+	min-width:150px;
+	min-height:110px;
+}
+div.ul_cart_goods_name{
+	width:80px;
+	height:50px;
+}
+li.ul_cart_black{
+	width:15%;
+}
+li.ul_cart_price{
+	width:8%;
+}
+li.ul_cart_num{
+	width:8%;
+}
+li.ul_cart_total{
+	width:10%;
+	color: #f40;
+    font-weight: 700;
+    font-size:16px;
+}
+li.ul_cart_do{
+	width:10%;
+}

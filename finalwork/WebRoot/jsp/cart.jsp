@@ -48,6 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             var total=0;
             var str="";
             var str1="";
+            var div=$("#tab");
             length=obj.length;
             var table=$("#cart_table");
             table.empty();
@@ -56,6 +57,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          	{
          	total=total+obj[i].price*obj[i].number;
          	table.append('<tr><th>'+obj[i].name+'</th><th>￥'+obj[i].price+'</th><th>'+obj[i].number+'</th><th>￥'+obj[i].price*obj[i].number+'</th><th><a href="UserCtrl?action=add_collect&user_id=<%=value%>&goods_id='+obj[i].goods_id+'">收藏</a>/<a href="UserCtrl?action=del_cart&id='+obj[i].id+'">删除</a></th></tr>');
+         	
+         	div.append('<div class=""><ul class="ul_cart"><li class="ul_cart_goods"><img class="ul_cart_goods_img"><a>'+obj[i].name+'</a></li><li class="ul_cart_black"></li><li class="ul_cart_price">￥'+obj[i].price+'</li><li class="ul_cart_num">×'+obj[i].number+'</li><li class="ul_cart_total">￥'+obj[i].price*obj[i].number+'</li><li class="ul_cart_do"><p><a href="UserCtrl?action=add_collect&user_id=<%=value%>&goods_id='+obj[i].goods_id+'">收藏</a></p><p><a href="UserCtrl?action=del_cart&id='+obj[i].id+'">删除</a></p></li></ul></div>');
+         	
          	str=str.concat(obj[i].goods_id+'_');
          	str1=str1.concat(obj[i].number+'_');
          	}
@@ -112,15 +116,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </ul><br><br><br>
     	
     	
-    	
-    <div class="div1">
+    	<div class="Content">
+    <div class="div_cart">
 	<form action="jsp/pay.jsp" method="get">
 		<input type="hidden" name="id" value="<%=value%>">
 		<input type="hidden" name="array_g" id="array_g" value="">
 		<input type="hidden" name="array_n" id="array_n" value="">
-		<table class="info" id="cart_table">
+		<table class="info_cart" id="cart_table">
 		</table>
 	</form>
+    </div>
+     	
+    <div class="div_cart">
+		<table class="info_cart" id="order_table">
+		<tr><th>商品</th><th>单价</th><th>数量</th><th>小计</th><th>操作</th></tr>
+		</table>
+		
+    </div>
+    <div class="div_cart" id="tab">
+    </div>
     </div>
   </body>
 </html>
