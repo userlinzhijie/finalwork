@@ -31,11 +31,9 @@ public class Showctrl extends HttpServlet {
 		        File file = new File(filePath);
 		        OutputStream outputStream = response.getOutputStream();
 		        FileInputStream fileInputStream = new FileInputStream(file);
-		        // ¶ÁÊý¾Ý
 		        byte[] data = new byte[fileInputStream.available()];
 		        fileInputStream.read(data);
 		        fileInputStream.close();
-		        // »ØÐ´
 		        response.setContentType(JPG);
 		        outputStream.write(data);
 		        outputStream.flush();

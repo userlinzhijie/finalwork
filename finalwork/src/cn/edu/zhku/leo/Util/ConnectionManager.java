@@ -17,5 +17,4 @@ public class ConnectionManager {
 		conn = DriverManager.getConnection(ConnectionManager.url,ConnectionManager.userName,ConnectionManager.password);
 		return conn;
 	}
-
 }

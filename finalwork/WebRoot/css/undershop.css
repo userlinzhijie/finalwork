@@ -1,0 +1,47 @@
+@CHARSET "UTF-8";
+.userid{
+	border:0px;
+	background:none;
+	text-align:center;
+}
+.shopid{
+	border:0px;
+	background:none;
+	text-align:center;
+}
+.truename{
+	border:0px;
+	background:none;
+	text-align:center;
+}
+.shopinfo{
+	width:700px;
+	height:300px;
+	position:absolute;
+	top:190px;
+	left:500px;
+	border-collaspe:collaspe;
+	border:gray solid 2px;
+	font-family:"STFangsong";
+	border-radius:5px;
+	border-color:#6699FF;
+	}
+.shopinfo td{
+	text-indent:5em;
+	width:10px;
+	}
+
+.infosub{
+		padding: 5px 10px 6px;
+		-moz-border-radius: 6px;
+		-webkit-border-radius: 6px;
+		-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+		-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+		text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+		border-bottom: 1px solid rgba(0,0,0,0.25);
+	}
+	
+	
+	
+	
+	

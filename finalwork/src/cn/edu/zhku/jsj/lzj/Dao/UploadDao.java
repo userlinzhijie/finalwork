@@ -28,7 +28,8 @@ public class UploadDao {
 		String material= keyboard.getMaterial();
 		String details= keyboard.getDetails();
 		String picture =keyboard.getPicture();
-		String sql ="insert into goods values(0,?,?,?,,?,?,?,?,?,?,?,?,?,?,?,?)";  
+		String user=keyboard.getUser();
+		String sql ="insert into goods values(0,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";  
 	    PreparedStatement pstmt = conn.prepareStatement(sql);
 	    pstmt.setString(1,brand);
 	    pstmt.setString(2,price);
@@ -45,6 +46,7 @@ public class UploadDao {
 	    pstmt.setString(13,picture);
 	    pstmt.setString(14,material);
 	    pstmt.setString(15,details);
+	    pstmt.setString(16,user);
 	    pstmt.executeUpdate();
 	}
 }

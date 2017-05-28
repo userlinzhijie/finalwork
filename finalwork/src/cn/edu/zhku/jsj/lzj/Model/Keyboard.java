@@ -17,6 +17,7 @@ public class Keyboard {
 	private String details;
 	private String weight;
 	private String picture;
+	private String user;
 	public void setBrand(String brand) {
 		this.brand = brand;
 	}
@@ -112,5 +113,11 @@ public class Keyboard {
 	}
 	public String getId() {
 		return id;
+	}
+	public void setUser(String user) {
+		this.user = user;
+	}
+	public String getUser() {
+		return user;
 	}
 }

@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>店铺信息</title>
+    <title>商品信息</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<link href="css/styles.css" rel="stylesheet" type="text/css" >
 	<link href="css/info_selectlist.css" rel="stylesheet" type="text/css">
-	<link href="css/info.css" rel="stylesheet" type="text/css">
+	<link href="css/undershop.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="js/jquery-1.11.1.js"></script> 
 	<script language="javascript" type="text/javascript">
 	  	window.onload=function(){
@@ -32,28 +32,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            this.getElementsByClassName("submenu")[0].style.display = "none";
 	        };
 	    	}
-	   	//获得信息
-	   	$.ajax({  
-               type:"get",//请求方式  
-               url:"Shopinfoctrl?id=1",//发送请求地址  
-               timeout:30000,//超时时间：30秒  
-               dataType:"json",//设置返回数据的格式  
-               //请求成功后的回调函数 data为json格式  
-               success:function(data){  
-                  var shopname=data.shopname;
-                  var username=data.username;
-                  var truename=data.truename;
-                 $("#userid").val(username);
-                 $("#shopid").val(shopname);
-                 $("#truename").val(truename);
-              },  
-              //请求出错的处理  
-              error:function(){  
-                        alert("请求出错");  
-              }  
-           });  
-        };  
-  	</script>
+	    };  
+  </script>
+
   </head>
   
   <body background="img/background2.jpg">
@@ -67,8 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function() {
 		var title = document.getElementById("p_title").innerHTML;
 		if (title == "游客") {
-			alert("请登录！");
-			window.location = "jsp/login.jsp";
+			document.getElementById("p_title").innerHTML = '<a href="jsp/login.jsp">你好，请登录</a>&nbsp;&nbsp;<a href="jsp/reg.jsp">注册</a>&nbsp;&nbsp;&nbsp;';
 		}else{
 			document.getElementById("p_title").innerHTML = '欢迎回来,'+title+'<a href="UserCtrl?action=logout">退出登陆</a>';
 		}
@@ -85,12 +65,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	          <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="">下架货物</a></div>
 	    </li>
 	    <li class="subme">
-	          <a href="jsp/cart.jsp">购物车</a>
-	        
+	          <a href="">我的订单</a>
+	         <div class ="submenu"><a href="#">1</a><a href="#">2</a><a href="#">3</a></div>
 	    </li>
 	    <li class="subme">
 	          <a href="jsp/info.jsp">我的中心</a>
-	        
+	          <div class ="submenu"><a href="jsp/info.jsp">我的信息</a><a href="jsp/changepwd.jsp">更改密码</a><a href="jsp/apply.jsp">申请开铺</a></div>
 	    </li>
 	    <li class="subme">
 	          <a href="">首页</a>
@@ -113,19 +93,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	
     	
     <div class="div1">
-    	<table class="info">
+    	<table class="shopinfo">
     	<tr>	
-    		<th colspan="2">店铺信息</th>
+    		<th colspan="4">商品信息</th>
     		</tr>
     	<tr>
-    		<td>店铺名字:</td><td><input type="text"  disabled class="shopid" id="shopid" name="shopid"></td>
+    		<td>商品</td><td>图片</td><td>价格</td><td>操作</td>
     	</tr>
-    	<tr><td>开户人：</td><td><input type="text"  disabled class="userid" id="userid" name="userid"></td>
-    		</tr>
-    	<tr>
-    		<td>真实姓名:</td><td><input type="text" name="truename" id="truename" class="truename"></td>
+    	<tr><td>s：</td><td>p</td><td>p</td><td>cz</td>
     		</tr>
     	</table>
     </div>
   </body>
 </html>
+

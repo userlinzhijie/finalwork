@@ -50,7 +50,8 @@ public class UserDao {
 			int sex = rs.getInt("sex"); // 0保密1男2女
 			String birth = rs.getString("birth");
 			String email = rs.getString("email");
-
+			String truename = rs.getString("truename");
+			
 			User m = new User();
 
 			m.setId(id);
@@ -62,7 +63,8 @@ public class UserDao {
 			m.setSex(sex);
 			m.setTelephone(telephone);
 			m.setEmail(email);
-
+			m.setTruename(truename);
+			
 			a.add(m);
 		}
 		return a;
@@ -126,11 +128,11 @@ public class UserDao {
 			throw new Exception("数据库连接不成功！");
 		}
 
-		String sqlQuery = "update `user` set nickname=?,`name`=?,telephone=?,birth=?,sex=?,email=? where id=?";
+		String sqlQuery = "update `user` set nickname=?,truename=?,telephone=?,birth=?,sex=?,email=? where id=?";
 
 		ps = conn.prepareStatement(sqlQuery);
 		ps.setString(1, u.getNickname());
-		ps.setString(2, u.getName());
+		ps.setString(2, u.getTruename());
 		ps.setString(3, u.getTelephone());
 		ps.setString(4, u.getBirth());
 		ps.setInt(5, u.getSex());
@@ -475,6 +477,7 @@ public class UserDao {
 			s.setShop_id(rs.getInt("shop_id"));
 			s.setStatus(rs.getInt("status"));
 			s.setUser_id(user_id);
+			s.setName(rs.getString("name"));
 			return s;
 		} else {
 			return null;
@@ -493,12 +496,13 @@ public class UserDao {
 			throw new Exception("数据库连接不成功！");
 		}
 
-		String sqlQuery = "INSERT into shop VALUES(0,?,?)";
+		String sqlQuery = "INSERT into shop VALUES(0,?,?,?)";
 
 		ps = conn.prepareStatement(sqlQuery);
 
 		ps.setInt(1, s.getUser_id());
 		ps.setInt(2, s.getStatus());
+		ps.setString(3, s.getName());
 		try {
 			rs = ps.executeUpdate();
 			if (rs == 0)

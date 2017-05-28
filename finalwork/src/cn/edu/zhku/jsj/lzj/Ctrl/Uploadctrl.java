@@ -44,6 +44,7 @@ public class Uploadctrl extends HttpServlet {
 		String weight = (String)request.getParameter("weight");
 		String material = (String)request.getParameter("material");
 		String details = (String)request.getParameter("details");
+		String user = (String)request.getParameter("user");
 		
 		// 为了简单，后面也直接就以fileName作为保存文件的名称
 		String fileName = request.getParameter("picture")+".jpg";
@@ -68,6 +69,7 @@ public class Uploadctrl extends HttpServlet {
 		keyboard.setMaterial(material);
 		keyboard.setDetails(details);
 		keyboard.setPicture(fileName);
+		keyboard.setUser(user);
 		try {
 			us.toUpload(keyboard);	
 			String msg="上架成功";

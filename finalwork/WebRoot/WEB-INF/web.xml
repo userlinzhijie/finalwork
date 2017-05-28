@@ -5,42 +5,9 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
   <display-name></display-name>	
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>Loginctrl</servlet-name>
-    <servlet-class>cn.edu.zhku.jsj.lzj.Ctrl.Loginctrl</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>Infoctrl</servlet-name>
-    <servlet-class>cn.edu.zhku.jsj.lzj.Ctrl.Infoctrl</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>Pwdctrl</servlet-name>
-    <servlet-class>cn.edu.zhku.jsj.ctrl.Pwdctrl</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>Getgoods</servlet-name>
-    <servlet-class>cn.edu.zhku.jsj.ctrl.Getgoods</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>RegCtrl</servlet-name>
-    <servlet-class>cn.edu.zhku.jsj.lzj.Ctrl.Regctrl</servlet-class>
-  </servlet>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>Checkctrl</servlet-name>
-    <servlet-class>cn.edu.zhku.jsj.lzj.Ctrl.Checkctrl</servlet-class>
-  </servlet>
+
+
+
   <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
@@ -66,46 +33,6 @@
     <servlet-class>cn.edu.zhku.jsj.lzj.Ctrl.Showctrl</servlet-class>
   </servlet>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <servlet-mapping>
-    <servlet-name>Loginctrl</servlet-name>
-    <url-pattern>/Loginctrl</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>Infoctrl</servlet-name>
-    <url-pattern>/Infoctrl</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>Pwdctrl</servlet-name>
-    <url-pattern>/Pwdctrl</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>Getgoods</servlet-name>
-    <url-pattern>/Getgoods</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>RegCtrl</servlet-name>
-    <url-pattern>/RegCtrl</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>Checkctrl</servlet-name>
-    <url-pattern>/Checkctrl</url-pattern>
-  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Getctrl</servlet-name>
     <url-pattern>/Getctrl</url-pattern>
@@ -154,16 +81,18 @@
   <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>ShopCtrl</servlet-name>
-    <servlet-class>cn.edu.zhku.leo.Ctrl.ShopCtrl</servlet-class>
+    <servlet-name>Shopinfoctrl</servlet-name>
+    <servlet-class>cn.edu.zhku.jsj.lzj.Ctrl.Shopinfoctrl</servlet-class>
   </servlet>
+
+
   <servlet-mapping>
     <servlet-name>UserCtrl</servlet-name>
     <url-pattern>/UserCtrl</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>ShopCtrl</servlet-name>
-    <url-pattern>/ShopCtrl</url-pattern>
+    <servlet-name>Shopinfoctrl</servlet-name>
+    <url-pattern>/Shopinfoctrl</url-pattern>
   </servlet-mapping>
   
   	

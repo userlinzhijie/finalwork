@@ -51,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             table.append('<tr><th>商品</th><th>单价</th><th colspan="2">操作</th></tr>');
          	for(var i=0;i< obj.length;i++)
          	{
-	      		table.append('<tr><th>'+obj[i].name+'</th><th>￥'+obj[i].price+'</th><th><a href="UserCtrl?action=del_collect&id='+obj[i].id+'">删除</a></th><th><a href="UserCtrl?action=add_cart&user_id=<%=value%>&goods_id='+obj[i].goods_id+'&num='+1+'">加入购物车</a></th></tr>');
+	      		table.append('<tr><th><a href="Pagectrl?id='+obj[i].goods_id+'">'+obj[i].name+'</a></th><th>￥'+obj[i].price+'</th><th><a href="UserCtrl?action=del_collect&id='+obj[i].id+'">删除</a></th><th><a href="UserCtrl?action=add_cart&user_id=<%=value%>&goods_id='+obj[i].goods_id+'&num='+1+'">加入购物车</a></th></tr>');
          	}
          	
         }
@@ -72,7 +72,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function() {
 		var title = document.getElementById("p_title").innerHTML;
 		if (title == "游客") {
-			document.getElementById("p_title").innerHTML = '<a href="jsp/login.jsp">你好，请登录</a>&nbsp;&nbsp;<a href="jsp/reg.jsp">注册</a>&nbsp;&nbsp;&nbsp;';
+			alert("请登录！");
+			window.location = "jsp/login.jsp";
 		}else{
 			document.getElementById("p_title").innerHTML = '欢迎回来,'+title+'<a href="UserCtrl?action=logout">退出登陆</a>';
 		}
@@ -90,11 +91,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </li>
 	    <li class="subme">
 	          <a href="jsp/cart.jsp">购物车</a>
-	         <div class ="submenu"><a href="#">1</a><a href="#">2</a><a href="#">3</a></div>
+	       
 	    </li>
 	    <li class="subme">
 	          <a href="jsp/info.jsp">我的中心</a>
-	          <div class ="submenu"><a href="jsp/info.jsp">我的信息</a><a href="jsp/changepwd.jsp">更改密码</a><a href="jsp/apply.jsp">申请开铺</a></div>
+	         
 	    </li>
 	    <li class="subme">
 	          <a href="">首页</a>

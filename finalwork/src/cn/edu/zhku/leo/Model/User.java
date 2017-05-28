@@ -11,6 +11,7 @@ public class User {
 	private int sex; // 0±£ÃÜ1ÄÐ2Å®
 	private String birth;
 	private String email;
+	private String truename;
 	public int getId() {
 		return id;
 	}
@@ -81,6 +82,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getTruename() {
+		return truename;
+	}
+
+	public void setTruename(String truename) {
+		this.truename = truename;
 	}
 
 }

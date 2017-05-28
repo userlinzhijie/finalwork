@@ -43,13 +43,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body background="img/background2.jpg">
     <div id="Header">
   	<div id="logo">
-    <%String name = (String)session.getAttribute("user"); %>
-  	<%if(name==null){%>	
-  	<p align = "right"><a href="jsp/login.jsp">你好，请登录</a>&nbsp;&nbsp;<a href="jsp/reg.jsp">注册</a>&nbsp;&nbsp;&nbsp;</p>
-  	<%}else{%>
-  	<p align =right>欢迎回来,<%= name %>  <a href = "jsp/exit.jsp">退出登陆</a><p> 
-	<% } %>
+    <p align ="right" >&nbsp;<p> 
+  	<p align ="right" id="p_title">loading...<p> 
 	</div></div>
+	<script>
+	$("#p_title").load("UserCtrl?action=getusercookie",
+	function() {
+		var title = document.getElementById("p_title").innerHTML;
+		if (title == "游客") {
+			document.getElementById("p_title").innerHTML = '<a href="jsp/login.jsp">你好，请登录</a>&nbsp;&nbsp;<a href="jsp/reg.jsp">注册</a>&nbsp;&nbsp;&nbsp;';
+		}else{
+			document.getElementById("p_title").innerHTML = '欢迎回来,'+title+'<a href="UserCtrl?action=logout">退出登陆</a>';
+		}
+	});
+</script>
  	<p align = "center" class = "ziti">购物系统</p>
 	<!-- 上层分割线 -->
 	<ul id="ul1">
@@ -62,12 +69,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	          <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="">下架货物</a></div>
     </li>
     <li class="subme">
-          <a href="">我的订单</a>
-         <div class ="submenu"><a href="#">1</a><a href="#">2</a><a href="#">3</a></div>
+          <a href="jsp/cart.jsp">购物车</a>
+        
     </li>
     <li class="subme">
           <a href="jsp/info.jsp">我的中心</a>
-	          <div class ="submenu"><a href="jsp/info.jsp">我的信息</a><a href="jsp/changepwd.jsp">更改密码</a><a href="jsp/apply.jsp">申请开铺</a></div>
+	    
     </li>
     <li class="subme">
           <a href="#">首页</a>

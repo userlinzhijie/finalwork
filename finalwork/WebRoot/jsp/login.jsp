@@ -33,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div id="Content">
 			<div id="Content-Mid">
 				<form class="form-horizontal" action="UserCtrl?action=login" method="post" id="reg-form">
-					<div>
+					<div style="margin-left:300px;">
 						<div class="form-group">
 							<div class="col-md-6">
 								<label for="first_name" class="control-label">用户名</label> <input

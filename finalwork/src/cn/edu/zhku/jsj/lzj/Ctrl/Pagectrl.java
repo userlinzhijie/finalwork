@@ -67,7 +67,6 @@ public class Pagectrl extends HttpServlet {
 				if(ps.goGetSearch(search,curPage).getData().isEmpty())
 				{
 					result=0;				
-					System.out.print("test");
 				}
 				request.setAttribute("result",result);
 				request.getRequestDispatcher("jsp/search.jsp").forward(request,response);
