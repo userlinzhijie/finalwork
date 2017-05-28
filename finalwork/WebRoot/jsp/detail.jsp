@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.net.*" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -20,6 +21,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="css/styles.css" rel="stylesheet" type="text/css" >
 	<link href="css/detail.css" rel="stylesheet" type="text/css" >
 	<link href="css/selectlist.css" rel="stylesheet" type="text/css">
+	<%Cookie[] cookies = null;
+		cookies = request.getCookies();
+		String value="";
+		for (int i = 0; i < cookies.length; i++) {
+			String name = URLDecoder.decode(cookies[i].getName(), "utf-8");
+			if (name.equals("user_id")) {
+				value = URLDecoder.decode(cookies[i].getValue(), "utf-8");
+			}
+		}
+			
+	 %>
 	<script type="text/javascript" src="js/jquery-1.11.1.js"></script> 
 	<script language="javascript" type="text/javascript">
 		function numberadd(){
@@ -53,6 +65,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	</script>
   
 
+	<script language="javascript" type="text/javascript">
+		function addcart(){
+		var goods_id=document.getElementById("goods_id").value;
+		var num=document.getElementById("number").value;
+		document.getElementById("ac_add").href="UserCtrl?action=add_cart&goods_id="+goods_id+"&user_id=<%=value %>&num="+num;};
+	</script>
+	
   </head>
   
   <body background="img/background2.jpg">
@@ -105,12 +124,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  		 ${shop.name}<br>
  		价格：￥${shop.price}<br>
  		<form action="" method="post">
+ 		<input type="hidden" id="goods_id" value="${shop.id}" >
  		<table>
  		<tr>
  			<td rowspan="2">数量:</td><td rowspan="2">
  			<input type="text" width="50px" id="number" class="number"  value="1" onchange="numberchange()" onkeyup="this.value=this.value.replace(/\D/g,'')"></td>
  			<td><input type="button" value="+" class="btn" onclick="numberadd()"></td>
- 			<td rowspan="2"><input type="submit"  class="cart" value="加入购物车"></td>
+ 			<td rowspan="2"><a id="ac_add" href="" onclick="addcart()"><input type="button" class="cart" value="加入购物车"></a></td>
  			<td rowspan="2"><input type="submit"  class="cart" value="一键购买"></td>
  			</tr>
  		<tr>

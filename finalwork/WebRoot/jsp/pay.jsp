@@ -34,8 +34,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		
 		//传来的goods字符串
-		String array_g = request.getParameter("array_g");	
-		String array_n = request.getParameter("array_n");
+		String array_g = request.getParameter("arr_g");	
+		String array_n = request.getParameter("arr_n");
+		String array_s = request.getParameter("arr_s");
 	 %>
   	
     <script>
@@ -261,7 +262,7 @@ $.ajax({
 
     
     <div class="div2" id="tab5"><!-- submit -->
-    <form action="UserCtrl" method="post">
+    <form action="UserCtrl" method="get">
     <input type="hidden" name="action" value="add_order">
     <input type="hidden" name="address_id" id="aid" value="">
     <input type="hidden" name="card_id" id="cid" value="">
@@ -269,9 +270,10 @@ $.ajax({
     <input type="hidden" name="user_id" id="uid" value="<%=value%>">
     <input type="hidden" name="status" id="status" value="1">
     <input type="hidden" name="total" id="total" value="">    
-    <input type="hidden" name="number" id="number" value="<%=array_n%>">    
+    <input type="hidden" name="arr_n" id="number" value="<%=array_n%>">    
     <input type="hidden" name="transfee" id="transfee" value="0">
-    <input type="hidden" name="array_g" id="array_g" value="<%=array_g%>">
+    <input type="hidden" name="arr_g" id="array_g" value="<%=array_g%>">
+    <input type="hidden" name="arr_s" id="array_s" value="<%=array_s%>">
     <div class="next" id="tab5_g">goods</div>
     <div class="next" id="tab5_a">address</div>
     <div class="next" id="tab5_c">card</div>

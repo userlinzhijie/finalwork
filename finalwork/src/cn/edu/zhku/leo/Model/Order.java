@@ -4,6 +4,9 @@ public class Order {
 	private int id;
 	private	int user_id;
 	private int address_id;
+	private	int seller_id;
+	private int goods_id;
+	private int number;
 	private int total;
 	private int transfee;
 	private int status;
@@ -56,6 +59,24 @@ public class Order {
 	}
 	public void setCard_id(String card_id) {
 		this.card_id = card_id;
+	}
+	public int getSeller_id() {
+		return seller_id;
+	}
+	public void setSeller_id(int seller_id) {
+		this.seller_id = seller_id;
+	}
+	public int getNumber() {
+		return number;
+	}
+	public void setNumber(int number) {
+		this.number = number;
+	}
+	public int getGoods_id() {
+		return goods_id;
+	}
+	public void setGoods_id(int goods_id) {
+		this.goods_id = goods_id;
 	}
 
 }

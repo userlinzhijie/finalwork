@@ -3,15 +3,7 @@ package cn.edu.zhku.leo.Service;
 import java.util.ArrayList;
 
 import cn.edu.zhku.leo.Dao.UserDao;
-import cn.edu.zhku.leo.Model.Address;
-import cn.edu.zhku.leo.Model.Card;
-import cn.edu.zhku.leo.Model.Cartlog;
-import cn.edu.zhku.leo.Model.Collect;
-import cn.edu.zhku.leo.Model.Goods;
-import cn.edu.zhku.leo.Model.OG;
-import cn.edu.zhku.leo.Model.Order;
-import cn.edu.zhku.leo.Model.Shop;
-import cn.edu.zhku.leo.Model.User;
+import cn.edu.zhku.leo.Model.*;
 
 public class UserService {
 
@@ -183,7 +175,7 @@ public class UserService {
 			} else {
 				return false;
 			}
-		}else
+		} else
 			return false;
 	}
 
@@ -195,17 +187,18 @@ public class UserService {
 			return false;
 		}
 	}
-	public int getIdByName(String name) throws Exception{
-		ArrayList<User> a=this.get();
-		for(int i=0;i<a.size();i++){
-			if(a.get(i).getName().equals(name)){
+
+	public int getIdByName(String name) throws Exception {
+		ArrayList<User> a = this.get();
+		for (int i = 0; i < a.size(); i++) {
+			if (a.get(i).getName().equals(name)) {
 				return a.get(i).getId();
 			}
 		}
 		return 0;
 	}
 
-	public ArrayList<Cartlog> getCart(int user_id) throws Exception{
+	public ArrayList<Cartlog> getCart(int user_id) throws Exception {
 		UserDao ld = new UserDao();
 		ArrayList<Cartlog> A = ld.getCart();
 		ArrayList<Cartlog> B = new ArrayList<Cartlog>();
@@ -218,12 +211,12 @@ public class UserService {
 		return B;
 	}
 
-	public ArrayList<Goods> getGoodsByOrderId(int order_id) throws Exception{
+	public Goods getGoodsById(int goods_id) throws Exception {
 		UserDao ld = new UserDao();
-		return ld.getGoodsByOrderId(order_id);
+		return ld.getGoodsById(goods_id);
 	}
 
-	public boolean del_cart(int id) throws Exception{
+	public boolean del_cart(int id) throws Exception {
 		UserDao ld = new UserDao();
 		if (ld.del_cart(id)) {
 			return true;
@@ -232,56 +225,57 @@ public class UserService {
 		}
 	}
 
-	public ArrayList<Goods> getGoodsByArr(String arr,String num) throws Exception{
-		
+	public ArrayList<Goods> getGoodsByArr(String arr, String num)
+			throws Exception {
+
 		UserDao ld = new UserDao();
-		ArrayList<Goods> A=new ArrayList<Goods>();
-		String[] arr1=arr.split("_");
-		String[] num1=num.split("_");
-		for(int i=0;i<arr1.length;i++)
-		{
-			int id=Integer.parseInt(arr1[i]);
-			int n=Integer.parseInt(num1[i]);
-			Goods g=ld.getGoodsById(id);
+		ArrayList<Goods> A = new ArrayList<Goods>();
+		String[] arr1 = arr.split("_");
+		String[] num1 = num.split("_");
+		for (int i = 0; i < arr1.length; i++) {
+			int id = Integer.parseInt(arr1[i]);
+			int n = Integer.parseInt(num1[i]);
+			Goods g = ld.getGoodsById(id);
 			g.setNumber(n);
 			A.add(g);
 		}
 		return A;
 	}
 
-	public boolean add_order(Order c,String arr_n,String arr_g) throws Exception{
-		UserDao d=new UserDao();
-		int order_id = d.add_order(c);
-		if(order_id!=0){
-			ArrayList<OG> A = new ArrayList<OG>();
-			String[] an = arr_n.split("_");
-			String[] ag = arr_g.split("_");
-			for (int i = 0; i < ag.length; i++) {
-				int id = Integer.parseInt(ag[i]);
-				int n = Integer.parseInt(an[i]);
-				OG og = new OG();
-				og.setGoods_id(id);
-				og.setNumber(n);
-				og.setOrder_id(order_id);
-				A.add(og);
+	public boolean add_order(Order c, String arr_n, String arr_g, String arr_s)
+			throws Exception {
+		UserDao d = new UserDao();
+
+		String[] an = arr_n.split("_");
+		String[] ag = arr_g.split("_");
+		String[] as = arr_s.split("_");
+		for (int i = 0; i < ag.length; i++) {
+			int g = Integer.parseInt(ag[i]);
+			int n = Integer.parseInt(an[i]);
+			int s = Integer.parseInt(as[i]);
+
+			c.setGoods_id(g);
+			c.setNumber(n);
+			c.setSeller_id(s);
+			try {
+				d.add_order(c);
+			} catch (Exception e) {
+				return false;
 			}
-			d.add_og(A);
-			return true;
-		}else{
-			return false;
 		}
+		return true;
 	}
 
-	public boolean orderTo(int order_id,int status) throws Exception{
+	public boolean orderTo(int order_id, int status) throws Exception {
 		UserDao ld = new UserDao();
-		if (ld.orderStatusTo(order_id,status)) {
+		if (ld.orderStatusTo(order_id, status)) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	public boolean del_order(int id) throws Exception{
+	public boolean del_order(int id) throws Exception {
 		UserDao ld = new UserDao();
 		if (ld.del_order(id)) {
 			return true;
@@ -290,16 +284,16 @@ public class UserService {
 		}
 	}
 
-	public boolean add_collect(int uid, int gid) throws Exception{
+	public boolean add_collect(int uid, int gid) throws Exception {
 		UserDao ld = new UserDao();
-		if (ld.add_collect(uid,gid)) {
+		if (ld.add_collect(uid, gid)) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	public boolean del_collect(int id) throws Exception{
+	public boolean del_collect(int id) throws Exception {
 		UserDao ld = new UserDao();
 		if (ld.del_collect(id)) {
 			return true;
@@ -308,12 +302,12 @@ public class UserService {
 		}
 	}
 
-	public ArrayList<Collect> getCollect(int user_id) throws Exception{
+	public ArrayList<Collect> getCollect(int user_id) throws Exception {
 		UserDao ld = new UserDao();
 		return ld.getCollect(user_id);
 	}
 
-	public boolean add_cart(Cartlog c) throws Exception{
+	public boolean add_cart(Cartlog c) throws Exception {
 		UserDao ld = new UserDao();
 		if (ld.add_cart(c)) {
 			return true;
@@ -321,5 +315,10 @@ public class UserService {
 			return false;
 		}
 	}
-	
+
+	public int getSellerIdByGoodsId(int goods_id) throws Exception {
+		UserDao ld = new UserDao();
+		return ld.getSidByGid(goods_id);
+	}
+
 }

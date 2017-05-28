@@ -437,6 +437,9 @@ public class UserDao {
 			int transfee = rs.getInt("transfee");
 			int status = rs.getInt("status");
 			String date = rs.getString("date");
+			int goods_id = rs.getInt("goods_id");
+			int seller_id = rs.getInt("seller_id");
+			int num=rs.getInt("number");
 
 			Order m = new Order();
 
@@ -447,7 +450,10 @@ public class UserDao {
 			m.setTotal(total);
 			m.setTransfee(transfee);
 			m.setUser_id(user_id);
-
+			m.setGoods_id(goods_id);
+			m.setNumber(num);
+			m.setSeller_id(seller_id);
+			
 			a.add(m);
 		}
 		return a;
@@ -611,45 +617,6 @@ public class UserDao {
 		return a;
 	}
 
-	public ArrayList<Goods> getGoodsByOrderId(int order_id) throws Exception {
-		ArrayList<Goods> a = new ArrayList<Goods>();
-
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		ResultSet grs = null;
-
-		// 连接数据库
-		conn = ConnectionManager.getConnection();
-
-		if (conn == null) {
-			throw new Exception("数据库连接不成功！");
-		}
-
-		String sqlQuery = "Select * from og where order_id=?";
-
-		ps = conn.prepareStatement(sqlQuery);
-		ps.setInt(1, order_id);
-		rs = ps.executeQuery();
-
-		while (rs.next()) {
-			Goods c = new Goods();
-
-			sqlQuery = "SELECT `name`,price from goods where id=?";
-			ps = conn.prepareStatement(sqlQuery);
-			ps.setInt(1, rs.getInt("goods_id"));
-			grs = ps.executeQuery();
-
-			grs.next();
-			c.setName(grs.getString("name"));
-			c.setPrice(grs.getInt("price"));
-			c.setId(rs.getInt("id"));
-			c.setNumber(rs.getInt("number"));
-			a.add(c);
-		}
-		return a;
-	}
-
 	public boolean del_cart(int id) throws Exception {
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -708,7 +675,6 @@ public class UserDao {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		int rs = 0;
-		ResultSet r = null;
 		// 连接数据库
 		conn = ConnectionManager.getConnection();
 
@@ -716,53 +682,25 @@ public class UserDao {
 			throw new Exception("数据库连接不成功！");
 		}
 
-		String sqlQuery = "INSERT into `order` VALUES(?,?,?,?,?,?,?,?)";
+		String sqlQuery = "INSERT into `order` VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
 		ps = conn.prepareStatement(sqlQuery);
 		ps.setInt(1, 0);
 		ps.setInt(2, c.getUser_id());
 		ps.setInt(3, c.getAddress_id());
-		ps.setInt(4, c.getTotal());
-		ps.setInt(5, c.getTransfee());
-		ps.setInt(6, c.getStatus());
-		ps.setString(7, c.getDate());
-		ps.setString(8, c.getCard_id());
-		System.out.println(c.getCard_id());
+		ps.setInt(4, c.getGoods_id());
+		ps.setInt(5, c.getSeller_id());
+		ps.setInt(6, c.getNumber());
+		ps.setInt(7, c.getTotal());
+		ps.setInt(8, c.getTransfee());
+		ps.setInt(9, c.getStatus());
+		ps.setString(10, c.getDate());
+		ps.setString(11, c.getCard_id());
 		rs = ps.executeUpdate();
 		if (rs == 0)
 			return 0;
 		else {
-			sqlQuery = "select max(id) from `order`";
-			ps = conn.prepareStatement(sqlQuery);
-			r = ps.executeQuery();
-			r.next();
-			return r.getInt("max(id)");
-		}
-	}
-
-	public boolean add_og(ArrayList<OG> a) throws Exception {
-		Connection conn = null;
-		PreparedStatement ps = null;
-		int rs = 0;
-		// 连接数据库
-		conn = ConnectionManager.getConnection();
-
-		if (conn == null) {
-			throw new Exception("数据库连接不成功！");
-		}
-		for (int i = 0; i < a.size(); i++) {
-			String sqlQuery = "insert into og (goods_id,order_id,number)VALUES(?,?,?)";
-			ps = conn.prepareStatement(sqlQuery);
-			ps.setInt(1, a.get(i).getGoods_id());
-			ps.setInt(2, a.get(i).getOrder_id());
-			ps.setInt(3, a.get(i).getNumber());
-
-			rs = ps.executeUpdate();
-		}
-		if (rs == 0) {
-			return false;
-		} else {
-			return true;
+			return -1;
 		}
 	}
 
@@ -803,13 +741,7 @@ public class UserDao {
 			throw new Exception("数据库连接不成功！");
 		}
 
-		String sqlQuery = "delete from og where order_id=?";
-
-		ps = conn.prepareStatement(sqlQuery);
-		ps.setInt(1, id);
-		rs = ps.executeUpdate();
-
-		sqlQuery = "delete from `order` where id=?";
+		String sqlQuery = "delete from `order` where id=?";
 
 		ps = conn.prepareStatement(sqlQuery);
 		ps.setInt(1, id);
@@ -941,5 +873,28 @@ public class UserDao {
 			return false;
 		else
 			return true;
+	}
+
+	public int getSidByGid(int goods_id) throws Exception{
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		// 连接数据库
+		conn = ConnectionManager.getConnection();
+
+		if (conn == null) {
+			throw new Exception("数据库连接不成功！");
+		}
+
+		String sqlQuery = "Select * from goods where id=?";
+
+		ps = conn.prepareStatement(sqlQuery);
+		ps.setInt(1, goods_id);
+		rs = ps.executeQuery();
+
+		rs.next();
+		return rs.getInt("Seller_id");
+	
 	}
 }

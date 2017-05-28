@@ -360,8 +360,9 @@ public class UserCtrl extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
-		String arr_n = request.getParameter("number");
-		String arr_g = request.getParameter("array_g");
+		String arr_n = request.getParameter("arr_n");
+		String arr_g = request.getParameter("arr_g");
+		String arr_s = request.getParameter("arr_s");
 		int user_id = Integer.parseInt(request.getParameter("user_id"));
 		int address_id = Integer.parseInt(request.getParameter("address_id"));
 		String card_id = request.getParameter("card_id");
@@ -384,7 +385,8 @@ public class UserCtrl extends HttpServlet {
 		c.setTransfee(transfee);
 		c.setUser_id(user_id);
 		c.setCard_id(card_id);
-		if (g.add_order(c,arr_n,arr_g)) {
+
+		if (g.add_order(c,arr_n,arr_g,arr_s)) {
 			response.sendRedirect(request.getContextPath() + "/jsp/order.jsp");
 		} else {
 			response.sendRedirect(request.getContextPath() + "/jsp/order.jsp");
@@ -411,6 +413,7 @@ public class UserCtrl extends HttpServlet {
 			jsonObject.put("name", m.getName());
 			jsonObject.put("price", m.getPrice());
 			jsonObject.put("number", m.getNumber());
+			jsonObject.put("seller_id", s.getSellerIdByGoodsId(m.getGoods_id()));
 			jsonArray.add(jsonObject);
 		}
 		resultJson.put("cartlog", jsonArray);
@@ -1042,7 +1045,6 @@ public class UserCtrl extends HttpServlet {
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("id", gs.getId());
 			jsonObject.put("name", gs.getName());
-			System.out.println("?" + i + "--" + gs.getName());
 			jsonObject.put("price", gs.getPrice());
 			jsonObject.put("number", gs.getNumber());
 			jsonArray.add(jsonObject);
@@ -1124,22 +1126,15 @@ public class UserCtrl extends HttpServlet {
 			jsonObject.put("transfee", m.getTransfee());
 			jsonObject.put("status", m.getStatus());
 			jsonObject.put("date", m.getDate());
-
-			ArrayList<Goods> b = g.getGoodsByOrderId(m.getId());
-			JSONArray jb = new JSONArray();
-
-			for (int j = 0; j < b.size(); j++) {
-				Goods gs = new Goods();
-				gs = b.get(j);
-
-				JSONObject Object = new JSONObject();
-				Object.put("id", gs.getId());
-				Object.put("name", gs.getName());
-				Object.put("price", gs.getPrice());
-				Object.put("number", gs.getNumber());
-				jb.add(Object);
-			}
-			jsonObject.put("goods", jb);
+			jsonObject.put("number", m.getNumber());
+			jsonObject.put("goods_id", m.getGoods_id());
+			jsonObject.put("seller_id", m.getSeller_id());
+			
+			Goods b = g.getGoodsById(m.getGoods_id());
+		
+			jsonObject.put("name", b.getName());
+			jsonObject.put("price", b.getPrice());
+			
 			jsonArray.add(jsonObject);
 		}
 		resultJson.put("order", jsonArray);

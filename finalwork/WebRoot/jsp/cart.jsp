@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="css/info_selectlist.css" rel="stylesheet" type="text/css">
 	<link href="css/info.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="js/jquery-1.11.1.js"></script> 
-	
+	<link href="css/detail.css" rel="stylesheet" type="text/css" >
 	<%Cookie[] cookies = null;
 		cookies = request.getCookies();
 		String value="";
@@ -34,6 +34,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 			
 	 %>
+	 <script language="javascript" type="text/javascript">
+		function numberadd(){
+			document.getElementById("number").value++;
+		}
+		
+		function numberreduce(){
+			if(document.getElementById("number").value>1)
+			document.getElementById("number").value--;
+		}
+		function numberchange(){
+			if(document.getElementById("number").value<0||document.getElementById("number").value=="")
+			document.getElementById("number").value=1;
+		}
+	
+	</script>
+		
   	<script language="javascript" type="text/javascript">
 	$.ajax({  
         type:"get",//请求方式  
@@ -48,9 +64,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             var total=0;
             var str="";
             var str1="";
+            var str2="";
             var div=$("#tab");
             length=obj.length;
             var table=$("#cart_table");
+            var part= '<table><tr><td rowspan="2">数量:</td><td rowspan="2"><input type="text" width="50px" id="number" class="number"  value="1" onchange="numberchange()" onkeyup="this.value=this.value.replace(/\D/g,'+')"></td><td><input type="button" value="+" class="btn" onclick="numberadd()"></td><td rowspan="2"></td><td rowspan="2"></td></tr><tr><td><input type="button" value="-" class="btn" onclick="numberreduce()"></td></tr></table>';
             table.empty();
             table.append('<tr><th>商品</th><th>单价</th><th>数量</th><th>小计</th><th>操作</th></tr>');
          	for(var i=0;i< obj.length;i++)
@@ -59,18 +77,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
          	table.append('<tr><th><a href="Pagectrl?id='+obj[i].goods_id+'">'+obj[i].name+'</a></th><th>￥'+obj[i].price+'</th><th>'+obj[i].number+'</th><th>￥'+obj[i].price*obj[i].number+'</th><th><a href="UserCtrl?action=add_collect&user_id=<%=value%>&goods_id='+obj[i].goods_id+'">收藏</a>/<a href="UserCtrl?action=del_cart&id='+obj[i].id+'">删除</a></th></tr>');
          	
-         	div.append('<div class=""><ul class="ul_cart"><li class="ul_cart_goods"><img class="ul_cart_goods_img"><a>'+obj[i].name+'</a></li><li class="ul_cart_black"></li><li class="ul_cart_price">￥'+obj[i].price+'</li><li class="ul_cart_num">×'+obj[i].number+'</li><li class="ul_cart_total">￥'+obj[i].price*obj[i].number+'</li><li class="ul_cart_do"><p><a href="UserCtrl?action=add_collect&user_id=<%=value%>&goods_id='+obj[i].goods_id+'">收藏</a></p><p><a href="UserCtrl?action=del_cart&id='+obj[i].id+'">删除</a></p></li></ul></div>');
+         	div.append('<div class=""><ul class="ul_cart"><li class="ul_cart_goods"><img class="ul_cart_goods_img"><a>'+obj[i].name+'</a></li><li class="ul_cart_black"></li><li class="ul_cart_price">￥'+obj[i].price+'</li><li class="ul_cart_num">×'+obj[i].number+part+'</li><li class="ul_cart_total" id="ul_cart_total">￥'+obj[i].price*obj[i].number+'</li><li class="ul_cart_do"><p><a href="UserCtrl?action=add_collect&user_id=<%=value%>&goods_id='+obj[i].goods_id+'">收藏</a></p><p><a href="UserCtrl?action=del_cart&id='+obj[i].id+'">删除</a></p><p><a id="yjxd" href="">一键下单</a></p></li></ul></div>');
 
          	str=str.concat(obj[i].goods_id+'_');
          	str1=str1.concat(obj[i].number+'_');
+         	str2=str2.concat(obj[i].seller_id+'_');
          	}
          	str=str.slice(0, str.length-1);
          	str1=str1.slice(0, str1.length-1);
-         	document.getElementById("array_g").value=str;
-         	document.getElementById("array_n").value=str1;
+         	str2=str2.slice(0, str2.length-1);
+         	document.getElementById("arr_g").value=str;
+         	document.getElementById("arr_n").value=str1;
+         	document.getElementById("arr_s").value=str2;
          	table.append('<tr><th colspan="3">共计：￥<label id="cc_total">'+total+'</label></th><th colspan="2"><input type="submit" value="结算"></th></tr>');
         }
        }); 
+	
   	</script>
 	
   </head>
@@ -120,8 +142,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="div_cart">
 	<form action="jsp/pay.jsp" method="get">
 		<input type="hidden" name="id" value="<%=value%>">
-		<input type="hidden" name="array_g" id="array_g" value="">
-		<input type="hidden" name="array_n" id="array_n" value="">
+		<input type="hidden" name="arr_g" id="arr_g" value="">
+		<input type="hidden" name="arr_n" id="arr_n" value="">
+		<input type="hidden" name="arr_s" id="arr_s" value="">
 		<table class="info_cart" id="cart_table">
 		</table>
 	</form>
