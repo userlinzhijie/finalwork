@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -19,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<link href="css/styles.css" rel="stylesheet" type="text/css" >
 	<link href="css/info_selectlist.css" rel="stylesheet" type="text/css">
-	<link href="css/info.css" rel="stylesheet" type="text/css">
+	<link href="css/putonsale.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="js/jquery-1.11.1.js"></script> 
   	<script language="javascript" type="text/javascript">
 	  	window.onload=function(){
@@ -32,13 +33,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	            this.getElementsByClassName("submenu")[0].style.display = "none";
 	        };
 	    }
-           };  
+           }; 
+           
+       function judge(){	
+       		var count=0;			
+			for(var i=0;i<23;i++)
+			{
+				if(document.getElementsByTagName("input")[i].value!="")
+				{
+					count++;
+				}
+			}
+			if(count==22)
+				document.getElementById("sub").disabled=false;		
+			else
+				document.getElementById("sub").disabled=true;
+		};
+		
+		$(document).ready(function(){
+		  $(".keyboard").click(function(){
+		    $(".standard1").show();
+		    $(".standard2").hide();
+		    $(".standard").hide();
+		  });
+		  $(".mouse").click(function(){
+		    $(".standard2").show();
+		    $(".standard1").hide();
+		    $(".standard").hide();
+		    $("input[name=standard][value=光电]").attr("checked",true)
+		  });
+		});
   	</script>
-	
+  	
   </head>
 
   
-  <body>
+  <body background="img/background2.jpg">
     <div id="Header">
   	<div id="logo">
   	<p align =right>欢迎回来,<input type="text" class="useridtop" id="useridtop" disabled>&nbsp;&nbsp;
@@ -83,33 +113,83 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	
     	
     <div class="div1">
-	<form action="Upload" method="post">
+	<form action="Uploadctrl" method="post" enctype="multipart/form-data">
     	<table class="info">
     	<tr>	
     		<th colspan="2">上架商品</th>
     		</tr>
     	<tr>
-    		<td>品牌:</td><td><input type="text" class="brand" id="brand" name="brand"></td>
+    		<td>名字:</td><td><input type="text" name="name" onchange="judge()"></td>
     	</tr>
-    	<tr><td>型号:</td><td><input type="text" class="type" id="type" id="type" name="type"></td>
+    	<tr>
+    		<td>价格(￥):</td><td><input type="text" name="price" onchange="judge()" onkeyup="value=value.replace(/[^\d.]/g,'')" ></td>
+    	</tr>
+    	<tr>
+    		<td>种类:</td><td>
+    		<input type="radio" name="type" value = "键盘" onchange="judge()" class="keyboard" checked>键盘
+    		<input type="radio" name="type" value = "鼠标" onchange="judge()" class="mouse">鼠标
+    		</td>
     		</tr>
     	<tr>
-    		<td>颜色:</td><td><input type="text" class="color" id="color" id="color" name="color"></td>
+    		<td>品牌:</td><td><input type="text" name="brand" onchange="judge()"></td>
+    	</tr>
+    	<tr>
+    		<td>版本:</td><td><input type="text" name="version" onchange="judge()"></td>
+    	</tr>
+    	<tr>
+    		<td>标准:</td><td>
+    		<p class="standard1" ><input type="radio" name="standard" value = "104键" onchange="judge()" checked>104键
+    		<input type="radio" name="standard" value = "87键" onchange="judge()" >87键</p>
+    		<p class="standard2" hidden><input type="radio" name="standard" value = "光电" onchange="judge()"  >光电
+    		<input type="radio" name="standard" value = "激光" onchange="judge()" >激光</p>
+    		</td>
+    	</tr>
+    	<tr>
+    		<td>接口方式:</td><td>
+    		<input type="radio" name="inter" value = "USB" onchange="judge()"  checked>USB
+    		<input type="radio" name="inter" value = "无线" onchange="judge()" >无线
+    		</td>
+    	</tr>
+    	<tr>
+    		<td>颜色:</td><td><input type="text" name="color" onchange="judge()"></td>
     		</tr>
     	<tr>
-    		<td>传输方式:</td><td><input type="text" name="trans" id="trans" class="trans" name="trans"></td>
+    		<td>背光:</td><td><input type="text" name="backlight" onchange="judge()"></td>
+    	</tr>
+    	
+    	<tr>
+    		<td>人体学工程:</td><td>
+    		<input type="radio" name="ergo" value = "支持" onchange="judge()"  checked>支持
+    		<input type="radio" name="ergo" value = "不支持" onchange="judge()" >不支持
+    		</td>
+    	</tr>
+    	<tr>
+    		<td>尺寸:</td><td><input type="text" name="size" onchange="judge()"></td>
+    	</tr>
+    	<tr>
+    		<td>重量:</td><td><input type="text" name="weight" onchange="judge()"></td>
+    	</tr>
+    	<tr>
+    		<td>材质:</td><td><input type="text" name="material" onchange="judge()"></td>
+    	</tr>
+    	<tr>
+    		<td>细节描述:</td><td><textarea name="details" onchange="judge()" rows="5" cols="19"></textarea></td>
+    	</tr>
+    	<tr>
+    		<td>商品图片名:</td><td><input type="text" name="picture" onchange="judge()"></td>
     		</tr>
     	<tr>
-    		<td>商品图片:</td>
+    		<td colspan="2"><input type="file" name="file" id="upfile" onchange="judge()"></td>
     		</tr>
     	<tr>
-    		<td colspan="2"><input type="file" name="trans" id="trans" class="trans"></td>
-    		</tr>
-    	<tr>
-    		<th colspan="2"><input type="submit" value="上传" class="infosub"></th>
+    		<th colspan="2"><input type="submit" value="上传"  id ="sub" class="infosub"  disabled="true"></th>
     		</tr>
     	</table>
     </form>
     </div>
+    	<c:if test = "${MSG!=null}">
+    			<script>alert("${MSG}");</script>
+    			<% session.setAttribute("MSG", null);%>
+    	</c:if>
   </body>
 </html>

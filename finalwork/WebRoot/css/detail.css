@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+.picture{
+	position:absolute;
+	margin-left:50px;
+	margin-top:20px;
+	}
+	
+.number{
+	width:31px;
+	height:44px;
+	text-align:center;
+	}
+	
+.showimg{
+	width:350px; 
+	height:350px;
+	}
+	
+.info{
+	position:absolute;
+	margin-left:500px;
+	margin-top:20px;	
+}
+
+.shopinfo td{
+	padding-right:80px;
+	padding-top:30px;
+	}
+	
+.shopinfo th{
+	padding-right:80px;
+	padding-top:30px;
+	}	
+	
+.btn{
+	width:24px;
+	height:20px;
+	}
+.cart{
+	width:90px;
+	height:44px
+	}

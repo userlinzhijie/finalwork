@@ -43,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   </head>
   
-  <body background="img/background2.jpg" >
+  <body background="img/background2.jpg">
     <div id="Header">
   	<div id="logo">
     <%String name = (String)session.getAttribute("user"); %>
@@ -79,6 +79,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- 下层分割线 -->
  	<form action = "Pagectrl" method="post">
  	<p align = "center" >
+ 	<select size ="1" name="mysite" >
+ 		<option value="" selected></option>
+		<option value="键盘">键盘</option>
+		<option value="鼠标">鼠标</option>
+		<option value="耳机">耳机</option>
+		<option value="音响">音响</option>
+ 	</select>
  	<input type = "text" name = "search"><input type = "submit" value = "搜索"><br>
  	</form><br><br>
  	<div>
@@ -88,50 +95,50 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    <th>可选分类</th>  
 			</tr>  
 			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
-			    <td><a href="Pagectrl?page=1&type=键盘">键盘</a></td>  
+			    <td><a href="jsp/keyboard.jsp">键盘</a></td>  
 			</tr>  
 			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
-			    <td><a href="Pagectrl?page=1&type=鼠标">鼠标</a></td>  
+			    <td><a href="">鼠标</a></td>  
+			</tr>  
+			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
+			    <td><a href="">耳机</a></td>  
+			</tr>  
+			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
+			    <td><a href="">音响</a></td>  
 			</tr>    
 		</table>
 	 	</div>
 	 		<div class="div1">
-	 		<table class="shoplist" >
+	 		<table class="shoplist">
 	 			<tr>
 	 			<c:forEach var="shop" items="${pageBean.data}" varStatus="vs">	
 	 			<c:if test = "${vs.count>=2}"><c:if test = "${(vs.count % 2)==1}">
 	 				<tr>
 	 			</c:if></c:if>		
 				<td>
-				<a href="Pagectrl?id=${shop.id}">
-				<table class="shopdetail">
+				<a href="Pagectrl?page=${shop.id}"><table class="shopdetail">
 					<tr>
-					<td class="pic"><img id="img1" src="Showctrl?id=${shop.id}" width="170px" height="160px"></td></tr>
+					<td><img id="img1" src="" width="30px" height="20px"></td></tr>
 					<tr>
-					<td style="text-align:left">¥<c:out value="${shop.price}" /></td></tr>
-					<tr>
-					<td><c:out value="${shop.name}" /></td></tr>
-					<tr>
-					<td style="text-align:right">店铺名</td></tr>
+					<td>名字：<c:out value="${shop.name}" /></td></tr>
 					</table></a>
 				</td>
 				</c:forEach>
 			</table>
-		<br>
 		<p align="center">
     	页数${pageBean.curPage}/${pageBean.totalPages}
     	<c:choose>
     		<c:when test = "${pageBean.curPage==1}">首页 上一页</c:when>
     		<c:otherwise>
-    			<a href="Pagectrl?page=1">首页</a>
-    			<a href="Pagectrl?page=${pageBean.curPage-1}">上一页</a>
+    			<a href="Pagectrl?page=1&search=${search}">首页</a>
+    			<a href="Pagectrl?page=${pageBean.curPage-1}&search=${search}">上一页</a>
     		</c:otherwise>
     	</c:choose>
     	<c:choose>
     		<c:when test="${pageBean.curPage==pageBean.totalPages}">下一页 尾页</c:when>
     		<c:otherwise>
-    			<a href="Pagectrl?page=${pageBean.curPage+1}">下一页</a>
-    			<a href="Pagectrl?page=${pageBean.totalPages}">尾页</a>
+    			<a href="Pagectrl?page=${pageBean.curPage+1}&search=${search}">下一页</a>
+    			<a href="Pagectrl?page=${pageBean.totalPages}&search=${search}">尾页</a>
     		</c:otherwise>
     	</c:choose>
 	 		</div>

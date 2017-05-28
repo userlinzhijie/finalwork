@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>键盘售卖页</title>
+    <title>商品详情</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -18,10 +18,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<link href="css/styles.css" rel="stylesheet" type="text/css" >
-	<link href="css/keyboard.css" rel="stylesheet" type="text/css" >
-	<link href="./css/selectlist.css" rel="stylesheet" type="text/css">
-	<script type="text/javascript" src="js/jquery-1.11.1.js"></script> 
+	<link href="css/detail.css" rel="stylesheet" type="text/css" >
+	<link href="css/selectlist.css" rel="stylesheet" type="text/css">
 	
+	<script language="javascript" type="text/javascript">
+		function numberadd(){
+			document.getElementById("number").value++;
+		}
+		
+		function numberreduce(){
+			if(document.getElementById("number").value>1)
+			document.getElementById("number").value--;
+		}
+		function numberchange(){
+			if(document.getElementById("number").value<0||document.getElementById("number").value=="")
+			document.getElementById("number").value=1;
+		}
+	
+	</script>
+		
 	<script language="javascript" type="text/javascript">
 	  	window.onload=function(){
 	  	//折叠菜单函数
@@ -36,14 +51,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	}
           };  
   	</script>
-  	
-  	<script type="text/javascript">
-	
-	</script>
+  
 
   </head>
   
-  <body background="img/background2.jpg" >
+  <body background="img/background2.jpg">
     <div id="Header">
   	<div id="logo">
     <%String name = (String)session.getAttribute("user"); %>
@@ -53,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<p align =right>欢迎回来,<%= name %>  <a href = "jsp/exit.jsp">退出登陆</a><p> 
 	<% } %>
 	</div></div>
- 	<p align = "center" class = "ziti">购物系统</p>
+ 	<p align = "center" class = "ziti">商品详情</p>
 	<!-- 上层分割线 -->
 	<ul id="ul1">
     <li class="subme">
@@ -76,65 +88,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <a href="#">首页</a>
     </li>
  	</ul><br>
-	<!-- 下层分割线 -->
- 	<form action = "Pagectrl" method="post">
- 	<p align = "center" >
- 	<input type = "text" name = "search"><input type = "submit" value = "搜索"><br>
- 	</form><br><br>
- 	<div>
-	 	<div class="div0"><br>
-		<table class="hovertable">
-			<tr>  
-			    <th>可选分类</th>  
-			</tr>  
-			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
-			    <td><a href="Pagectrl?page=1&type=键盘">键盘</a></td>  
-			</tr>  
-			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
-			    <td><a href="Pagectrl?page=1&type=鼠标">鼠标</a></td>  
-			</tr>    
-		</table>
-	 	</div>
-	 		<div class="div1">
-	 		<table class="shoplist" >
-	 			<tr>
-	 			<c:forEach var="shop" items="${pageBean.data}" varStatus="vs">	
-	 			<c:if test = "${vs.count>=2}"><c:if test = "${(vs.count % 2)==1}">
-	 				<tr>
-	 			</c:if></c:if>		
-				<td>
-				<a href="Pagectrl?id=${shop.id}">
-				<table class="shopdetail">
-					<tr>
-					<td class="pic"><img id="img1" src="Showctrl?id=${shop.id}" width="170px" height="160px"></td></tr>
-					<tr>
-					<td style="text-align:left">¥<c:out value="${shop.price}" /></td></tr>
-					<tr>
-					<td><c:out value="${shop.name}" /></td></tr>
-					<tr>
-					<td style="text-align:right">店铺名</td></tr>
-					</table></a>
-				</td>
-				</c:forEach>
-			</table>
-		<br>
-		<p align="center">
-    	页数${pageBean.curPage}/${pageBean.totalPages}
-    	<c:choose>
-    		<c:when test = "${pageBean.curPage==1}">首页 上一页</c:when>
-    		<c:otherwise>
-    			<a href="Pagectrl?page=1">首页</a>
-    			<a href="Pagectrl?page=${pageBean.curPage-1}">上一页</a>
-    		</c:otherwise>
-    	</c:choose>
-    	<c:choose>
-    		<c:when test="${pageBean.curPage==pageBean.totalPages}">下一页 尾页</c:when>
-    		<c:otherwise>
-    			<a href="Pagectrl?page=${pageBean.curPage+1}">下一页</a>
-    			<a href="Pagectrl?page=${pageBean.totalPages}">尾页</a>
-    		</c:otherwise>
-    	</c:choose>
-	 		</div>
-	 	</div>	 	
-  </body>
+ 	<div class="picture">
+ 		<c:forEach var="shop" items="${pageBean.data}" varStatus="vs">
+ 		<img alt="test" src="Showctrl?id=${shop.id}" class="showimg" id="pic">
+ 		</c:forEach>
+ 	</div>
+ 	
+ 	<div class="info">
+ 		<c:forEach var="shop" items="${pageBean.data}" varStatus="vs">
+ 		 ${shop.name}<br>
+ 		价格：￥${shop.price}<br>
+ 		<form action="" method="post">
+ 		<table>
+ 		<tr>
+ 			<td rowspan="2">数量:</td><td rowspan="2">
+ 			<input type="text" width="50px" id="number" class="number"  value="1" onchange="numberchange()" onkeyup="this.value=this.value.replace(/\D/g,'')"></td>
+ 			<td><input type="button" value="+" class="btn" onclick="numberadd()"></td>
+ 			<td rowspan="2"><input type="submit"  class="cart" value="加入购物车"></td>
+ 			<td rowspan="2"><input type="submit"  class="cart" value="一键购买"></td>
+ 			</tr>
+ 		<tr>
+ 			<td><input type="button" value="-" class="btn" onclick="numberreduce()"></td>
+ 		</tr>
+ 		</table>
+ 		</form>
+ 		<div>
+ 		<h1>商品介绍</h1>
+ 		<table class="shopinfo">
+ 		<tr>
+ 		<td>类型:${shop.type}</td><td>品牌:${shop.brand}</td><td>版本:${shop.version}</td><td>颜色:${shop.color}</td>
+ 		</tr>
+ 		<tr>
+ 		<td>标准:${shop.standard}</td><td>接口:${shop.inter}</td><td>背光:${shop.backlight}</td><td>人体工学:${shop.ergo}</td>
+ 		</tr>
+ 		<tr>
+ 		<td>尺寸:${shop.size}</td><td>重量:${shop.weight}</td><td>材质:${shop.material}</td>
+ 		</tr>
+ 		<tr>
+ 			<th colspan="4" align="left">细节:${shop.details}</th>
+ 		</tr>
+ 		</table>
+ 		</div>	
+ 		</c:forEach>
+ 	</div>
+ 	</body>
 </html>

@@ -1,7 +1,6 @@
 @CHARSET "UTF-8";
 .shoplist{
-	border:1px solid #F00;
-
+		
 	}
 .shoplist td{
 	width:200px;
@@ -15,12 +14,27 @@
 }
 
 .shopdetail{
-	border:1px solid #F00;
+	background-color:00CCFF;
+	border:1px solid #989898;
+	height:150px;
+	width:200px;
+	table-layout:fixed;
 }
 .shopdetail tr{
-	height:20px;
+	height:10px;
 }
 
 .shopdetail td{
+		padding-top:5px;
+		padding-right:0px;
+		padding-left:0px;
+		width:40px;
+		height:30px;
 		text-align:center;	
+		word-wrap:break-word;
+}
+
+.pic{
+		width:180px;
+		height:140px;
 }

@@ -67,7 +67,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </script>
 	
 </head>
-  <body>
+  <body background="img/background2.jpg" >
   	<div id="Header">
   	<div id="logo">
     <p align ="right" >&nbsp;<p> 
@@ -85,6 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	});
 </script>
  	<p align = "center" class = "ziti">购物系统</p>
+ 	<!--  <img alt="background" src="img/background.jpg">-->
 	<!-- 上层分割线 -->
 	<ul id="ul1">
     <li class="subme">
@@ -110,13 +111,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- 下层分割线 -->
  	<form action = "index.jsp" method="post">
  	<p align = "center" >
- 	<select size ="1" name="mysite" >
- 		<option value="" selected></option>
-		<option value="键盘">键盘</option>
-		<option value="鼠标">鼠标</option>
-		<option value="耳机">耳机</option>
-		<option value="音响">音响</option>
- 	</select>
  	<input type = "text" name = "search"><input type = "submit" value = "搜索"><br>
  	</form><br><br>
  	<div>
@@ -126,16 +120,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    <th>可选分类</th>  
 			</tr>  
 			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
-			    <td><a href="Pagectrl">键盘</a></td>  
+			    <td><a href="Pagectrl?page=1&type=键盘">键盘</a></td>  
 			</tr>  
 			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
-			    <td><a href="">鼠标</a></td>  
-			</tr>  
-			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
-			    <td><a href="">耳机</a></td>  
-			</tr>  
-			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
-			    <td><a href="">音响</a></td>  
+			    <td><a href="Pagectrl?page=1&type=鼠标">鼠标</a></td>  
 			</tr>    
 		</table>
 	 	</div>
@@ -143,10 +131,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 	<div id="fade_focus">
 		<div class="loading">Loading...<br></div>
 		<ul id ="photo">
-		<li><a href="" ><img src="" width="700" height="300" alt="xxx键盘" /></a></li>
-		<li><a href="" ><img src="" width="700" height="300" alt="xxx鼠标" /></a></li>
-		<li><a href="" ><img src="" width="700" height="300" alt="xxx耳机" /></a></li>
-		<li><a href="" ><img src="" width="700" height="300" alt="xxx音响" /></a></li>
+		<li><a href="" ><img src="img/background.jpg" width="704" height="304" alt="xxx键盘" /></a></li>
+		<li><a href="" ><img src="img/background1.jpg" width="704" height="304" alt="xxx鼠标" /></a></li>
 		</ul>
 		</div></div>
 	</div>	

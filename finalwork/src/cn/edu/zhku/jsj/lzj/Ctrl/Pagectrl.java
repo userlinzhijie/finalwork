@@ -22,18 +22,50 @@ public class Pagectrl extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
+		String type = request.getParameter("type");
 		String page = request.getParameter("page");
+		String recid = request.getParameter("id");
+		String search = request.getParameter("search");
+		PageService ps = new PageService();
+		int id=0;
+		if(recid!=null && recid.length()>0){
+			id=Integer.parseInt(recid);
+		}		
 		int curPage=1;
 		if(page!=null && page.length()>0){
 			curPage = Integer.parseInt(page);
-		}	
-		PageService ps = new PageService();
-		try {
-			request.setAttribute("pageBean",ps.goGetResult(curPage));
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
-		request.getRequestDispatcher("jsp/keyboard.jsp").forward(request,response);
+		//进入详细界面
+		if(id!=0)
+		{
+			try {	
+				request.setAttribute("pageBean",ps.goGetDetail(id));
+				request.getRequestDispatcher("jsp/detail.jsp").forward(request,response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		//进入搜索界面
+		if(search!=null)
+		{
+			try {
+				request.setAttribute("search",search);
+				request.setAttribute("pageBean",ps.goGetSearch(search,curPage));
+				request.getRequestDispatcher("jsp/search.jsp").forward(request,response);
+			} catch (Exception e) {
+			e.printStackTrace();
+			}
+		}
+		//常规进入
+		if(search==null&&page!=null)
+		{
+			try {	
+				request.setAttribute("pageBean",ps.goGetResult(curPage,type));
+				request.getRequestDispatcher("jsp/keyboard.jsp").forward(request,response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}	
 		out.flush();
 		out.close();	
 	}

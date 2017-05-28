@@ -9,7 +9,6 @@ public class Keyboard {
 	private String type;
 	private String color;
 	private String standard;
-	private String trans;
 	private String inter;
 	private String size;
 	private String backlight;
@@ -35,12 +34,6 @@ public class Keyboard {
 	}
 	public String getColor() {
 		return color;
-	}
-	public void setTrans(String trans) {
-		this.trans = trans;
-	}
-	public String getTrans() {
-		return trans;
 	}
 	public void setInter(String inter) {
 		this.inter = inter;

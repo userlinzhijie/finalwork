@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+table.info{
+	width:600px;
+	position:absolute;
+	top:190px;
+	left:500px;
+	border-collaspe:collaspe;
+	border:gray solid 2px;
+	font-family:"STFangsong";
+	border-radius:5px;
+	border-color:#6699FF;
+	}
+table.info td{
+	text-indent:5em;
+	}
+	
+.infosub{
+		padding: 5px 10px 6px;
+		-moz-border-radius: 6px;
+		-webkit-border-radius: 6px;
+		-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+		-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+		text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+		border-bottom: 1px solid rgba(0,0,0,0.25);
+	}

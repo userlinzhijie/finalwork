@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	</script>
   </head>
   
-  <body>
+  <body background="img/background2.jpg">
     <div id="Header">
   	<div id="logo">
   	<p align =right>欢迎回来,<input type="text" class="useridtop" id="useridtop" disabled>&nbsp;&nbsp;
