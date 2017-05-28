@@ -55,7 +55,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             if(s=="one"){
 	            var table = $("#shop_table");  
 	 			table.empty();
-	          	table.append('<tr><td>shopid:'+data.shop_id+'</td><td>shopstatus:'+data.status+'</td></tr>');
+	 			var status;
+	 			if(data.status==0)status="审核中。。。";
+	 			if(data.status==1)status="营业中。。。";
+	 			if(data.status==2)status="打烊中。。。";
+	          	table.append('<tr><th>店铺id：'+data.shop_id+'</th></tr><tr><th>店铺名：'+data.name+'</th></tr><tr><th>店铺状态:'+status+'</th></tr>');
             }
         }  
        });
@@ -87,7 +91,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function() {
 		var title = document.getElementById("p_title").innerHTML;
 		if (title == "游客") {
-			document.getElementById("p_title").innerHTML = '<a href="jsp/login.jsp">你好，请登录</a>&nbsp;&nbsp;<a href="jsp/reg.jsp">注册</a>&nbsp;&nbsp;&nbsp;';
+			alert("请登录！");
+			window.location = "jsp/login.jsp";
 		}else{
 			document.getElementById("p_title").innerHTML = '欢迎回来,'+title+'<a href="UserCtrl?action=logout">退出登陆</a>';
 		}
@@ -106,11 +111,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </li>
 	    <li class="subme">
 	          <a href="jsp/cart.jsp">购物车</a>
-	         <div class ="submenu"><a href="#">1</a><a href="#">2</a><a href="#">3</a></div>
 	    </li>
 	    <li class="subme">
 	          <a href="jsp/info.jsp">我的中心</a>
-	          <div class ="submenu"><a href="jsp/info.jsp">我的信息</a><a href="jsp/changepwd.jsp">更改密码</a><a href="jsp/apply.jsp">申请开铺</a></div>
 	    </li>
 	    <li class="subme">
 	          <a href="">首页</a>
@@ -154,7 +157,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<table class="info" id="shop_table">
     	<tr>	
     		<th colspan="2">申请开铺</th>
-    		</tr>
+    	</tr>
+    	<tr>	
+    		<th colspan="2"><input type="text" name="name" placeholder="输入店铺名"></th>
+    	</tr>
     	<tr>
     		<td>请阅读以下法律协议，同意后才能开铺</td>
     		</tr>

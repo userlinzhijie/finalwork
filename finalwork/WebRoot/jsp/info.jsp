@@ -46,14 +46,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             var objs=eval(data); //解析json对象  
             var obj = objs.users;  
             
-            var name = obj[0].name;
+            var truename = obj[0].truename;
             var nickname=obj[0].nickname;
             var sex=obj[0].sex;
             var birth=obj[0].birth;
             var telephone=obj[0].telephone;
             var email=obj[0].email;
             
-            document.getElementById("name").value = name;
+            document.getElementById("truename").value = truename;
             document.getElementById("nickname").value = nickname;
             document.getElementById("telephone").value = telephone;
             document.getElementById("email").value = email;
@@ -82,7 +82,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function() {
 		var title = document.getElementById("p_title").innerHTML;
 		if (title == "游客") {
-			document.getElementById("p_title").innerHTML = '<a href="jsp/login.jsp">你好，请登录</a>&nbsp;&nbsp;<a href="jsp/reg.jsp">注册</a>&nbsp;&nbsp;&nbsp;';
+			alert("请登录！");
+			window.location = "jsp/login.jsp";
 		}else{
 			document.getElementById("p_title").innerHTML = '欢迎回来,'+title+'<a href="UserCtrl?action=logout">退出登陆</a>';
 		}
@@ -100,11 +101,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </li>
 	    <li class="subme">
 	          <a href="jsp/cart.jsp">购物车</a>
-	         <div class ="submenu"><a href="#">1</a><a href="#">2</a><a href="#">3</a></div>
+	        
 	    </li>
 	    <li class="subme">
 	          <a href="jsp/info.jsp">我的中心</a>
-	          <div class ="submenu"><a href="jsp/info.jsp">我的信息</a><a href="jsp/changepwd.jsp">更改密码</a><a href="jsp/apply.jsp">申请开铺</a></div>
+	       
 	    </li>
 	    <li class="subme">
 	          <a href="">首页</a>
@@ -144,12 +145,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="div1">
 	<form action="UserCtrl" method="post">
 		<input type="hidden" name="action" value="edit">
-		<input type="hidden" name="id" value="<%=Integer.parseInt(value) %>">
+		<input type="hidden" name="id" value="<%=value %>">
 		<table class="info">
 				<tr>
-					<td><label for="user-name" class="am-form-label">账号</label>
+					<td><label for="user-name" class="am-form-label">真实姓名</label>
 					</td>
-					<td><input type="text" id="name" name="name" placeholder="name">
+					<td><input type="text" id="truename" name="truename" placeholder="真实姓名">
 					</td>
 				</tr>
 					

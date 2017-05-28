@@ -515,6 +515,10 @@ public class UserCtrl extends HttpServlet {
 				cookies[i].setValue(URLEncoder.encode("сн©м", "utf-8"));
 				response.addCookie(cookies[i]);
 			}
+			if (name.equals("user_id")) {
+				cookies[i].setValue(URLEncoder.encode("0", "utf-8"));
+				response.addCookie(cookies[i]);
+			}
 		}
 		response.sendRedirect(request.getContextPath() + "/jsp/login.jsp");
 	}
@@ -603,11 +607,13 @@ public class UserCtrl extends HttpServlet {
 
 		int user_id = Integer.parseInt(request.getParameter("user_id"));
 		int status = Integer.parseInt(request.getParameter("status"));
+		String name = request.getParameter("name");
 
 		UserService u = new UserService();
 		Shop s = new Shop();
 		s.setStatus(status);
 		s.setUser_id(user_id);
+		s.setName(name);
 		u.shopApply(s);
 		if (u.shopApply(s)) {
 			response.sendRedirect(request.getContextPath() + "/jsp/apply.jsp");
@@ -630,6 +636,7 @@ public class UserCtrl extends HttpServlet {
 			r.put("shop_id", s.getShop_id());
 			r.put("user_id", s.getUser_id());
 			r.put("status", s.getStatus());
+			r.put("name", s.getName());
 		} else {
 			r.put("shop", "none");
 		}
@@ -874,7 +881,7 @@ public class UserCtrl extends HttpServlet {
 
 		UserService g = new UserService();
 		int id = Integer.parseInt(request.getParameter("id"));
-		String name = (String) request.getParameter("name");
+		String truename = (String) request.getParameter("truename");
 		String nickname = (String) request.getParameter("nickname");
 		String birth = (String) request.getParameter("birth");
 		String telephone = (String) request.getParameter("telephone");
@@ -884,7 +891,7 @@ public class UserCtrl extends HttpServlet {
 		User u = new User();
 		u.setBirth(birth);
 		u.setEmail(email);
-		u.setName(name);
+		u.setTruename(truename);
 		u.setNickname(nickname);
 		u.setSex(sex);
 		u.setTelephone(telephone);
@@ -1177,6 +1184,7 @@ public class UserCtrl extends HttpServlet {
 				jsonObject.put("sex", m.getSex());
 				jsonObject.put("birth", m.getBirth());
 				jsonObject.put("email", m.getEmail());
+				jsonObject.put("truename", m.getTruename());
 				jsonArray.add(jsonObject);
 			}
 		}
