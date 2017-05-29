@@ -98,6 +98,11 @@ $.ajax({
            		}else if(obj[i].status==7){
            			div0.append('<div><table class="next" id="t'+i+'"><tr><th>订单id：</th><th>地址：</th><th>共计：</th><th>邮费：</th><th>交易时间：</th><th>操作</th></tr><tr><th>'+obj[i].id+'</th><th>'+obj[i].address_id+'</th><th>￥'+obj[i].total+'</th><th>￥'+obj[i].transfee+'</th><th>'+obj[i].date+'</th><th><a href="UserCtrl?action=del_order&id='+obj[i].id+'">删除订单</a>（不可撤销）</th></tr></table></div>');
             		$("#t"+i).append('<tr><th>'+obj[i].name+'</th><th>'+obj[i].price+'</th><th>×'+obj[i].number+'</th></tr>');
+           		}else if(obj[i].status==8){//del	
+           		}else if(obj[i].status==89){//del
+           		}else if(obj[i].status==9){
+           			div0.append('<div><table class="next" id="t'+i+'"><tr><th>订单id：</th><th>地址：</th><th>共计：</th><th>邮费：</th><th>交易时间：</th><th>操作</th></tr><tr><th>'+obj[i].id+'</th><th>'+obj[i].address_id+'</th><th>￥'+obj[i].total+'</th><th>￥'+obj[i].transfee+'</th><th>'+obj[i].date+'</th><th><a href="UserCtrl?action=del_order&id='+obj[i].id+'">删除订单</a>（不可撤销）</th></tr></table></div>');
+            		$("#t"+i).append('<tr><th>'+obj[i].name+'</th><th>'+obj[i].price+'</th><th>×'+obj[i].number+'</th></tr>');
            		}
             }  
         }  

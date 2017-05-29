@@ -34,17 +34,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 %>
 	<script type="text/javascript" src="js/jquery-1.11.1.js"></script> 
 	<script language="javascript" type="text/javascript">
-		function numberadd(){
+		function numberadd(price){
 			document.getElementById("number").value++;
+			document.getElementById("arr_n").value=document.getElementById("number").value;
+			document.getElementById("arr_v").value=document.getElementById("number").value*price;
 		}
 		
-		function numberreduce(){
+		function numberreduce(price){
 			if(document.getElementById("number").value>1)
 			document.getElementById("number").value--;
+			document.getElementById("arr_n").value=document.getElementById("number").value;
+			document.getElementById("arr_v").value=document.getElementById("number").value*price;
 		}
-		function numberchange(){
+		function numberchange(price){
 			if(document.getElementById("number").value<0||document.getElementById("number").value=="")
 			document.getElementById("number").value=1;
+			document.getElementById("arr_n").value=document.getElementById("number").value;
+			document.getElementById("arr_v").value=document.getElementById("number").value*price;
 		}
 	
 	</script>
@@ -89,7 +95,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			window.location = "jsp/login.jsp";
 		}else{
 			document.getElementById("p_title").innerHTML = '欢迎回来,'+title+'<a href="UserCtrl?action=logout">退出登陆</a>';
-		}
+		};
 	});
 </script>
  	<p align = "center" class = "ziti">商品详情</p>
@@ -123,18 +129,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  		<c:forEach var="shop" items="${pageBean.data}" varStatus="vs">
  		 ${shop.name}<br>
  		价格：￥${shop.price}<br>
- 		<form action="" method="post">
+ 		<form action="jsp/onekeypay.jsp" method="post">
  		<input type="hidden" id="goods_id" value="${shop.id}" >
+ 		 <input type="hidden" name="action" value="add_order">
+	    <input type="hidden" name="address_id" id="aid" value="0">
+	    <input type="hidden" name="mode" id="mode" value="0">
+	    <input type="hidden" name="card_id" id="cid" value="default">
+	    <input type="hidden" name="user_id" id="uid" value="<%=value%>">
+    	<input type="hidden" name="status" id="status" value="1">
+    	<input type="hidden" name="arr_v" id="arr_v" value="0">    
+    	<input type="hidden" name="arr_n" id="arr_n" value="1">    
+    	<input type="hidden" name="transfee" id="transfee" value="0">
+   		<input type="hidden" name="arr_g" id="array_g" value="${shop.id}">
+   		<input type="hidden" name="arr_s" id="array_s" value="${shop.user }">
  		<table>
  		<tr>
  			<td rowspan="2">数量:</td><td rowspan="2">
- 			<input type="text" width="50px" id="number" class="number"  value="1" onchange="numberchange()" onkeyup="this.value=this.value.replace(/\D/g,'')"></td>
- 			<td><input type="button" value="+" class="btn" onclick="numberadd()"></td>
+ 			<input type="text" width="50px" id="number" class="number"  value="1" onchange="numberchange(${shop.price })" onkeyup="this.value=this.value.replace(/\D/g,'')"></td>
+ 			<td><input type="button" value="+" class="btn" onclick="numberadd(${shop.price })"></td>
  			<td rowspan="2"><a id="ac_add" href="" onclick="addcart()"><input type="button" class="cart" value="加入购物车"></a></td>
- 			<td rowspan="2"><input type="submit"  class="cart" value="一键购买"></td>
+ 			<td rowspan="2"><input type="submit" class="cart" value="一键购买"></td>
  			</tr>
  		<tr>
- 			<td><input type="button" value="-" class="btn" onclick="numberreduce()"></td>
+ 			<td><input type="button" value="-" class="btn" onclick="numberreduce(${shop.price })"></td>
  		</tr>
  		</table>
  		</form>

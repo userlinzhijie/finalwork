@@ -34,7 +34,7 @@ public class UserCtrl extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		String action = request.getParameter("action");
-
+		System.out.println(action);
 		if ("del".equals(action)) {
 			try {
 				this.del(request, response);
@@ -280,19 +280,38 @@ public class UserCtrl extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} 
+		} else if ("setdefault_adddress".equals(action)) {
+			try {
+				this.setDefault(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if ("setdefault_card".equals(action)) {
+			try {
+				this.setDefault(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 	}
 
-	private void add_cart(HttpServletRequest request,
+	private void setDefault(HttpServletRequest request,
 			HttpServletResponse response) throws Exception{
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void add_cart(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
 		int user_id = Integer.parseInt(request.getParameter("user_id"));
 		int goods_id = Integer.parseInt(request.getParameter("goods_id"));
 		int number = Integer.parseInt(request.getParameter("num"));
-		
 
 		Cartlog c = new Cartlog();
 		UserService g = new UserService();
@@ -307,14 +326,14 @@ public class UserCtrl extends HttpServlet {
 	}
 
 	private void del_collect(HttpServletRequest request,
-			HttpServletResponse response) throws Exception{
+			HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
 		int id = Integer.parseInt(request.getParameter("id"));
 
 		UserService g = new UserService();
-		
+
 		if (g.del_collect(id)) {
 			response.sendRedirect(request.getContextPath() + "/jsp/collect.jsp");
 		} else {
@@ -323,7 +342,7 @@ public class UserCtrl extends HttpServlet {
 	}
 
 	private void add_collect(HttpServletRequest request,
-			HttpServletResponse response) throws Exception{
+			HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
@@ -331,8 +350,8 @@ public class UserCtrl extends HttpServlet {
 		int gid = Integer.parseInt(request.getParameter("goods_id"));
 
 		UserService g = new UserService();
-		
-		if (g.add_collect(uid,gid)) {
+
+		if (g.add_collect(uid, gid)) {
 			response.sendRedirect(request.getContextPath() + "/jsp/collect.jsp");
 		} else {
 			response.sendRedirect(request.getContextPath() + "/jsp/collect.jsp");
@@ -340,7 +359,7 @@ public class UserCtrl extends HttpServlet {
 	}
 
 	private void del_order(HttpServletRequest request,
-			HttpServletResponse response) throws Exception{
+			HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
@@ -352,41 +371,51 @@ public class UserCtrl extends HttpServlet {
 		} else {
 			response.sendRedirect(request.getContextPath() + "/jsp/order.jsp");
 		}
-		
+
 	}
 
 	private void add_order(HttpServletRequest request,
-			HttpServletResponse response) throws Exception{
+			HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
+		int mode =Integer.parseInt(request.getParameter("mode"));//0one*1cart  
+		
 		String arr_n = request.getParameter("arr_n");
 		String arr_g = request.getParameter("arr_g");
 		String arr_s = request.getParameter("arr_s");
+		String arr_v = request.getParameter("arr_v");
+
 		int user_id = Integer.parseInt(request.getParameter("user_id"));
 		int address_id = Integer.parseInt(request.getParameter("address_id"));
 		String card_id = request.getParameter("card_id");
 		int status = Integer.parseInt(request.getParameter("status"));
-		int total=  Integer.parseInt(request.getParameter("total"));
 		int transfee = Integer.parseInt(request.getParameter("transfee"));
-		
+
 		Order c = new Order();
 		UserService g = new UserService();
-		
-		Date currentTime = new Date();    
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");    
-		String dateString = formatter.format(currentTime); 
-		 
-		c.setAddress_id(address_id);
+
+		Date currentTime = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String dateString = formatter.format(currentTime);
+
+		if (address_id == 0) {
+			c.setAddress_id(g.getDefaultAddressByUid(user_id).getId());
+		} else {
+			c.setAddress_id(address_id);
+		}
+		if (card_id.equals("default")) {
+			c.setCard_id(g.getDefaultCardByUid(user_id).getId());
+		} else {
+			c.setCard_id(card_id);
+		}
 		c.setDate(dateString);
 		c.setId(0);
 		c.setStatus(status);
-		c.setTotal(total);
 		c.setTransfee(transfee);
 		c.setUser_id(user_id);
-		c.setCard_id(card_id);
-
-		if (g.add_order(c,arr_n,arr_g,arr_s)) {
+		
+		if (g.add_order(c, arr_n, arr_g, arr_s, arr_v,mode)) {
 			response.sendRedirect(request.getContextPath() + "/jsp/order.jsp");
 		} else {
 			response.sendRedirect(request.getContextPath() + "/jsp/order.jsp");
@@ -421,7 +450,7 @@ public class UserCtrl extends HttpServlet {
 		out.flush();
 		out.close();
 	}
-	
+
 	private void getJson_collect(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		PrintWriter out = response.getWriter();
@@ -676,7 +705,7 @@ public class UserCtrl extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/jsp/cart.jsp");
 		}
 	}
-	
+
 	private void orderTo5(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -685,12 +714,13 @@ public class UserCtrl extends HttpServlet {
 		UserService g = new UserService();
 		int order_id = Integer.parseInt(request.getParameter("id"));
 
-		if (g.orderTo(order_id,5)) {
+		if (g.orderTo(order_id, 5)) {
 			response.sendRedirect(request.getContextPath() + "/jsp/order.jsp");
 		} else {
 			response.sendRedirect(request.getContextPath() + "/jsp/order.jsp");
 		}
 	}
+
 	private void orderTo4(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -699,12 +729,13 @@ public class UserCtrl extends HttpServlet {
 		UserService g = new UserService();
 		int order_id = Integer.parseInt(request.getParameter("id"));
 
-		if (g.orderTo(order_id,4)) {
+		if (g.orderTo(order_id, 4)) {
 			response.sendRedirect(request.getContextPath() + "/jsp/order.jsp");
 		} else {
 			response.sendRedirect(request.getContextPath() + "/jsp/order.jsp");
 		}
 	}
+
 	private void orderTo6(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -713,12 +744,13 @@ public class UserCtrl extends HttpServlet {
 		UserService g = new UserService();
 		int order_id = Integer.parseInt(request.getParameter("id"));
 
-		if (g.orderTo(order_id,6)) {
+		if (g.orderTo(order_id, 6)) {
 			response.sendRedirect(request.getContextPath() + "/jsp/order.jsp");
 		} else {
 			response.sendRedirect(request.getContextPath() + "/jsp/order.jsp");
 		}
 	}
+
 	private void orderTo7(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -727,12 +759,13 @@ public class UserCtrl extends HttpServlet {
 		UserService g = new UserService();
 		int order_id = Integer.parseInt(request.getParameter("id"));
 
-		if (g.orderTo(order_id,7)) {
+		if (g.orderTo(order_id, 7)) {
 			response.sendRedirect(request.getContextPath() + "/jsp/order.jsp");
 		} else {
 			response.sendRedirect(request.getContextPath() + "/jsp/order.jsp");
 		}
 	}
+
 	private void orderTo2(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -741,7 +774,7 @@ public class UserCtrl extends HttpServlet {
 		UserService g = new UserService();
 		int order_id = Integer.parseInt(request.getParameter("id"));
 
-		if (g.orderTo(order_id,2)) {
+		if (g.orderTo(order_id, 2)) {
 			response.sendRedirect(request.getContextPath() + "/jsp/order.jsp");
 		} else {
 			response.sendRedirect(request.getContextPath() + "/jsp/order.jsp");
@@ -1086,6 +1119,7 @@ public class UserCtrl extends HttpServlet {
 			jsonObject.put("phone", m.getPhone());
 			jsonObject.put("id_number", m.getId_number());
 			jsonObject.put("bank", m.getBank());
+			jsonObject.put("de_fault", m.getDe_fault());
 			jsonArray.add(jsonObject);
 		}
 		resultJson.put("card", jsonArray);
@@ -1129,12 +1163,12 @@ public class UserCtrl extends HttpServlet {
 			jsonObject.put("number", m.getNumber());
 			jsonObject.put("goods_id", m.getGoods_id());
 			jsonObject.put("seller_id", m.getSeller_id());
-			
+
 			Goods b = g.getGoodsById(m.getGoods_id());
-		
+
 			jsonObject.put("name", b.getName());
 			jsonObject.put("price", b.getPrice());
-			
+
 			jsonArray.add(jsonObject);
 		}
 		resultJson.put("order", jsonArray);

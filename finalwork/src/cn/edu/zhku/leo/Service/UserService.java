@@ -242,27 +242,32 @@ public class UserService {
 		return A;
 	}
 
-	public boolean add_order(Order c, String arr_n, String arr_g, String arr_s)
-			throws Exception {
+	public boolean add_order(Order c, String arr_n, String arr_g, String arr_s,
+			String arr_v,int mode) throws Exception {
 		UserDao d = new UserDao();
 
 		String[] an = arr_n.split("_");
 		String[] ag = arr_g.split("_");
 		String[] as = arr_s.split("_");
+		String[] av = arr_v.split("_");
 		for (int i = 0; i < ag.length; i++) {
 			int g = Integer.parseInt(ag[i]);
 			int n = Integer.parseInt(an[i]);
 			int s = Integer.parseInt(as[i]);
+			int v = Integer.parseInt(av[i]);
 
 			c.setGoods_id(g);
 			c.setNumber(n);
 			c.setSeller_id(s);
+			c.setTotal(v);
 			try {
 				d.add_order(c);
 			} catch (Exception e) {
 				return false;
 			}
 		}
+		if(mode==1)
+			d.clear_cart();
 		return true;
 	}
 
@@ -277,10 +282,15 @@ public class UserService {
 
 	public boolean del_order(int id) throws Exception {
 		UserDao ld = new UserDao();
-		if (ld.del_order(id)) {
+		if (ld.getOrderStatusById(id) == 9) {
+			ld.orderStatusTo(id, 89);
 			return true;
 		} else {
-			return false;
+			if (ld.orderStatusTo(id, 8)) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	}
 
@@ -321,4 +331,29 @@ public class UserService {
 		return ld.getSidByGid(goods_id);
 	}
 
+	public Address getDefaultAddressByUid(int user_id) throws Exception {
+		UserDao ld = new UserDao();
+		ArrayList<Address> A = new ArrayList<Address>();
+		A = ld.getAllAddress();
+		for (int i = 0; i < A.size(); i++) {
+			Address a = A.get(i);
+			if (a.getId() == user_id && a.getDe_fault() == 1) {
+				return a;
+			}
+		}
+		return null;
+	}
+
+	public Card getDefaultCardByUid(int user_id) throws Exception {
+		UserDao ld = new UserDao();
+		ArrayList<Card> A = new ArrayList<Card>();
+		A = ld.getAllCard();
+		for (int i = 0; i < A.size(); i++) {
+			Card a = A.get(i);
+			if (a.getUser_id() == user_id && a.getDe_fault() == 1) {
+				return a;
+			}
+		}
+		return null;
+	}
 }

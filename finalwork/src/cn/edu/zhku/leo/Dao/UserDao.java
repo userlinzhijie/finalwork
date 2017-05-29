@@ -357,13 +357,12 @@ public class UserDao {
 		while (rs.next()) {
 
 			int user_id = rs.getInt("user_id");
-
 			String name = rs.getString("name");
 			String phone = rs.getString("phone");
 			String id_number = rs.getString("id_number");
 			String id = rs.getString("id");
 			String bank = rs.getString("bank");
-
+			int de_fault = rs.getInt("de_fault");
 			Card m = new Card();
 
 			m.setId(id);
@@ -372,7 +371,7 @@ public class UserDao {
 			m.setUser_id(user_id);
 			m.setBank(bank);
 			m.setId_number(id_number);
-
+			m.setDe_fault(de_fault);
 			a.add(m);
 		}
 		return a;
@@ -896,5 +895,45 @@ public class UserDao {
 		rs.next();
 		return rs.getInt("Seller_id");
 	
+	}
+
+	public void clear_cart() throws Exception{
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int r = 0;
+		// 连接数据库
+		conn = ConnectionManager.getConnection();
+
+		if (conn == null) {
+			throw new Exception("数据库连接不成功！");
+		}
+
+		String sqlQuery = "delete from cart";
+
+		ps = conn.prepareStatement(sqlQuery);
+		r = ps.executeUpdate();
+		if(r==0)System.out.println("!clear failure!");
+	}
+
+	public int getOrderStatusById(int id) throws Exception{
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		// 连接数据库
+		conn = ConnectionManager.getConnection();
+
+		if (conn == null) {
+			throw new Exception("数据库连接不成功！");
+		}
+
+		String sqlQuery = "Select status from `order` where id=?";
+
+		ps = conn.prepareStatement(sqlQuery);
+		ps.setInt(1, id);
+		rs = ps.executeQuery();
+
+		rs.next();
+		return rs.getInt("status");
 	}
 }

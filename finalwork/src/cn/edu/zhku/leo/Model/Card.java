@@ -7,6 +7,7 @@ public class Card {
 	private String id_number;
 	private String phone;
 	private String bank;
+	private int de_fault;
 	public String getId() {
 		return id;
 	}
@@ -42,5 +43,11 @@ public class Card {
 	}
 	public void setBank(String bank) {
 		this.bank = bank;
+	}
+	public int getDe_fault() {
+		return de_fault;
+	}
+	public void setDe_fault(int de_fault) {
+		this.de_fault = de_fault;
 	}
 }

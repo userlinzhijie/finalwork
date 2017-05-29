@@ -133,7 +133,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	
     	
     <div class="div1">
-		<table class="info" id="collect_table">
+		<table class="info_cart" id="collect_table">
 		</table>
     </div>
   </body>

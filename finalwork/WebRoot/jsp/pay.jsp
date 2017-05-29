@@ -37,6 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		String array_g = request.getParameter("arr_g");	
 		String array_n = request.getParameter("arr_n");
 		String array_s = request.getParameter("arr_s");
+		String array_v = request.getParameter("arr_v");
 	 %>
   	
     <script>
@@ -78,35 +79,16 @@ $.ajax({
             var table = $("#pay_table");  
  			table.append('<tr><th id="s0" class="blue">选择物品</th><th id="s1">收货地址</th><th id="s2">支付方式</th><th id="s3">物流方式</th><th id="s4">提交订单</th></tr>');
          	
-            var div1 = $("#tab1");  div1.append('<div class=next"><button onclick="h2()">→</button></div>');
-            var div2 = $("#tab2");  div2.append('<div class=next"><button onclick="h1()">←</button><button id="step2" onclick="h3()" disabled>→</button></div>');
-            var div3 = $("#tab3");  div3.append('<div class=next"><button onclick="h2()">←</button><button id="step3" onclick="h4()" disabled>→</button></div>');
-            var div4 = $("#tab4");  div4.append('<div class=next"><button onclick="h3()">←</button><button id="step4" onclick="h5()" disabled>→</button></div>');
-            var div5 = $("#tab5");  div5.append('<div class=next"><button onclick="h4()">←</button></div>');
-            $("#tab1").show();$("#tab2").hide();$("#tab3").hide();$("#tab4").hide();$("#tab5").hide();
-           /* for(var i=0;i< obj.length;i++){
-            	if(obj[i].status==1){	
-            		div1.append('<div><table class="next" id="t'+i+'"><tr><th>订单id：</th><th>地址：</th><th>共计：</th><th>邮费：</th><th>交易时间：</th><th>操作</th></tr><tr><th>'+obj[i].id+'</th><th>'+obj[i].address_id+'</th><th>￥'+obj[i].total+'</th><th>￥'+obj[i].transfee+'</th><th>'+obj[i].date+'</th><th><a href="">一键付款</a>/<a href="">退单</a></th></tr></table></div>');
-            		for(var j=0;j<obj[i].goods.length;j++)
-            			$("#t"+i).append('<tr><th>'+obj[i].goods[j].name+'</th><th>'+obj[i].goods[j].price+'</th><th>×'+obj[i].goods[j].number+'</th></tr>');
-            		
-            	}else if(obj[i].status==2){
- 					div2.append('<div><table class="next" id="t'+i+'"><tr><th>订单id：</th><th>地址：</th><th>共计：</th><th>邮费：</th><th>交易时间：</th><th>操作</th></tr><tr><th>'+obj[i].id+'</th><th>'+obj[i].address_id+'</th><th>￥'+obj[i].total+'</th><th>￥'+obj[i].transfee+'</th><th>'+obj[i].date+'</th><th><a href="">提醒发货</a></th></tr></table></div>');
-           			for(var j=0;j<obj[i].goods.length;j++)
-            			$("#t"+i).append('<tr><th>'+obj[i].goods[j].name+'</th><th>'+obj[i].goods[j].price+'</th><th>×'+obj[i].goods[j].number+'</th></tr>');
-            		
-           		}else if(obj[i].status==3){
- 					div3.append('<div><table class="next" id="t'+i+'"><tr><th>订单id：</th><th>地址：</th><th>共计：</th><th>邮费：</th><th>交易时间：</th><th>操作</th></tr><tr><th>'+obj[i].id+'</th><th>'+obj[i].address_id+'</th><th>￥'+obj[i].total+'</th><th>￥'+obj[i].transfee+'</th><th>'+obj[i].date+'</th><th><a href="">确认收货</a>/<a href="">查看物流</a></th></tr></table></div>');
-            		for(var j=0;j<obj[i].goods.length;j++)
-            			$("#t"+i).append('<tr><th>'+obj[i].goods[j].name+'</th><th>'+obj[i].goods[j].price+'</th><th>×'+obj[i].goods[j].number+'</th></tr>');
-            		
-            	}else if(obj[i].status==4){
- 					div4.append('<div><table class="next" id="t'+i+'"><tr><th>订单id：</th><th>地址：</th><th>共计：</th><th>邮费：</th><th>交易时间：</th><th>操作</th></tr><tr><th>'+obj[i].id+'</th><th>'+obj[i].address_id+'</th><th>￥'+obj[i].total+'</th><th>￥'+obj[i].transfee+'</th><th>'+obj[i].date+'</th><th><a href="">评价商品</a></th></tr></table></div>');
-           			for(var j=0;j<obj[i].goods.length;j++)
-            			$("#t"+i).append('<tr><th>'+obj[i].goods[j].name+'</th><th>'+obj[i].goods[j].price+'</th><th>×'+obj[i].goods[j].number+'</th></tr>');
-            		
-           		}
-            }  */
+            var div1 = $("#tab1"); 
+             div1.append('<div class=next"><button onclick="h2()">→</button></div>');
+            var div2 = $("#tab2");  
+             div2.append('<div class=next"><button onclick="h1()">←</button><button id="step2" onclick="h3()" disabled>→</button></div>');
+            var div3 = $("#tab3"); 
+             div3.append('<div class=next"><button onclick="h2()">←</button><button id="step3" onclick="h4()" disabled>→</button></div>');
+            var div4 = $("#tab4"); 
+             div4.append('<div class=next"><button onclick="h3()">←</button><button id="step4" onclick="h5()" disabled>→</button></div>');
+            var div5 = $("#tab5"); 
+             div5.append('<div class=next"><button onclick="h4()">←</button></div>');
         }  
        });
        </script>
@@ -122,7 +104,6 @@ $.ajax({
             var objs=eval(data); //解析json对象  
             var obj = objs.goods;  
             var total=0;
-            var str="";
             length=obj.length;
             var div=$("#good_table");
             div.append('<tr><th>商品</th><th>单价</th><th>数量</th><th>小计</th></tr>');
@@ -132,14 +113,17 @@ $.ajax({
          	div.append('<tr><th>'+obj[i].name+'</th><th>￥'+obj[i].price+'</th><th>'+obj[i].number+'</th><th>￥'+obj[i].price*obj[i].number+'</th></tr>');
          	}
          	div.append('<tr><th colspan="3">共计：￥<label id="cc_total">'+total+'</label></th></tr>');
-         	$("#total").val(total);
         }
        }); 
   	</script>
        	<script language="javascript" type="text/javascript">
 	function a1(i,max,id){
-	for(var j=0;j<max;j++){$("#address"+j).removeClass("next_active");$("#address"+j).addClass("next");}
+		for(var j=0;j<max;j++){
+			$("#address"+j).removeClass("next_active");$("#address"+j).addClass("next");$("#ads"+j).hide();$("#setdf"+j).hide();
+		}
 		$("#address"+i).addClass("next_active");
+		$("#ads"+i).show();
+		$("#setdf"+i).show();
 		$("#aid").val(id);
 		document.getElementById("step2").disabled=false;
 	};
@@ -157,7 +141,11 @@ $.ajax({
             var div = $("#tab2");  
  
             for(var i=0;i< obj.length;i++){  
-       		     div.append('<div onclick="a1('+i+','+obj.length+','+obj[i].id+')" class="next" id="address'+i+'"><p>name:'+obj[i].name+'<br>place:'+obj[i].province+obj[i].city+obj[i].dist+obj[i].street+'</p><div>');
+       		    // div.append('<div onclick="a1('+i+','+obj.length+','+obj[i].id+')" class="next" id="address'+i+'"><p>name:'+obj[i].name+'<br>place:'+obj[i].province+obj[i].city+obj[i].dist+obj[i].street+'</p><div>');
+	           var de_fault = "";
+	            if (obj[i].de_fault == 1) de_fault = "默认地址";
+	            else de_fault = "<a href=''> 设为默认地址 </a> ";
+	            div.append('<div class="next"onclick="a1(' + i + ',' + obj.length + ',' + obj[i].id + ')" id="address' + i + '"><p class="address"><span id="ads' + i + '" style="display:none">√</span>  收货地址：:' + obj[i].province + ' ' + obj[i].city + ' ' + obj[i].dist + ' ' + obj[i].street + '( ' + obj[i].name + ' 收)   ' + obj[i].telephone + '  <span id="setdf' + i + '">' + de_fault + '</span></p><div>');
             }  
         }  
        });
@@ -235,23 +223,23 @@ $.ajax({
     </ul><br><br><br>
     	
     	
-     <div class="div2">
+     <div class="div2" style="display: block;">
 		<table class="next" id="pay_table"></table>
 		
     </div>
-	<div class="div2" id="tab1"><!-- goods -->
-		<table class="next" id="good_table"></table>
+	<div class="div2" id="tab1" style="display: block;"><!-- goods -->
+		<table class="next" id="good_table" ></table>
     </div>
     
-    <div class="div2" id="tab2"><!-- address -->
+    <div class="div2" id="tab2" style="display: none;"><!-- address -->
    	
     </div>
     
-    <div class="div2" id="tab3"><!-- card -->
+    <div class="div2" id="tab3" style="display: none;"><!-- card -->
     
     </div>
 	
-	<div class="div2" id="tab4"><!-- trans -->
+	<div class="div2" id="tab4" style="display: none;"><!-- trans -->
 	<div class="next" id="trans1" onclick="trans(1)">全包办</div>
 	<div class="next" id="trans2" onclick="trans(2)">自己解决</div>
     </div>
@@ -261,15 +249,16 @@ $.ajax({
 	</script>
 
     
-    <div class="div2" id="tab5"><!-- submit -->
-    <form action="UserCtrl" method="get">
+    <div class="div2" id="tab5" style="display: none;"><!-- submit -->
+    <form action="UserCtrl" method="post">
     <input type="hidden" name="action" value="add_order">
+    <input type="hidden" name="mode" id="mode" value="1">
     <input type="hidden" name="address_id" id="aid" value="">
     <input type="hidden" name="card_id" id="cid" value="">
     <input type="hidden" name="trans_id" id="tid" value="">
     <input type="hidden" name="user_id" id="uid" value="<%=value%>">
     <input type="hidden" name="status" id="status" value="1">
-    <input type="hidden" name="total" id="total" value="">    
+    <input type="hidden" name="arr_v" id="arr_v" value="<%=array_v%>">    
     <input type="hidden" name="arr_n" id="number" value="<%=array_n%>">    
     <input type="hidden" name="transfee" id="transfee" value="0">
     <input type="hidden" name="arr_g" id="array_g" value="<%=array_g%>">
@@ -286,7 +275,7 @@ $.ajax({
 	var a=$("#cid").val();
 	var b=$("#aid").val();
 	var c=$("#tid").val();
-	var d=$("#total").val();
+	var d=$("#arr_v").val();
 	$("#tab5_a").text(b);
 	$("#tab5_c").text(a);
 	$("#tab5_t").text(c);
