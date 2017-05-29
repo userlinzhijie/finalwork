@@ -31,8 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			if (name.equals("user_id")) {
 				value = URLDecoder.decode(cookies[i].getValue(), "utf-8");
 			}
-		}
-			
+		}		
 	 %>
 	<script language="javascript" type="text/javascript">
 	//图片轮转代码 和 菜单折叠代码
@@ -97,16 +96,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	});
 </script>
  	<p align = "center" class = "ziti">购物系统</p>
- 	<!--  <img alt="background" src="img/background.jpg">-->
 	<!-- 上层分割线 -->
 	<ul id="ul1">
     <li class="subme">
-          <a href="jsp/shoporder.jsp">店铺订单</a>
-          <div class ="submenu"><a href="#">01 </a><a href="#">02 </a><a href="#">03</a></div>        
+          <a href="Shoporderctrl?user_id=<%=value %>">店铺订单</a>     
     </li>
     <li class="subme">
-         <a href="">店铺中心</a>
-	          <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="Pagectrl?userid=<%=value %>">下架货物</a></div>
+         <a href="jsp/shopinfo.jsp">店铺中心</a>
+	     <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="Pagectrl?userid=<%=value %>">下架货物</a></div>
     </li>
     <li class="subme">
           <a href="jsp/cart.jsp">购物车</a>

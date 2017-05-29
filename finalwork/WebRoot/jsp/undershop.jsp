@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.net.*" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -18,10 +19,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	
-	<link href="css/styles.css" rel="stylesheet" type="text/css" >
+	<link href="css/understyles.css" rel="stylesheet" type="text/css" >
 	<link href="css/info_selectlist.css" rel="stylesheet" type="text/css">
 	<link href="css/undershop.css" rel="stylesheet" type="text/css">
-	<script type="text/javascript" src="js/jquery-1.11.1.js"></script> 
+	<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+	<%Cookie[] cookies = null;
+		cookies = request.getCookies();
+		String value="";
+		for (int i = 0; i < cookies.length; i++) {
+			String name = URLDecoder.decode(cookies[i].getName(), "utf-8");
+			if (name.equals("user_id")) {
+				value = URLDecoder.decode(cookies[i].getValue(), "utf-8");
+			}
+		}
+			
+	 %> 
 	<script language="javascript" type="text/javascript">
 	  	window.onload=function(){
         var lis = document.getElementsByClassName("subme");
@@ -58,11 +70,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	<p align = "center" class = "ziti">店铺信息</p>
  	<ul id="ul1">
 	    <li class="subme">
-	          <a href="jsp/login.jsp">店铺订单</a>
-	          <div class ="submenu"><a href="#">01 </a><a href="#">02 </a><a href="#">03</a></div>        
-	    </li>
+	          <a href="Shoporderctrl?user_id=<%=value%>">店铺订单</a>         
 	    <li class="subme">
-	          <a href="">店铺中心</a>
+	          <a href="jsp/shopinfo.jsp">店铺中心</a>
 	          <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="">下架货物</a></div>
 	    </li>
 	    <li class="subme">
@@ -71,7 +81,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </li>
 	    <li class="subme">
 	          <a href="jsp/info.jsp">我的中心</a>
-	          <div class ="submenu"><a href="jsp/info.jsp">我的信息</a><a href="jsp/changepwd.jsp">更改密码</a><a href="jsp/apply.jsp">申请开铺</a></div>
 	    </li>
 	    <li class="subme">
 	          <a href="">首页</a>
@@ -88,12 +97,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    <td><a href="jsp/putonsale.jsp">上架商品</a></td>  
 			</tr>  
 			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
-			    <td><a href="">下架商品</a></td>  
+			    <td><a href="Pagectrl?userid=<%=value %>">下架商品</a></td>  
 			</tr>   
 		</table>
     	
     	
-    <div class="div1">
     	<table class="shopinfo">
     	<tr>	
     		<th colspan="4">商品信息</th>
@@ -102,15 +110,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<td>商品</td><td>图片</td><td>价格</td><td>操作</td>
     	</tr>
     	<c:forEach var="shop" items="${pageBean.data}" varStatus="vs">
+    	<c:if test = "${shop.status!=1}">
     	<tr>
     	<td><c:out value="${shop.name}" /></td>
     	<td style="text-indent:1em"><img src="Showctrl?id=${shop.id}" width="60px" height="60px"></td>
     	<td>￥<c:out value="${shop.price}" /></td>
-    	<td>下架</td>
+    	<td><a href="Delctrl?goodsid=${shop.id}&userid=<%=value %>">下架</a></td>
     	</tr>
+    	</c:if>
     	</c:forEach>
     	</table>
-    </div>
   </body>
 </html>
 

@@ -18,6 +18,15 @@ public class Keyboard {
 	private String weight;
 	private String picture;
 	private String user;
+	private String status;
+	
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getStatus() {
+		return status;
+	}
+	
 	public void setBrand(String brand) {
 		this.brand = brand;
 	}
