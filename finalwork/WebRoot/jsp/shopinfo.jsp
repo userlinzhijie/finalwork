@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page import="java.net.*" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -21,6 +22,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="css/info_selectlist.css" rel="stylesheet" type="text/css">
 	<link href="css/info.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="js/jquery-1.11.1.js"></script> 
+	<%Cookie[] cookies = null;
+		cookies = request.getCookies();
+		String value="";
+		for (int i = 0; i < cookies.length; i++) {
+			String name = URLDecoder.decode(cookies[i].getName(), "utf-8");
+			if (name.equals("user_id")) {
+				value = URLDecoder.decode(cookies[i].getValue(), "utf-8");
+			}
+		}
+	%>
 	<script language="javascript" type="text/javascript">
 	  	window.onload=function(){
         var lis = document.getElementsByClassName("subme");
@@ -77,12 +88,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	<p align = "center" class = "ziti">店铺信息</p>
  	<ul id="ul1">
 	    <li class="subme">
-	          <a href="jsp/login.jsp">店铺订单</a>
-	          <div class ="submenu"><a href="#">01 </a><a href="#">02 </a><a href="#">03</a></div>        
+	          <a href="Shoporderctrl?user_id=<%=value%>">店铺订单</a>       
 	    </li>
 	    <li class="subme">
-	          <a href="">店铺中心</a>
-	          <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="">下架货物</a></div>
+	          <a href="jsp/shopinfo.jsp">店铺中心</a>
+	          <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="Pagectrl?userid=<%=value %>">下架货物</a></div>
 	    </li>
 	    <li class="subme">
 	          <a href="jsp/cart.jsp">购物车</a>
@@ -107,7 +117,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    <td><a href="jsp/putonsale.jsp">上架商品</a></td>  
 			</tr>  
 			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
-			    <td><a href="">下架商品</a></td>  
+			    <td><a href="Pagectrl?userid=<%=value %>">下架商品</a></td>  
 			</tr>   
 		</table>
     	

@@ -130,12 +130,12 @@ $.ajax({
  	<p align = "center" class = "ziti">订单管理</p>
  	<ul id="ul1">
 	    <li class="subme">
-	          <a href="jsp/login.jsp">店铺订单</a>
+	          <a href="Shoporderctrl?user_id=<%=value%>">店铺订单</a> 
 	          <div class ="submenu"><a href="#">01 </a><a href="#">02 </a><a href="#">03</a></div>        
 	    </li>
 	    <li class="subme">
-	          <a href="">店铺中心</a>
-	          <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="">下架货物</a></div>
+	          <a href="jsp/shopinfo.jsp">店铺中心</a>
+	          <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="Pagectrl?userid=<%=value %>">下架货物</a></div>
 	    </li>
 	    <li class="subme">
 	          <a href="jsp/cart.jsp">购物车</a>

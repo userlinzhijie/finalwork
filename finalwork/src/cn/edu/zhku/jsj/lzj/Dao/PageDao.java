@@ -44,6 +44,7 @@ public class PageDao {
                     kb.setSize(rs.getString("size"));
                     kb.setStandard(rs.getString("standard"));
                     kb.setWeight(rs.getString("weight"));
+                    kb.setStatus(rs.getString("status"));
                     list.add(kb);  
             }  
             pageBean.setData(list); 
@@ -135,6 +136,7 @@ public class PageDao {
                     kb.setSize(rs.getString("size"));
                     kb.setStandard(rs.getString("standard"));
                     kb.setWeight(rs.getString("weight"));
+                    kb.setStatus(rs.getString("status"));
                     list.add(kb);  
             }  
             pageBean.setData(list); 
@@ -179,6 +181,7 @@ public class PageDao {
                     kb.setStandard(rs.getString("standard"));
                     kb.setWeight(rs.getString("weight"));
                     kb.setUser(rs.getString("seller_id"));
+                    kb.setStatus(rs.getString("status"));
                     list.add(kb);  
             }  
             pageBean.setData(list); 
@@ -238,6 +241,7 @@ public class PageDao {
                     kb.setSize(rs.getString("size"));
                     kb.setStandard(rs.getString("standard"));
                     kb.setWeight(rs.getString("weight"));
+                    kb.setStatus(rs.getString("status"));
                     list.add(kb);  
             }  
             pageBean.setData(list); 
@@ -285,6 +289,7 @@ public class PageDao {
                     kb.setSize(rs.getString("size"));
                     kb.setStandard(rs.getString("standard"));
                     kb.setWeight(rs.getString("weight"));
+                    kb.setStatus(rs.getString("status"));
                     list.add(kb);  
             }  
             pageBean.setData(list); 

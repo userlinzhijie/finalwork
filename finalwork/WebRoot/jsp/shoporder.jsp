@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.net.*" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -20,8 +21,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<link href="css/styles.css" rel="stylesheet" type="text/css" >
 	<link href="css/info_selectlist.css" rel="stylesheet" type="text/css">
-	<link href="css/undershop.css" rel="stylesheet" type="text/css">
+	<link href="css/shoporder.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="js/jquery-1.11.1.js"></script> 
+	<%Cookie[] cookies = null;
+		cookies = request.getCookies();
+		String value="";
+		for (int i = 0; i < cookies.length; i++) {
+			String name = URLDecoder.decode(cookies[i].getName(), "utf-8");
+			if (name.equals("user_id")) {
+				value = URLDecoder.decode(cookies[i].getValue(), "utf-8");
+			}
+		}
+			
+	 %> 
 	<script language="javascript" type="text/javascript">
 	  	window.onload=function(){
         var lis = document.getElementsByClassName("subme");
@@ -59,12 +71,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	<p align = "center" class = "ziti">店铺信息</p>
  	<ul id="ul1">
 	    <li class="subme">
-	          <a href="jsp/login.jsp">店铺订单</a>
-	          <div class ="submenu"><a href="#">01 </a><a href="#">02 </a><a href="#">03</a></div>        
+	          <a href="Shoporderctrl?user_id=<%=value%>">店铺订单</a>      
 	    </li>
 	    <li class="subme">
-	          <a href="">店铺中心</a>
-	          <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="">下架货物</a></div>
+	          <a href="jsp/shopinfo.jsp">店铺中心</a>
+	          <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="Pagectrl?userid=<%=value %>">下架货物</a></div>
 	    </li>
 	    <li class="subme">
 	          <a href="jsp/cart.jsp">购物车</a>
@@ -78,37 +89,58 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	          <a href="">首页</a>
 	    </li>
     </ul><br><br><br>
-    	<table class="hovertable">
-			<tr>  
-			    <th>店铺中心</th>  
-			</tr>  
-			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
-			    <td><a href="jsp/shopinfo.jsp">店铺信息</a></td>  
-			</tr>  
-			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
-			    <td><a href="jsp/putonsale.jsp">上架商品</a></td>  
-			</tr>  
-			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
-			    <td><a href="">下架商品</a></td>  
-			</tr>   
-		</table>
     	
     	
-   <div class="div1">
+   <div class="div1" >
     	<table class="shopinfo">
     	<tr>	
-    		<th colspan="5">订单信息</th>
+    		<th colspan="8">订单信息</th>
     		</tr>
     	<tr>
-    		<td>订单id</td><td>共计</td><td>邮费</td><td>交易时间</td><td>操作</td>
+    		<td>订单id</td><td>商品名</td><td>数量</td><td>共计</td><td>邮费</td><td>交易时间</td><td>状态</td><td>操作</td>
     	</tr>
-    	<c:forEach var="shop" items="${pageBean.data}" varStatus="vs">
+    	<c:forEach var="order" items="${pageBean.data}" varStatus="vs">
+    	<c:if test = "${order.status!=9&&order.status!=89}">
     	<tr>
-    	<td><c:out value="${shop.name}" /></td>
-    	<td style="text-indent:1em"><img src="Showctrl?id=${shop.id}" width="60px" height="60px"></td>
-    	<td>￥<c:out value="${shop.price}" /></td>
-    	<td>下架</td>
+    	<td class="short"><c:out value="${order.id}"/></td>
+    	<td class="long"><c:out value="${order.goods}" /></td>
+    	<td class="short"><c:out value="${order.number}" /></td>
+    	<td>￥<c:out value="${order.total}" /></td>
+    	<td>￥<c:out value="${order.transfee}" /></td>
+    	<td class="long"><c:out value="${order.date}" /></td>
+    	
+    	<c:if test = "${order.status==1}">
+    	<td>等待付款</td>
+    	<td>等待付款</td></c:if>
+    	
+    	<c:if test = "${order.status==2||order.status==6}">
+    	<td>提醒发货</td>
+    	<td><a href="Delctrl?orderid=${order.id}&userid=<%=value%>&status=${order.status}">发货</a></td></c:if>
+    	
+    	<c:if test = "${order.status==3}">
+    	<td>等待收货</td>
+    	<td>等待收货</td></c:if>
+    	  	
+    	<c:if test = "${order.status==4}">
+    	<td>等待评价</td>
+    	<td>等待评价</td></c:if>
+    	
+    	<c:if test = "${order.status==5}">
+    	<td>已退单</td>
+    	<td><a href="Delctrl?orderid=${order.id}&userid=<%=value%>&status=${order.status}">删除订单</a></td></c:if>
+    	
+    	<c:if test = "${order.status==7}">
+    	<td>交易成功</td>
+    	<td><a href="Delctrl?orderid=${order.id}&userid=<%=value%>&status=${order.status}">删除订单</a></td></c:if>   
+    	
+    	<c:if test = "${order.status==8}">
+    	<td>交易结束</td>
+    	<td><a href="Delctrl?orderid=${order.id}&userid=<%=value%>&status=${order.status}">删除订单</a></td></c:if> 
+    		
     	</tr>
+    	</c:if>
+    	
+    	
     	</c:forEach>
     	</table>
     </div>

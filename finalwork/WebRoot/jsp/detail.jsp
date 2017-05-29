@@ -124,6 +124,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  		 ${shop.name}<br>
  		价格：￥${shop.price}<br>
  		<form action="" method="post">
+ 		<input type="text" id="seller_id" value="${shop.user}" >
  		<input type="hidden" id="goods_id" value="${shop.id}" >
  		<table>
  		<tr>

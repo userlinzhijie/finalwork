@@ -15,11 +15,11 @@
 	text-align:center;
 }
 .shopinfo{
-	width:700px;
+	width:1200px;
 	height:auto;
 	position:absolute;
 	top:190px;
-	left:450px;
+	left:100px;
 	border-collaspe:collaspe;
 	border:gray solid 2px;
 	font-family:"STFangsong";
@@ -29,16 +29,11 @@
 .shopinfo tr{
 	height:20px;
 	}
-.shopinfo td{
-	text-indent:3em;
-	width:20px;
+.short{
+	width:30px;
+	text-indent:1em;
 	}
-
-
-	
-
-	
-	
-	
-	
+.long{
+	width:30px;
+	}
 	

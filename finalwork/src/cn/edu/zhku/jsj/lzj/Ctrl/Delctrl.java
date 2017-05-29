@@ -8,11 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cn.edu.zhku.jsj.lzj.Service.ShoporderService;
+import cn.edu.zhku.jsj.lzj.Service.DelService;
 
 @SuppressWarnings("serial")
-public class Shoporderctrl extends HttpServlet {
-
+public class Delctrl extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -20,27 +19,27 @@ public class Shoporderctrl extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws ServletException, IOException {		
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		ShoporderService ss = new ShoporderService();
-		String page = request.getParameter("page");
-		String recid = request.getParameter("user_id");
-		String shopid = null;
+		String goodsid = request.getParameter("goodsid");
+		String userid = request.getParameter("userid");
+		String orderid = request.getParameter("orderid");
+		String status = request.getParameter("status");
+		DelService ds = new DelService();
+		if(goodsid!=null)
 		try {
-			shopid = ss.goGetShopId(recid);
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
-		int curPage=1;
-		if(page!=null && page.length()>0){
-			curPage = Integer.parseInt(page);
-		}
-		try {	
-			request.setAttribute("pageBean",ss.goGetOrder(shopid,curPage));
-			request.getRequestDispatcher("jsp/shoporder.jsp").forward(request,response);
+			ds.todelgoods(goodsid);
+			response.sendRedirect("Pagectrl?userid="+userid);
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(orderid!=null)
+		try{
+			ds.todelorder(orderid,status);
+			response.sendRedirect("Shoporderctrl?user_id="+userid);
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
 		out.flush();
