@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.net.*" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -22,6 +23,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="css/info_selectlist.css" rel="stylesheet" type="text/css">
 	<link href="css/putonsale.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="js/jquery-1.11.1.js"></script> 
+	<%Cookie[] cookies = null;
+		cookies = request.getCookies();
+		String value="";
+		for (int i = 0; i < cookies.length; i++) {
+			String name = URLDecoder.decode(cookies[i].getName(), "utf-8");
+			if (name.equals("user_id")) {
+				value = URLDecoder.decode(cookies[i].getValue(), "utf-8");
+			}
+		}
+			
+	 %>
   	<script language="javascript" type="text/javascript">
 	  	window.onload=function(){
         var lis = document.getElementsByClassName("subme");
@@ -44,7 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					count++;
 				}
 			}
-			if(count==22)
+			if(count==23)
 				document.getElementById("sub").disabled=false;		
 			else
 				document.getElementById("sub").disabled=true;
@@ -78,7 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	$("#p_title").load("UserCtrl?action=getusercookie",
 	function() {
 		var title = document.getElementById("p_title").innerHTML;
-		 $("#user_id").val(title);
+		 $("#user_id").val(<%=value%>);
 		if (title == "游客") {
 			alert("请登录！");
 			window.location = "jsp/login.jsp";
@@ -127,7 +139,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	
     <div class="div1">
 	<form action="Uploadctrl" method="post" enctype="multipart/form-data">
-	<input type = "hidden" name="user_id" id="user_id"value="">
+	<input type = "hidden" name="user_id" id="user_id" value="">
     	<table class="info">
     	<tr>	
     		<th colspan="2">上架商品</th>

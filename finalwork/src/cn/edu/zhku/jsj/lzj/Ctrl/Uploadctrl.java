@@ -3,7 +3,6 @@ package cn.edu.zhku.jsj.lzj.Ctrl;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -44,14 +43,13 @@ public class Uploadctrl extends HttpServlet {
 		String weight = (String)request.getParameter("weight");
 		String material = (String)request.getParameter("material");
 		String details = (String)request.getParameter("details");
-		String user = (String)request.getParameter("user");
+		String user = (String)request.getParameter("user_id");
 		
 		// 为了简单，后面也直接就以fileName作为保存文件的名称
 		String fileName = request.getParameter("picture")+".jpg";
 		Part part = request.getPart("file");
 		// 将文件保存到项目下的uploads文件夹下，为了简单这里没写判断目录是否存在及创建目录的操作，要先确保该目录已经存在
 		part.write(getServletContext().getRealPath("/img") + "/" + fileName);
-		RequestDispatcher rd = null;
 		Keyboard keyboard = new Keyboard();
 		keyboard.setName(name);
 		keyboard.setPrice(price);

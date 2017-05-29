@@ -31,22 +31,22 @@ public class UploadDao {
 		String user=keyboard.getUser();
 		String sql ="insert into goods values(0,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";  
 	    PreparedStatement pstmt = conn.prepareStatement(sql);
-	    pstmt.setString(1,brand);
-	    pstmt.setString(2,price);
-	    pstmt.setString(3,name);
-	    pstmt.setString(4,version);
-	    pstmt.setString(5,type);
-	    pstmt.setString(6,color);
-	    pstmt.setString(7,standard);
-	    pstmt.setString(8,inter);
-	    pstmt.setString(9,backlight);
-	    pstmt.setString(10,ergo);
-	    pstmt.setString(11,size);
-	    pstmt.setString(12,weight);
-	    pstmt.setString(13,picture);
-	    pstmt.setString(14,material);
-	    pstmt.setString(15,details);
-	    pstmt.setString(16,user);
+	    pstmt.setString(1,user);
+	    pstmt.setString(2,brand);
+	    pstmt.setString(3,price);
+	    pstmt.setString(4,name);
+	    pstmt.setString(5,version);
+	    pstmt.setString(6,type);
+	    pstmt.setString(7,color);
+	    pstmt.setString(8,standard);
+	    pstmt.setString(9,inter);
+	    pstmt.setString(10,backlight);
+	    pstmt.setString(11,ergo);
+	    pstmt.setString(12,size);
+	    pstmt.setString(13,weight);
+	    pstmt.setString(14,picture);
+	    pstmt.setString(15,material);
+	    pstmt.setString(16,details);
 	    pstmt.executeUpdate();
 	}
 }

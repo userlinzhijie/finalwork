@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page import="java.net.*" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -22,6 +23,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="./css/selectlist.css" rel="stylesheet" type="text/css">
 	
     <script type="text/javascript" src="js/jquery-1.11.1.js"></script> 
+    <%Cookie[] cookies = null;
+		cookies = request.getCookies();
+		String value="";
+		for (int i = 0; i < cookies.length; i++) {
+			String name = URLDecoder.decode(cookies[i].getName(), "utf-8");
+			if (name.equals("user_id")) {
+				value = URLDecoder.decode(cookies[i].getValue(), "utf-8");
+			}
+		}
+			
+	 %>
 	<script language="javascript" type="text/javascript">
 	//图片轮转代码 和 菜单折叠代码
 	var s=function(){
@@ -89,12 +101,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- 上层分割线 -->
 	<ul id="ul1">
     <li class="subme">
-          <a href="">店铺订单</a>
+          <a href="jsp/shoporder.jsp">店铺订单</a>
           <div class ="submenu"><a href="#">01 </a><a href="#">02 </a><a href="#">03</a></div>        
     </li>
     <li class="subme">
          <a href="">店铺中心</a>
-	          <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="Pagectrl?userid=1">下架货物</a></div>
+	          <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="Pagectrl?userid=<%=value %>">下架货物</a></div>
     </li>
     <li class="subme">
           <a href="jsp/cart.jsp">购物车</a>

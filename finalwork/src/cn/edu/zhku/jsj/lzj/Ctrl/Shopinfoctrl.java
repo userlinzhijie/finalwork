@@ -9,10 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cn.edu.zhku.jsj.lzj.Model.Shopinfo;
-import cn.edu.zhku.jsj.lzj.Service.GetService;
 import cn.edu.zhku.jsj.lzj.Service.ShopinfoService;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @SuppressWarnings("serial")

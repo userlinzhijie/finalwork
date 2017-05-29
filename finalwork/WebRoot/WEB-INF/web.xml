@@ -52,15 +52,6 @@
 
 
   
-  <filter>
-  	<filter-name>Loginfilter</filter-name>
-  	<filter-class>cn.edu.zhku.jsj.lzj.Filter.Loginfilter</filter-class>
-  </filter>
-  <filter-mapping>
-  <filter-name>Loginfilter</filter-name>
-  <url-pattern>//Loginctrl</url-pattern>
-  </filter-mapping>
-  
   
   <servlet>
     <description>This is the description of my J2EE component</description>
@@ -84,6 +75,13 @@
     <servlet-name>Shopinfoctrl</servlet-name>
     <servlet-class>cn.edu.zhku.jsj.lzj.Ctrl.Shopinfoctrl</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Shoporderctrl</servlet-name>
+    <servlet-class>cn.edu.zhku.jsj.lzj.Ctrl.Shoporderctrl</servlet-class>
+  </servlet>
+
 
 
   <servlet-mapping>
@@ -93,6 +91,10 @@
   <servlet-mapping>
     <servlet-name>Shopinfoctrl</servlet-name>
     <url-pattern>/Shopinfoctrl</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Shoporderctrl</servlet-name>
+    <url-pattern>/Shoporderctrl</url-pattern>
   </servlet-mapping>
   
   	

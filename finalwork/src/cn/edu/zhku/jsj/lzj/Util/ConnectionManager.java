@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 public class ConnectionManager {
 	
 	private static String driverName= "com.mysql.jdbc.Driver";
-	private static String url = "jdbc:mysql://localhost:3306/store";
+	private static String url = "jdbc:mysql://localhost:3306/webshop";
 	private static String userName = "root";
 	private static String password = "zhijie";
 	

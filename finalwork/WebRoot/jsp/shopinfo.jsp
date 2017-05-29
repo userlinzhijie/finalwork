@@ -123,7 +123,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<tr><td>开户人：</td><td><input type="text"  disabled class="userid" id="userid" name="userid"></td>
     		</tr>
     	<tr>
-    		<td>真实姓名:</td><td><input type="text" name="truename" id="truename" class="truename"></td>
+    		<td>真实姓名:</td><td><input type="text" disabled name="truename" id="truename" class="truename"></td>
     		</tr>
     	</table>
     </div>

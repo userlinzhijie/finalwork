@@ -178,7 +178,7 @@ public class PageDao {
                     kb.setSize(rs.getString("size"));
                     kb.setStandard(rs.getString("standard"));
                     kb.setWeight(rs.getString("weight"));
-                    kb.setUser(rs.getString("user"));
+                    kb.setUser(rs.getString("seller_id"));
                     list.add(kb);  
             }  
             pageBean.setData(list); 
@@ -265,7 +265,7 @@ public class PageDao {
     			throw new Exception("数据库连接不成功！");
     		}
             Statement stmt = con.createStatement();  
-            String strSql = "select * from goods where user = '"+userid+"' limit "+(pageNum-1) * pageBean.getPageSize()+","+pageBean.getPageSize();
+            String strSql = "select * from goods where seller_id = '"+userid+"' limit "+(pageNum-1) * pageBean.getPageSize()+","+pageBean.getPageSize();
             ResultSet rs = stmt.executeQuery(strSql);  
             while (rs.next()) {    
                     Keyboard kb=new Keyboard();  
