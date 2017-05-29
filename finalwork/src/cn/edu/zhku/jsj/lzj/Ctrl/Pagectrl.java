@@ -27,6 +27,7 @@ public class Pagectrl extends HttpServlet {
 		String recid = request.getParameter("id");
 		String search = request.getParameter("search");
 		String order =request.getParameter("order");
+		String userid = request.getParameter("userid");
 		PageService ps = new PageService();
 		int id=0;
 		if(recid!=null && recid.length()>0){
@@ -35,6 +36,16 @@ public class Pagectrl extends HttpServlet {
 		int curPage=1;
 		if(page!=null && page.length()>0){
 			curPage = Integer.parseInt(page);
+		}
+		//商品信息
+		if(userid!=null)
+		{	
+			try {
+				request.setAttribute("pageBean",ps.goGetGoods(userid,curPage));
+				request.getRequestDispatcher("jsp/undershop.jsp").forward(request,response);
+			} catch (Exception e) {
+			e.printStackTrace();
+			}
 		}
 		//排序显示
 		if(order!=null)

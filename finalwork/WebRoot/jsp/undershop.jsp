@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -100,8 +101,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<tr>
     		<td>商品</td><td>图片</td><td>价格</td><td>操作</td>
     	</tr>
-    	<tr><td>s：</td><td>p</td><td>p</td><td>cz</td>
-    		</tr>
+    	<c:forEach var="shop" items="${pageBean.data}" varStatus="vs">
+    	<tr>
+    	<td><c:out value="${shop.name}" /></td>
+    	<td style="text-indent:1em"><img src="Showctrl?id=${shop.id}" width="60px" height="60px"></td>
+    	<td>￥<c:out value="${shop.price}" /></td>
+    	<td>下架</td>
+    	</tr>
+    	</c:forEach>
     	</table>
     </div>
   </body>

@@ -31,4 +31,11 @@ public class PageService {
 		pageBean=pd.getDetail(id);
 		return pageBean;
 	}
+	
+	public PageBean goGetGoods(String userid,int page) throws Exception{
+		PageBean pageBean = new PageBean();
+		PageDao pd = new PageDao();
+		pageBean=pd.getGoods(userid,page);
+		return pageBean;
+	}
 }
