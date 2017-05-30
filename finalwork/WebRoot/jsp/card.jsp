@@ -35,6 +35,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
 	 %>
   	<script language="javascript" type="text/javascript">
+function c1(i,max,id){
+		for(var j=0;j<max;j++){$("#card"+j).removeClass("next_active");$("#card"+j).addClass("next");}
+		$("#card"+i).addClass("next_active");
+	};
 $.ajax({  
         type:"get",//请求方式  
         url:"UserCtrl?action=getcard&user_id=<%=value%>",//发送请求地址  
@@ -46,11 +50,20 @@ $.ajax({
             var objs=eval(data); //解析json对象  
             var obj = objs.card;  
               
-            var table = $("#card_table");  
- 
-            for(var i=0;i< obj.length;i++){  
-       		     table.append('<tr><td>'+obj[i].name+'</td><td>'+obj[i].id+'<a href="UserCtrl?action=del_card&id='+obj[i].id+'">删除</a></td></tr>');
-            }  
+            var div = $("#tab3");  
+	 
+	            for(var i=0;i< obj.length;i++){  
+	         	  	 var id = obj[i].id;
+	         		 id=id.slice(id.length-4, id.length);
+	          		 var idmax='"'+obj[i].id+'"';
+	         		 var de_fault = "";
+					 if (obj[i].de_fault == 1)
+						de_fault = "默认银行卡";
+					 else
+						de_fault = "<a href='UserCtrl?action=setdefault_card&id="+obj[i].id+"'> 设为默认银行卡 </a> ";
+							
+			            div.append("<div onclick='c1(" + i + "," + (obj.length+1) + "," + idmax + ")' class='next' id='card" + i + "'><p class='card'><span id='cds" + i + "' style='display:none'>√</span> 持卡人:" + obj[i].name + "    尾号" + id + "   所属银行："+obj[i].bank+" 预留电话："+obj[i].phone+"&nbsp;&nbsp;&nbsp;<span id='setdf" + i +"'>" + de_fault + "</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><a href='UserCtrl?action=del_card&id="+obj[i].id+"'>×删除</a></span></p><div>");
+			        }
         }  
        });
 
@@ -77,7 +90,7 @@ $.ajax({
 		}
 	});
 </script>
- 	<p align = "center" class = "ziti">我的信息</p>
+ 	<p align = "center" class = "ziti">快捷支付</p>
  	<ul id="ul1">
 	    <li class="subme">
 	          <a href="jsp/login.jsp">店铺订单</a>
@@ -136,30 +149,30 @@ $.ajax({
 		<table class="info" id="card_table">
 		<tr><th colspan="2">新增银行卡</th></tr>
 				<tr>
-					<td><label>持卡人姓名：</label>
-					</td>
-					<td><input type="text" name="name" placeholder="真实姓名">
-					</td>
+					<th><label>持卡人姓名：</label>
+					</th>
+					<th><input type="text" name="name" placeholder="真实姓名">
+					</th>
 				</tr>
 					<tr>
-					<td><label>银行卡号：</label>
-					</td>
-					<td><input name="id" placeholder="银行卡号">
-					</td>
+					<th><label>银行卡号：</label>
+					</th>
+					<th><input name="id" placeholder="银行卡号">
+					</th>
 				</tr>
 									
 				<tr>
-					<td><label>身份证号：</label>
-					</td>
-					<td><input type="text" name="id_number"  placeholder="身份证号">
-					</td>
+					<th><label>身份证号：</label>
+					</th>
+					<th><input type="text" name="id_number"  placeholder="身份证号">
+					</th>
 				</tr>
 
 				<tr>
-					<td><label>预留手机号：</label>
-					</td>
-					<td><input type="text" name="phone" placeholder="银行卡绑定手机号">
-					</td>
+					<th><label>预留手机号：</label>
+					</th>
+					<th><input type="text" name="phone" placeholder="银行卡绑定手机号">
+					</th>
 				</tr>
 				
 				<tr>
@@ -167,6 +180,9 @@ $.ajax({
 				</tr>
 </table>
 							</form>
+    </div>
+    <div class="div2_down" id="tab3" ><!-- card -->
+    
     </div>
 
   </body>

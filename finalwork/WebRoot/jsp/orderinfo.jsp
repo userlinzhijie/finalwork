@@ -36,10 +36,7 @@
 		}
 	}
 	//传来的goods字符串
-	String array_g = request.getParameter("arr_g");
-	String array_n = request.getParameter("arr_n");
-	String array_s = request.getParameter("arr_s");
-	String array_v = request.getParameter("arr_v");
+	int order_id = Integer.parseInt(request.getParameter("id"));
 %>
 <script language="javascript" type="text/javascript">
 	 function numberadd(){
@@ -136,35 +133,54 @@ $.ajax({
 			    $("#cid").val(id);
 			    //document.getElementById("step3").disabled = false;
 			};
-			$.ajax({
+			
+</script>
+<script type="text/javascript">
+$.ajax({
 			    type: "get", //请求方式  
-			    url: "UserCtrl?action=getcard&user_id=<%=value%>", //发送请求地址  
+			    url: "UserCtrl?action=getorder&user_id=<%=value%>", //发送请求地址  
 			    dataType: "json",
 			    data: { //发送给数据库的数据  
 			    },
 			    //请求成功后的回调函数有两个参数  
 			    success: function(data) {
 			        var objs = eval(data); //解析json对象  
-			        var obj = objs.card;
-			        var div = $("#tab3");
-			        for (var i = 0; i < obj.length; i++) {
-			            var id = obj[i].id;
-			            id=id.slice(id.length-4, id.length);
-			            var idmax='"'+obj[i].id+'"';
-			            var de_fault = "";
-						if (obj[i].de_fault == 1)
-							de_fault = "默认银行卡";
-						else
-							de_fault = "<a href='UserCtrl?action=setdefault_card&id="+obj[i].id+"'> 设为默认银行卡 </a> ";
-							
-			            div.append("<div onclick='c1(" + i + "," + (obj.length+1) + "," + idmax + ")' class='next_group' id='card" + i + "'><p class='card'><span id='cds" + i + "' style='display:none'>√</span> 持卡人:" + obj[i].name + "    尾号" + id + "   所属银行："+obj[i].bank+" 预留电话："+obj[i].phone+"<span id='setdf" + i +"'>" + de_fault + "</span></p><div>");
-			        }
-			        div.append("<div onclick='c1(" + obj.length + "," + obj.length+1 + "," + idmax + ")' class='next_group' id='card" + obj.length + "'><p class='card'><span id='cds" + obj.length + "' style='display:none'>√</span>支付宝/微信  扫码支付<span id='setdf" + obj.length +"'>(推荐方式)</span></p><div>");
+			        var o = objs.order;
+			    	
+			        //银行卡
+			        $.ajax({
+					    type: "get", //请求方式  
+					    url: "UserCtrl?action=getcard&user_id=<%=value%>", //发送请求地址  
+					    dataType: "json",
+					    data: { //发送给数据库的数据  
+					    },
+					    //请求成功后的回调函数有两个参数  
+					    success: function(data) {
+					        var objs = eval(data); //解析json对象  
+					        var obj = objs.card;
+					        var div = $("#tab3");
+					        for (var i = 0; i < obj.length; i++) {
+					            var id = obj[i].id;
+					            id=id.slice(id.length-4, id.length);
+					            var idmax='"'+obj[i].id+'"';
+					            var de_fault = "";
+								if (obj[i].de_fault == 1)
+									de_fault = "默认银行卡";
+								else
+									de_fault = "<a href='UserCtrl?action=setdefault_card&id="+obj[i].id+"'> 设为默认银行卡 </a> ";
+									
+					           if(o.card_id==obj[i].id)
+					            	div.append("<div onclick='c1(" + i + "," + (obj.length+1) + "," + idmax + ")' class='next_group' id='card" + i + "'><p class='card'><span id='cds" + i + "' style='display:none'>√</span> 持卡人:" + obj[i].name + "    尾号" + id + "   所属银行："+obj[i].bank+" 预留电话："+obj[i].phone+"<span id='setdf" + i +"'>" + de_fault + "</span></p><div>");
+					        }
+					       		
+					    }
+					});
+			         //
 			        
+			     	
 			    }
 			});
 </script>
-
 </head>
 
 
@@ -193,7 +209,7 @@ $.ajax({
 					;
 				});
 	</script>
-	<p align="center" class="ziti">立即购买</p>
+	<p align="center" class="ziti">订单详情</p>
 	<ul id="ul1">
 		<li class="subme"><a href="jsp/login.jsp">店铺订单</a>
 			<div class="submenu">
@@ -265,13 +281,14 @@ $.ajax({
 		
 		<div class="div_cart">
 			<form action="UserCtrl" method="post">
-				<input type="hidden" name="action" value="add_order"> <input
-					type="hidden" name="mode" id="mode" value="0"> <input
-					type="hidden" name="address_id" id="aid" value="0"> <input
-					type="hidden" name="card_id" id="cid" value="default"> <input
-					type="hidden" name="user_id" id="uid" value="<%=value%>"> <input
-					type="hidden" name="status" id="status" value="1"> <input
-					type="hidden" name="arr_v" id="arr_v" value="<%=array_v%>">
+				<input type="hidden" name="action" value="add_order"> 
+				<input	type="hidden" name="mode" id="mode" value="0"> 
+				<input type="hidden" name="address_id" id="aid" value="0">
+				 <input
+					type="hidden" name="card_id" id="cid" value="default"> 
+					<input type="hidden" name="user_id" id="uid" value="<%=value%>"> 
+					<input type="hidden" name="status" id="status" value="1"> 
+					<input type="hidden" name="arr_v" id="arr_v" value="<%=array_v%>">
 				<input type="hidden" name="arr_n" id="number" value="<%=array_n%>">
 				<input type="hidden" name="transfee" id="transfee" value="0">
 				<input type="hidden" name="arr_g" id="arr_g" value="<%=array_g%>">

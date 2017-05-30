@@ -316,7 +316,7 @@ public class UserDao {
 			throw new Exception("数据库连接不成功！");
 		}
 
-		String sqlQuery = "INSERT into card VALUES(?,?,?,?,?,?)";
+		String sqlQuery = "INSERT into card VALUES(?,?,?,?,?,?,0)";
 
 		ps = conn.prepareStatement(sqlQuery);
 
@@ -935,5 +935,60 @@ public class UserDao {
 
 		rs.next();
 		return rs.getInt("status");
+	}
+
+	public void setDefault_a(int id) throws Exception{
+		Connection conn = null;
+		PreparedStatement ps = null;
+
+		// 连接数据库
+		conn = ConnectionManager.getConnection();
+
+		if (conn == null) {
+			throw new Exception("数据库连接不成功！");
+		}
+
+		String sqlQuery = "update `address` set `de_fault`=?";
+
+		ps = conn.prepareStatement(sqlQuery);
+		ps.setInt(1,0);
+
+		ps.executeUpdate();
+		
+		sqlQuery = "update `address` set `de_fault`=? where id=?";
+
+		ps = conn.prepareStatement(sqlQuery);
+		ps.setInt(1,1);
+		ps.setInt(2, id);
+
+		ps.executeUpdate();
+		
+		
+	}
+	public void setDefault_c(String id) throws Exception{
+		Connection conn = null;
+		PreparedStatement ps = null;
+
+		// 连接数据库
+		conn = ConnectionManager.getConnection();
+
+		if (conn == null) {
+			throw new Exception("数据库连接不成功！");
+		}
+
+		String sqlQuery = "update `card` set `de_fault`=?";
+
+		ps = conn.prepareStatement(sqlQuery);
+		ps.setInt(1,0);
+		ps.executeUpdate();
+		
+		sqlQuery = "update `card` set `de_fault`=? where id=?";
+
+		ps = conn.prepareStatement(sqlQuery);
+		ps.setInt(1,1);
+		ps.setString(2, id);
+
+		ps.executeUpdate();
+		
 	}
 }

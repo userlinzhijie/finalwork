@@ -356,4 +356,17 @@ public class UserService {
 		}
 		return null;
 	}
+
+	public void setDefault_a(int address_id) throws Exception{
+		UserDao d = new UserDao();
+		d.setDefault_a(address_id);
+		System.out.println("?");
+	}
+	
+	public void setDefault_c(String card_id) throws Exception{
+		UserDao d = new UserDao();
+		d.setDefault_c(card_id);
+		System.out.println("?");
+
+	}
 }

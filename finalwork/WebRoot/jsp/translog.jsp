@@ -56,7 +56,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 	});
 </script>
- 	<p align = "center" class = "ziti">购物车</p>
+ 	<p align = "center" class = "ziti">物流跟踪</p>
  	<ul id="ul1">
 	    <li class="subme">
 	          <a href="jsp/login.jsp">店铺订单</a>
@@ -82,7 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	
     	
     <div class="div1">
-		<table class="info" id="cart_table">
+		<table class="info_cart" id="cart_table">
 		<tr><th colspan="2">物流跟踪</th></tr>
 		<tr><td>物流状态:</td><td>已签收</td></tr>
 <tr><td>承运公司：</td><td>天天物流</td></tr>

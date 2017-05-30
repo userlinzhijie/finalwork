@@ -79,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 	});
 </script>
- 	<p align = "center" class = "ziti">购物车</p>
+ 	<p align = "center" class = "ziti">收藏</p>
  	<ul id="ul1">
 	    <li class="subme">
 	          <a href="jsp/login.jsp">店铺订单</a>

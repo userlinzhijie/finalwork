@@ -60,7 +60,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	};
 	function h5(){
 	$("#s4").addClass("blue");$("#s1").removeClass("blue");$("#s2").removeClass("blue");$("#s3").removeClass("blue");$("#s0").removeClass("blue");
-	$("#tab5").show();$("#tab1").hide();$("#tab2").hide();$("#tab3").hide();$("#tab4").hide();
+	$("#tab5").hide();$("#tab1").show();$("#tab2").show();$("#tab3").show();$("#tab4").show();
+	$(".next").hide();$(".next_active").show();$(".pay_btn").hide();$("#tab5").show();
 	retab5();
 	};
   	</script>
@@ -80,15 +81,15 @@ $.ajax({
  			table.append('<tr><th id="s0" class="blue">选择物品</th><th id="s1">收货地址</th><th id="s2">支付方式</th><th id="s3">物流方式</th><th id="s4">提交订单</th></tr>');
          	
             var div1 = $("#tab1"); 
-             div1.append('<div class=next"><button onclick="h2()">→</button></div>');
+             div1.append('<div class=next"><button class="pay_btn" onclick="h2()">→</button></div>');
             var div2 = $("#tab2");  
-             div2.append('<div class=next"><button onclick="h1()">←</button><button id="step2" onclick="h3()" disabled>→</button></div>');
+             div2.append('<div class=next"><button class="pay_btn" onclick="h1()">←</button><button class="pay_btn" id="step2" onclick="h3()" disabled>→</button></div>');
             var div3 = $("#tab3"); 
-             div3.append('<div class=next"><button onclick="h2()">←</button><button id="step3" onclick="h4()" disabled>→</button></div>');
+             div3.append('<div class=next"><button class="pay_btn" onclick="h2()">←</button><button class="pay_btn" id="step3" onclick="h4()" disabled>→</button></div>');
             var div4 = $("#tab4"); 
-             div4.append('<div class=next"><button onclick="h3()">←</button><button id="step4" onclick="h5()" disabled>→</button></div>');
+             div4.append('<div class=next"><button class="pay_btn" onclick="h3()">←</button><button class="pay_btn" id="step4" onclick="h5()" disabled>→</button></div>');
             var div5 = $("#tab5"); 
-             div5.append('<div class=next"><button onclick="h4()">←</button></div>');
+             div5.append('<div class=next"><button class="pay_btn" onclick="h4()">←</button></div>');
         }  
        });
        </script>
@@ -172,9 +173,18 @@ $.ajax({
 	            var div = $("#tab3");  
 	 
 	            for(var i=0;i< obj.length;i++){  
-	            	var id='"'+obj[i].id+'"';
-	       		     div.append("<div onclick='c1("+i+","+obj.length+","+id+")' class='next' id='card"+i+"'><p>name:"+obj[i].name+"<br>id:"+obj[i].id+"</p><div>");
-	            };  
+	         	  	 var id = obj[i].id;
+	         		 id=id.slice(id.length-4, id.length);
+	          		 var idmax='"'+obj[i].id+'"';
+	         		 var de_fault = "";
+					 if (obj[i].de_fault == 1)
+						de_fault = "默认银行卡";
+					 else
+						de_fault = "<a href='UserCtrl?action=setdefault_card&id="+obj[i].id+"'> 设为默认银行卡 </a> ";
+							
+			            div.append("<div onclick='c1(" + i + "," + (obj.length+1) + "," + idmax + ")' class='next' id='card" + i + "'><p class='card'><span id='cds" + i + "' style='display:none'>√</span> 持卡人:" + obj[i].name + "    尾号" + id + "   所属银行："+obj[i].bank+" 预留电话："+obj[i].phone+"<span id='setdf" + i +"'>" + de_fault + "</span></p><div>");
+			        }
+			        div.append("<div onclick='c1(" + obj.length + "," + obj.length+1 + "," + idmax + ")' class='next' id='card" + obj.length + "'><p class='card'><span id='cds" + obj.length + "' style='display:none'>√</span>支付宝/微信  扫码支付<span id='setdf" + obj.length +"'>(推荐方式)</span></p><div>");
 	       }
        });
   	</script>
@@ -228,7 +238,7 @@ $.ajax({
 		
     </div>
 	<div class="div2" id="tab1" style="display: block;"><!-- goods -->
-		<table class="next" id="good_table" ></table>
+		<table class="next_active" id="good_table" ></table>
     </div>
     
     <div class="div2" id="tab2" style="display: none;"><!-- address -->
@@ -240,8 +250,8 @@ $.ajax({
     </div>
 	
 	<div class="div2" id="tab4" style="display: none;"><!-- trans -->
-	<div class="next" id="trans1" onclick="trans(1)">全包办</div>
-	<div class="next" id="trans2" onclick="trans(2)">自己解决</div>
+	<div class="next" id="trans1" onclick="trans(1)">锤子网全包办，邮费全免</div>
+	<div class="next" id="trans2" onclick="trans(2)">线下协商解决，邮费自算</div>
     </div>
     <script type="text/javascript">
     function trans(i){
@@ -263,11 +273,8 @@ $.ajax({
     <input type="hidden" name="transfee" id="transfee" value="0">
     <input type="hidden" name="arr_g" id="array_g" value="<%=array_g%>">
     <input type="hidden" name="arr_s" id="array_s" value="<%=array_s%>">
-    <div class="next" id="tab5_g">goods</div>
-    <div class="next" id="tab5_a">address</div>
-    <div class="next" id="tab5_c">card</div>
-	<div class="next" id="tab5_t">trans</div>
-	<div class="next"><input type="submit" value="下单"></div>
+
+	<div class="next_active" align="right"><input class="card" type="submit" value="下单"></div>
 	</form>
     </div>
      <script language="javascript" type="text/javascript">

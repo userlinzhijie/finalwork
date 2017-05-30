@@ -45,12 +45,17 @@ $.ajax({
             var objs=eval(data); //解析json对象  
             var obj = objs.address;  
               
-            var table = $("#address_table");  
- 
-            for(var i=0;i< obj.length;i++){  
-       		     table.append('<tr><td>'+obj[i].name+'</td><td>'+obj[i].province+obj[i].city+obj[i].dist+obj[i].street+'<a href="UserCtrl?action=del_address&id='+obj[i].id+'">删除</a></td></tr>');
-            }  
-        }  
+            var div = $("#tab2");
+
+					for ( var i = 0; i < obj.length; i++) {
+						var de_fault = "";
+						if (obj[i].de_fault == 1)
+							de_fault = "默认地址";
+						else
+							de_fault = "<a href='UserCtrl?action=setdefault_address&id="+obj[i].id+"'> 设为默认地址 </a> ";
+						div.append('<div class="next_group" onclick="a1(' + i + ',' + obj.length + ',' + obj[i].id + ')" id="address' + i + '"><p class="address"><span id="ads' + i + '" style="display:none">√</span>  收货地址：:' + obj[i].province + ' ' + obj[i].city + ' ' + obj[i].dist + ' ' + obj[i].street + '( ' + obj[i].name + ' 收)   ' + obj[i].telephone + '  <span id="setdf' + i + '">&nbsp;&nbsp;&nbsp;' + de_fault + '</span><span align="right"><a href="UserCtrl?action=del_address&id='+obj[i].id+'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;×删除</a></span></p><div>');
+					} 
+       		 }  
        });
 
   	</script>
@@ -77,7 +82,7 @@ $.ajax({
 	});
 	
 </script>
- 	<p align = "center" class = "ziti">我的信息</p>
+ 	<p align = "center" class = "ziti">地址管理</p>
  	<ul id="ul1">
 	    <li class="subme">
 	          <a href="jsp/login.jsp">店铺订单</a>
@@ -136,50 +141,54 @@ $.ajax({
 		<table class="info" id="address_table">
 		<tr><th colspan="2">新增地址</th></tr>
 				<tr>
-					<td><label for="user-name">收货人</label>
-					</td>
-					<td><input type="text" id="user-name" name="name" placeholder="收货人">
-					</td>
+					<th><label for="user-name">收货人</label>
+					</th>
+					<th><input type="text" id="user-name" name="name" placeholder="收货人">
+					</th>
 				</tr>
 					<tr>
-					<td><label for="user-phone">手机号码</label>
-					</td>
-					<td><input id="user-phone" name="telephone" placeholder="手机号必填">
-					</td>
+					<th><label for="user-phone">手机号码</label>
+					</th>
+					<th><input id="user-phone" name="telephone" placeholder="手机号必填">
+					</th>
 				</tr>
 									
 				<tr>
-					<td><label for="user-phone" class="am-form-label">省</label>
-					</td>
-					<td><input type="text" name="province">
-					</td>
+					<th><label for="user-phone" class="am-form-label">省</label>
+					</th>
+					<th><input type="text" name="province">
+					</th>
 				</tr>
 
 				<tr>
-					<td><label for="user-birth">市</label>
-					</td>
-					<td><input type="text" name="city">
-					</td>
+					<th><label for="user-birth">市</label>
+					</th>
+					<th><input type="text" name="city">
+					</th>
 				</tr>
 							
 				<tr>
-					<td><label for="user-phone">区</label>
-					</td>
-					<td><input type="text" name="dist">
-					<td>
+					<th><label for="user-phone">区</label>
+					</th>
+					<th><input type="text" name="dist">
+					<th>
 				</tr>
 				<tr>
-					<td><label for="user-intro">详细地址</label>
-					</td><td>
+					<th><label for="user-intro">详细地址</label>
+					</th><th>
 						<textarea class="" rows="3" id="user-intro" name="street" placeholder="输入详细地址"></textarea>
-					</td>
+					</th>
 				</tr>	
 				<tr>
-					<td><input type="submit" value="保存修改"></td>
+					<th colspan="2"><input type="submit" value="保存修改"></td>
 				</tr>
 </table>
 							</form>
     </div>
 
+  <div class="div2_down" id="tab2" ><!-- address -->
+   	
+    </div>
+    
   </body>
 </html>

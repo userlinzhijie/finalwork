@@ -280,16 +280,16 @@ public class UserCtrl extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else if ("setdefault_adddress".equals(action)) {
+		} else if ("setdefault_address".equals(action)) {
 			try {
-				this.setDefault(request, response);
+				this.setDefault_a(request, response);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else if ("setdefault_card".equals(action)) {
 			try {
-				this.setDefault(request, response);
+				this.setDefault_c(request, response);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -298,10 +298,31 @@ public class UserCtrl extends HttpServlet {
 
 	}
 
-	private void setDefault(HttpServletRequest request,
+
+	private void setDefault_c(HttpServletRequest request,
 			HttpServletResponse response) throws Exception{
-		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+
+		String id = request.getParameter("id");
 		
+		UserService u = new UserService();
+		
+		u.setDefault_c(id);
+		response.sendRedirect(request.getContextPath() + "/jsp/card.jsp");
+	}
+
+	private void setDefault_a(HttpServletRequest request,
+			HttpServletResponse response) throws Exception{
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+
+		int id = Integer.parseInt(request.getParameter("id"));
+		System.out.println(id);
+		UserService u = new UserService();
+		u.setDefault_a(id);
+		System.out.println("!");
+		response.sendRedirect(request.getContextPath() + "/jsp/address.jsp");
 	}
 
 	private void add_cart(HttpServletRequest request,
