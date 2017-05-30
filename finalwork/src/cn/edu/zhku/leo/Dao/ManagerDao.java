@@ -216,4 +216,39 @@ public class ManagerDao {
 		return rs;
 
 	}
+
+	public ArrayList<Advice> getAdvice() throws Exception{
+		ArrayList<Advice> a=new ArrayList<Advice>();
+
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		// 连接数据库
+		conn = ConnectionManager.getConnection();
+
+		if (conn == null) {
+			throw new Exception("数据库连接不成功！");
+		}
+
+		String sqlQuery = "Select * from advice";
+		
+		ps = conn.prepareStatement(sqlQuery);
+
+		rs = ps.executeQuery();
+
+		while (rs.next()) {
+			int id = rs.getInt("id");
+			String tag = rs.getString("tag");
+			String details = rs.getString("details");
+			
+			Advice m = new Advice();
+			m.setId(id);
+			m.setTag(tag);
+			m.setDetails(details);
+			
+			a.add(m);
+		}
+		return a;
+	}
 }

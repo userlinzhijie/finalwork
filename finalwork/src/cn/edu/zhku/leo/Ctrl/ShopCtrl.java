@@ -29,7 +29,7 @@ public class ShopCtrl extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		String action = request.getParameter("action");
-
+		System.out.println("Shop:"+action);
 		if ("getstatus".equals(action)) {
 			try {
 				this.get1(request, response);

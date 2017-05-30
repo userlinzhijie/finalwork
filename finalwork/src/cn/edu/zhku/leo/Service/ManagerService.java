@@ -110,5 +110,11 @@ public class ManagerService {
 			return false;
 		}
 	}
+
+	public ArrayList<Advice> getAdvice() throws Exception{
+		ManagerDao ld = new ManagerDao();
+
+		return ld.getAdvice();
+	}
 	
 }

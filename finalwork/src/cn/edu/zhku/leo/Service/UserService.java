@@ -369,4 +369,48 @@ public class UserService {
 		System.out.println("?");
 
 	}
+
+	public Order getOrderById(int order_id) throws Exception{
+		UserDao d= new UserDao();
+		ArrayList<Order> A = d.getAllOrder();
+		Order b = new Order();
+		for(int i=0;i<A.size();i++){
+			b=A.get(i);
+			if(b.getId()==order_id){
+				return b;
+			}
+		}
+		return b;//null?
+	}
+
+	public Address getAddressById(int address_id) throws Exception{
+		UserDao d= new UserDao();
+		ArrayList<Address> A = d.getAllAddress();
+		Address b = new Address();
+		for(int i=0;i<A.size();i++){
+			b=A.get(i);
+			if(b.getId()==address_id){
+				return b;
+			}
+		}
+		return b;//null?
+	}
+
+	public Card getCardById(String card_id) throws Exception{
+		UserDao d= new UserDao();
+		ArrayList<Card> A = d.getAllCard();
+		Card b = new Card();
+		for(int i=0;i<A.size();i++){
+			b=A.get(i);
+			if(b.getId().equals(card_id)){
+				return b;
+			}
+		}
+		return b;//null?
+	}
+
+	public void add_advice(Advice a) throws Exception{
+		UserDao d=new UserDao();
+		d.add_advice(a);
+	}
 }

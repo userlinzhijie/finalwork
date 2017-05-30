@@ -14,6 +14,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import cn.edu.zhku.leo.Service.*;
+import cn.edu.zhku.leo.Model.Advice;
 import cn.edu.zhku.leo.Model.Manager;
 
 public class ManagerCtrl extends HttpServlet {
@@ -32,7 +33,7 @@ public class ManagerCtrl extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		String action = request.getParameter("action");
-
+		System.out.println("Manager:"+action);
 		if ("login".equals(action)) {
 			try {
 				this.login(request, response);
@@ -104,10 +105,29 @@ public class ManagerCtrl extends HttpServlet {
 				// TODO getnum
 				e.printStackTrace();
 			}
+		} else if("getNum_advice".equals(action)){
+			try {
+				this.getNum_advice(request, response);
+			} catch (Exception e) {
+				// TODO getnum
+				e.printStackTrace();
+			}
 		}
 	}
 		
 	
+	private void getNum_advice(HttpServletRequest request,
+			HttpServletResponse response) throws Exception{
+		PrintWriter out = response.getWriter();
+		ManagerService g = new ManagerService();
+
+		ArrayList<Advice> a = g.getAdvice();
+		int num = a.size();
+		out.print(num);
+		out.flush();
+		out.close();
+	}
+
 	/**
 	 * 
 	 * 将数据度读来的Manager对象数组整理成json文件-->暂时保留 输出数据库读来的数据
@@ -183,7 +203,7 @@ public class ManagerCtrl extends HttpServlet {
 
 				for (int i = 0; i < cookies.length; i++) {
 					name = URLDecoder.decode(cookies[i].getName(), "utf-8");
-					if (name.equals("user")) {
+					if (name.equals("manager")) {
 						value = URLDecoder.decode(cookies[i].getValue(), "utf-8");
 					}
 				}
@@ -352,7 +372,7 @@ public class ManagerCtrl extends HttpServlet {
 		
 		if(g.login(m)){
 			//session.setAttribute("user","管理员"+id); 
-			Cookie cookie = new Cookie(URLEncoder.encode("user", "utf-8"),URLEncoder.encode(String.valueOf(id), "utf-8"));
+			Cookie cookie = new Cookie(URLEncoder.encode("manager", "utf-8"),URLEncoder.encode(String.valueOf(id), "utf-8"));
 			cookie.setMaxAge(60*60*24); 
 			response.addCookie(cookie);
 			response.sendRedirect(request.getContextPath()
@@ -387,7 +407,7 @@ public class ManagerCtrl extends HttpServlet {
 		
 		for(int i=0;i<cookies.length;i++){
 			name = URLDecoder.decode(cookies[i].getName(),"utf-8");
-			if(name.equals("user")){
+			if(name.equals("manager")){
 				cookies[i].setValue(URLEncoder.encode("游客", "utf-8"));
 				response.addCookie(cookies[i]);
 			}
@@ -419,12 +439,10 @@ public class ManagerCtrl extends HttpServlet {
 			value = "游客";
 		} else {
 			cookies = request.getCookies();
-			String name = URLDecoder.decode(cookies[0].getName(), "utf-8");
-			value = URLDecoder.decode(cookies[0].getValue(), "utf-8");
-
+			
 			for (int i = 0; i < cookies.length; i++) {
-				name = URLDecoder.decode(cookies[i].getName(), "utf-8");
-				if (name.equals("user")) {
+				String name = URLDecoder.decode(cookies[i].getName(), "utf-8");
+				if (name.equals("manager")) {
 					value = URLDecoder.decode(cookies[i].getValue(), "utf-8");
 				}
 			}

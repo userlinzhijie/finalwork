@@ -53,22 +53,8 @@
 
   
   
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>ManagerCtrl</servlet-name>
-    <servlet-class>cn.edu.zhku.leo.Ctrl.ManagerCtrl</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ManagerCtrl</servlet-name>
-    <url-pattern>/ManagerCtrl</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description>This is the description of my J2EE component</description>
-    <display-name>This is the display name of my J2EE component</display-name>
-    <servlet-name>UserCtrl</servlet-name>
-    <servlet-class>cn.edu.zhku.leo.Ctrl.UserCtrl</servlet-class>
-  </servlet>
+  
+  
   <servlet>
     <description>This is the description of my J2EE component</description>
     <display-name>This is the display name of my J2EE component</display-name>
@@ -87,14 +73,6 @@
     <servlet-name>Delctrl</servlet-name>
     <servlet-class>cn.edu.zhku.jsj.lzj.Ctrl.Delctrl</servlet-class>
   </servlet>
-
-
-
-
-  <servlet-mapping>
-    <servlet-name>UserCtrl</servlet-name>
-    <url-pattern>/UserCtrl</url-pattern>
-  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Shopinfoctrl</servlet-name>
     <url-pattern>/Shopinfoctrl</url-pattern>
@@ -107,6 +85,42 @@
     <servlet-name>Delctrl</servlet-name>
     <url-pattern>/Delctrl</url-pattern>
   </servlet-mapping>
+  
+  
+  
+  
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ManagerCtrl</servlet-name>
+    <servlet-class>cn.edu.zhku.leo.Ctrl.ManagerCtrl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManagerCtrl</servlet-name>
+    <url-pattern>/ManagerCtrl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserCtrl</servlet-name>
+    <servlet-class>cn.edu.zhku.leo.Ctrl.UserCtrl</servlet-class>
+  </servlet>
+    <servlet-mapping>
+    <servlet-name>UserCtrl</servlet-name>
+    <url-pattern>/UserCtrl</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ShopCtrl</servlet-name>
+    <servlet-class>cn.edu.zhku.leo.Ctrl.ShopCtrl</servlet-class>
+  </servlet>
+    <servlet-mapping>
+    <servlet-name>ShopCtrl</servlet-name>
+    <url-pattern>/ShopCtrl</url-pattern>
+  </servlet-mapping>
+  
+  
   
   	
   <welcome-file-list>

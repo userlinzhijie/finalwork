@@ -34,7 +34,7 @@ public class UserCtrl extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		String action = request.getParameter("action");
-		System.out.println(action);
+		System.out.println("User:"+action);
 		if ("del".equals(action)) {
 			try {
 				this.del(request, response);
@@ -94,6 +94,13 @@ public class UserCtrl extends HttpServlet {
 		} else if ("getorder".equals(action)) {
 			try {
 				this.getJson_order(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else if ("getorderbyid".equals(action)) {
+			try {
+				this.getOrderById(request, response);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -294,26 +301,49 @@ public class UserCtrl extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else if ("add_advice".equals(action)) {
+			try {
+				this.add_advice(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 	}
 
-
-	private void setDefault_c(HttpServletRequest request,
+	private void add_advice(HttpServletRequest request,
 			HttpServletResponse response) throws Exception{
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
-		String id = request.getParameter("id");
+		String tag = request.getParameter("tag");
+		String details = request.getParameter("details");
 		
 		UserService u = new UserService();
-		
+		Advice a = new Advice();
+		a.setTag(tag);
+		a.setDetails(details);
+		a.setId(0);
+		u.add_advice(a);
+		response.sendRedirect(request.getContextPath() + "/jsp/info.jsp");
+	}
+
+	private void setDefault_c(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+
+		String id = request.getParameter("id");
+
+		UserService u = new UserService();
+
 		u.setDefault_c(id);
 		response.sendRedirect(request.getContextPath() + "/jsp/card.jsp");
 	}
 
 	private void setDefault_a(HttpServletRequest request,
-			HttpServletResponse response) throws Exception{
+			HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
@@ -400,8 +430,8 @@ public class UserCtrl extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
-		int mode =Integer.parseInt(request.getParameter("mode"));//0one*1cart  
-		
+		int mode = Integer.parseInt(request.getParameter("mode"));// 0one*1cart
+
 		String arr_n = request.getParameter("arr_n");
 		String arr_g = request.getParameter("arr_g");
 		String arr_s = request.getParameter("arr_s");
@@ -435,8 +465,8 @@ public class UserCtrl extends HttpServlet {
 		c.setStatus(status);
 		c.setTransfee(transfee);
 		c.setUser_id(user_id);
-		
-		if (g.add_order(c, arr_n, arr_g, arr_s, arr_v,mode)) {
+
+		if (g.add_order(c, arr_n, arr_g, arr_s, arr_v, mode)) {
 			response.sendRedirect(request.getContextPath() + "/jsp/order.jsp");
 		} else {
 			response.sendRedirect(request.getContextPath() + "/jsp/order.jsp");
@@ -463,7 +493,8 @@ public class UserCtrl extends HttpServlet {
 			jsonObject.put("name", m.getName());
 			jsonObject.put("price", m.getPrice());
 			jsonObject.put("number", m.getNumber());
-			jsonObject.put("seller_id", s.getSellerIdByGoodsId(m.getGoods_id()));
+			jsonObject
+					.put("seller_id", s.getSellerIdByGoodsId(m.getGoods_id()));
 			jsonArray.add(jsonObject);
 		}
 		resultJson.put("cartlog", jsonArray);
@@ -1194,6 +1225,61 @@ public class UserCtrl extends HttpServlet {
 		}
 		resultJson.put("order", jsonArray);
 		out.println(resultJson);
+		out.flush();
+		out.close();
+
+	}
+
+	/**
+	 * 
+	 * 将数据度读来的order对象数组整理成json格式输出
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 * 
+	 * 
+	 */
+	private void getOrderById(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		PrintWriter out = response.getWriter();
+		int order_id = Integer.parseInt(request.getParameter("order_id"));
+		UserService g = new UserService();
+
+		Order m = g.getOrderById(order_id);
+
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("id", m.getId());
+		jsonObject.put("user_id", m.getUser_id());
+		jsonObject.put("address_id", m.getAddress_id());
+		jsonObject.put("total", m.getTotal());
+		jsonObject.put("transfee", m.getTransfee());
+		jsonObject.put("status", m.getStatus());
+		jsonObject.put("date", m.getDate());
+		jsonObject.put("number", m.getNumber());
+		jsonObject.put("goods_id", m.getGoods_id());
+		jsonObject.put("seller_id", m.getSeller_id());
+		jsonObject.put("card_id", m.getCard_id());
+
+		Goods b = g.getGoodsById(m.getGoods_id());
+		jsonObject.put("g_name", b.getName());
+		jsonObject.put("g_price", b.getPrice());
+
+		Address c = g.getAddressById(m.getAddress_id());
+		jsonObject.put("a_name", c.getName());
+		jsonObject.put("a_telephone", c.getTelephone());
+		jsonObject.put("a_province", c.getProvince());
+		jsonObject.put("a_city", c.getCity());
+		jsonObject.put("a_dist", c.getDist());
+		jsonObject.put("a_street", c.getStreet());
+
+		Card d = g.getCardById(m.getCard_id());
+		jsonObject.put("c_name", d.getName());
+		jsonObject.put("c_phone", d.getPhone());
+		jsonObject.put("c_id", d.getId().substring(d.getId().length()-4, d.getId().length()));
+		jsonObject.put("c_bank", d.getBank());
+
+		out.println(jsonObject);
 		out.flush();
 		out.close();
 

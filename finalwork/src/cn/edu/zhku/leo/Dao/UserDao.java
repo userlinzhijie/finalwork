@@ -991,4 +991,26 @@ public class UserDao {
 		ps.executeUpdate();
 		
 	}
+
+	public void add_advice(Advice a) throws Exception{
+		Connection conn = null;
+		PreparedStatement ps = null;
+		// 连接数据库
+		conn = ConnectionManager.getConnection();
+
+		if (conn == null) {
+			throw new Exception("数据库连接不成功！");
+		}
+
+		String sqlQuery = "INSERT into advice VALUES(?,?,?)";
+
+		ps = conn.prepareStatement(sqlQuery);
+
+		ps.setInt(1, a.getId());
+		ps.setString(2, a.getTag());
+		ps.setString(3, a.getDetails());
+
+		ps.executeUpdate();
+		
+	}
 }

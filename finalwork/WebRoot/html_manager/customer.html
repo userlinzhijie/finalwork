@@ -198,7 +198,7 @@
                 var id = obj[i].id;
                 var password = obj[i].password;
                 var name = obj[i].name;
-                table.append('<tr><th width=80px>'+id+'</th><th width=100px>'+name+'</th><th width=300px>'+password+'</th><th width=150px><button data-toggle="modal" data-target="#exampleModal1" onclick="loadedit('+id+')"><span class="glyphicon glyphicon-pencil" ></span>发信息</button><a href="../UserCtrl?action=del&id='+id+'"><button class="plus"><span class="glyphicon glyphicon-trash"></span>del</button></a> </th></tr>');
+                table.append('<tr><th width=80px>'+id+'</th><th width=100px>'+name+'</th><th width=300px>'+password+'</th><th width=150px><a href="../UserCtrl?action=del&id='+id+'"><button class="plus"><span class="glyphicon glyphicon-trash"></span>del</button></a> </th></tr>');
             }  
         }  
        }); 

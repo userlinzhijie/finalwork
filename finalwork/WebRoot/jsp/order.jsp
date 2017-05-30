@@ -79,30 +79,30 @@ $.ajax({
             for(var i=0;i< obj.length;i++){
             	if(obj[i].status==1){	
             		div1.append('<div><table class="next" id="t'+i+'"><tr><th>订单id：</th><th>地址：</th><th>共计：</th><th>邮费：</th><th>交易时间：</th><th>操作</th></tr><tr><th>'+obj[i].id+'</th><th>'+obj[i].address_id+'</th><th>￥'+obj[i].total+'</th><th>￥'+obj[i].transfee+'</th><th>'+obj[i].date+'</th><th><a href="UserCtrl?action=oTo2&id='+obj[i].id+'">一键付款</a>/<a href="UserCtrl?action=oTo5&id='+obj[i].id+'">退单</a></th></tr></table></div>');
-            		$("#t"+i).append('<tr><th>'+obj[i].name+'</th><th>'+obj[i].price+'</th><th>×'+obj[i].number+'</th><th><a href="jsp/orderinfo.jsp?id='+obj[i].id+'"订单详情</a></th></tr>');	
+            		$("#t"+i).append('<tr><th>'+obj[i].name+'</th><th>'+obj[i].price+'</th><th>×'+obj[i].number+'</th><th><a href="jsp/orderinfo.jsp?id='+obj[i].id+'">订单详情</a></th></tr>');	
             	}else if(obj[i].status==2){
  					div2.append('<div><table class="next" id="t'+i+'"><tr><th>订单id：</th><th>地址：</th><th>共计：</th><th>邮费：</th><th>交易时间：</th><th>操作</th></tr><tr><th>'+obj[i].id+'</th><th>'+obj[i].address_id+'</th><th>￥'+obj[i].total+'</th><th>￥'+obj[i].transfee+'</th><th>'+obj[i].date+'</th><th><a href="UserCtrl?action=oTo6&id='+obj[i].id+'">提醒发货</a></th></tr></table></div>');
-           			$("#t"+i).append('<tr><th>'+obj[i].name+'</th><th>'+obj[i].price+'</th><th>×'+obj[i].number+'</th><th><a href="jsp/orderinfo.jsp?id='+obj[i].id+'"订单详情</a></th></tr>');
+           			$("#t"+i).append('<tr><th>'+obj[i].name+'</th><th>'+obj[i].price+'</th><th>×'+obj[i].number+'</th><th><a href="jsp/orderinfo.jsp?id='+obj[i].id+'">订单详情</a></th></tr>');
            		}else if(obj[i].status==3){
  					div3.append('<div><table class="next" id="t'+i+'"><tr><th>订单id：</th><th>地址：</th><th>共计：</th><th>邮费：</th><th>交易时间：</th><th>操作</th></tr><tr><th>'+obj[i].id+'</th><th>'+obj[i].address_id+'</th><th>￥'+obj[i].total+'</th><th>￥'+obj[i].transfee+'</th><th>'+obj[i].date+'</th><th><a href="UserCtrl?action=oTo4&id='+obj[i].id+'">确认收货</a>/<a href="jsp/translog.jsp">查看物流</a></th></tr></table></div>');
-            		$("#t"+i).append('<tr><th>'+obj[i].name+'</th><th>'+obj[i].price+'</th><th>×'+obj[i].number+'</th><th><a href="jsp/orderinfo.jsp?id='+obj[i].id+'"订单详情</a></th></tr>');
+            		$("#t"+i).append('<tr><th>'+obj[i].name+'</th><th>'+obj[i].price+'</th><th>×'+obj[i].number+'</th><th><a href="jsp/orderinfo.jsp?id='+obj[i].id+'">订单详情</a></th></tr>');
             	}else if(obj[i].status==4){
  					div4.append('<div><table class="next" id="t'+i+'"><tr><th>订单id：</th><th>地址：</th><th>共计：</th><th>邮费：</th><th>交易时间：</th><th>操作</th></tr><tr><th>'+obj[i].id+'</th><th>'+obj[i].address_id+'</th><th>￥'+obj[i].total+'</th><th>￥'+obj[i].transfee+'</th><th>'+obj[i].date+'</th><th><a href="UserCtrl?action=oTo7&id='+obj[i].id+'">评价商品</a></th></tr></table></div>');
-           			$("#t"+i).append('<tr><th>'+obj[i].name+'</th><th>'+obj[i].price+'</th><th>×'+obj[i].number+'</th><th><a href="jsp/orderinfo.jsp?id='+obj[i].id+'"订单详情</a></th></tr>');
+           			$("#t"+i).append('<tr><th>'+obj[i].name+'</th><th>'+obj[i].price+'</th><th>×'+obj[i].number+'</th><th><a href="jsp/orderinfo.jsp?id='+obj[i].id+'">订单详情</a></th></tr>');
            		}else if(obj[i].status==5){
            			div0.append('<div><table class="next" id="t'+i+'"><tr><th>订单id：</th><th>地址：</th><th>共计：</th><th>邮费：</th><th>交易时间：</th><th>操作</th></tr><tr><th>'+obj[i].id+'</th><th>'+obj[i].address_id+'</th><th>￥'+obj[i].total+'</th><th>￥'+obj[i].transfee+'</th><th>'+obj[i].date+'</th><th><a href="UserCtrl?action=del_order&id='+obj[i].id+'">删除订单</a>（不可撤销）</th></tr></table></div>');
-            		$("#t"+i).append('<tr><th>'+obj[i].name+'</th><th>'+obj[i].price+'</th><th>×'+obj[i].number+'</th><th><a href="jsp/orderinfo.jsp?id='+obj[i].id+'"订单详情</a></th></tr>');
+            		$("#t"+i).append('<tr><th>'+obj[i].name+'</th><th>'+obj[i].price+'</th><th>×'+obj[i].number+'</th><th><a href="jsp/orderinfo.jsp?id='+obj[i].id+'">订单详情</a></th></tr>');
            		}else if(obj[i].status==6){
            			div0.append('<div><table class="next" id="t'+i+'"><tr><th>订单id：</th><th>地址：</th><th>共计：</th><th>邮费：</th><th>交易时间：</th><th>操作</th></tr><tr><th>'+obj[i].id+'</th><th>'+obj[i].address_id+'</th><th>￥'+obj[i].total+'</th><th>￥'+obj[i].transfee+'</th><th>'+obj[i].date+'</th><th>已提醒（无法再次提醒）</th></tr></table></div>');
-            		$("#t"+i).append('<tr><th>'+obj[i].name+'</th><th>'+obj[i].price+'</th><th>×'+obj[i].number+'</th><th><a href="jsp/orderinfo.jsp?id='+obj[i].id+'"订单详情</a></th></tr>');
+            		$("#t"+i).append('<tr><th>'+obj[i].name+'</th><th>'+obj[i].price+'</th><th>×'+obj[i].number+'</th><th><a href="jsp/orderinfo.jsp?id='+obj[i].id+'">订单详情</a></th></tr>');
            		}else if(obj[i].status==7){
            			div0.append('<div><table class="next" id="t'+i+'"><tr><th>订单id：</th><th>地址：</th><th>共计：</th><th>邮费：</th><th>交易时间：</th><th>操作</th></tr><tr><th>'+obj[i].id+'</th><th>'+obj[i].address_id+'</th><th>￥'+obj[i].total+'</th><th>￥'+obj[i].transfee+'</th><th>'+obj[i].date+'</th><th><a href="UserCtrl?action=del_order&id='+obj[i].id+'">删除订单</a>（不可撤销）</th></tr></table></div>');
-            		$("#t"+i).append('<tr><th>'+obj[i].name+'</th><th>'+obj[i].price+'</th><th>×'+obj[i].number+'</th><th><a href="jsp/orderinfo.jsp?id='+obj[i].id+'"订单详情</a></th></tr>');
+            		$("#t"+i).append('<tr><th>'+obj[i].name+'</th><th>'+obj[i].price+'</th><th>×'+obj[i].number+'</th><th><a href="jsp/orderinfo.jsp?id='+obj[i].id+'">订单详情</a></th></tr>');
            		}else if(obj[i].status==8){//del	
            		}else if(obj[i].status==89){//del
            		}else if(obj[i].status==9){
            			div0.append('<div><table class="next" id="t'+i+'"><tr><th>订单id：</th><th>地址：</th><th>共计：</th><th>邮费：</th><th>交易时间：</th><th>操作</th></tr><tr><th>'+obj[i].id+'</th><th>'+obj[i].address_id+'</th><th>￥'+obj[i].total+'</th><th>￥'+obj[i].transfee+'</th><th>'+obj[i].date+'</th><th><a href="UserCtrl?action=del_order&id='+obj[i].id+'">删除订单</a>（不可撤销）</th></tr></table></div>');
-            		$("#t"+i).append('<tr><th>'+obj[i].name+'</th><th>'+obj[i].price+'</th><th>×'+obj[i].number+'</th><th><a href="jsp/orderinfo.jsp?id='+obj[i].id+'"订单详情</a></th></tr>');
+            		$("#t"+i).append('<tr><th>'+obj[i].name+'</th><th>'+obj[i].price+'</th><th>×'+obj[i].number+'</th><th><a href="jsp/orderinfo.jsp?id='+obj[i].id+'">订单详情</a></th></tr>');
            		}
             }  
         }  

@@ -38,146 +38,34 @@
 	//传来的goods字符串
 	int order_id = Integer.parseInt(request.getParameter("id"));
 %>
-<script language="javascript" type="text/javascript">
-	 function numberadd(){
-			document.getElementById("num").value++;
-			$("#number").val(document.getElementById("num").value);
-			$("#tprice").text($("#sprice").text()*$("#number").val());
-			$("#arr_v").val($("#tprice").text());
-			$("#cc_total").text($("#tprice").text());
-		}
-		
-		function numberreduce(){
-			if(document.getElementById("num").value>1)
-			document.getElementById("num").value--;
-			$("#number").val(document.getElementById("num").value);
-			$("#tprice").text($("#sprice").text()*$("#number").val());
-			$("#arr_v").val($("#tprice").text());
-			$("#cc_total").text($("#tprice").text());
-		}
-		function numberchange(){
-			if(document.getElementById("num").value<0||document.getElementById("num").value=="")
-			document.getElementById("num").value=1;
-			$("#number").val(document.getElementById("num").value);
-			$("#tprice").text($("#sprice").text()*$("#number").val());
-			$("#arr_v").val($("#tprice").text());
-			$("#cc_total").text($("#tprice").text());
-		}
-	</script>
-<script language="javascript" type="text/javascript">
-	function a1(i,max,id){
-		for(var j=0;j<max;j++){
-			$("#address"+j).removeClass("next_active");$("#address"+j).addClass("next");
-			$("#ads"+j).hide();
-			$("#setdf"+j).hide();
-		}
-		$("#address"+i).addClass("next_active");
-		$("#ads"+i).show();
-		$("#setdf"+i).show();
-		$("#aid").val(id);
-		document.getElementById("last").disabled=false;
-	};
-$.ajax({  
-        type:"get",//请求方式  
-        url:"UserCtrl?action=getaddress&user_id=<%=value%>",//发送请求地址  
-				dataType : "json",
-				data : {//发送给数据库的数据  
-				},
-				//请求成功后的回调函数有两个参数  
-				success : function(data) {
-					var objs = eval(data); //解析json对象  
-					var obj = objs.address;
 
-					var div = $("#tab2");
-
-					for ( var i = 0; i < obj.length; i++) {
-						var de_fault = "";
-						if (obj[i].de_fault == 1)
-							de_fault = "默认地址";
-						else
-							de_fault = "<a href='UserCtrl?action=setdefault_address&id="+obj[i].id+"'> 设为默认地址 </a> ";
-						div.append('<div class="next_group" onclick="a1(' + i + ',' + obj.length + ',' + obj[i].id + ')" id="address' + i + '"><p class="address"><span id="ads' + i + '" style="display:none">√</span>  收货地址：:' + obj[i].province + ' ' + obj[i].city + ' ' + obj[i].dist + ' ' + obj[i].street + '( ' + obj[i].name + ' 收)   ' + obj[i].telephone + '  <span id="setdf' + i + '">' + de_fault + '</span></p><div>');
-					}
-				}
-			});
-			
-			//获取物品信息
-			$.ajax({  
-        type:"get",//请求方式  
-        url:"UserCtrl?action=getgoods&arr_n=<%=array_n%>&arr_g=<%=array_g%>",//发送请求地址  
-				dataType : "json",
-				data : {//发送给数据库的数据  
-				},
-				//请求成功后的回调函数有两个参数  
-				success : function(data) {
-					var objs = eval(data); //解析json对象  
-					var obj = objs.goods;
-
-					var div = $("#tab2");
-
-					for ( var i = 0; i < obj.length; i++) {
-						$("#name").text(obj[i].name);
-						$("#sprice").text(obj[i].price);
-						$("#tprice").text(obj[i].price*obj[i].number);
-					}
-				}
-			});
-			
-			//获取银行卡
-			function c1(i, max, id) {
-			   	 for (var j = 0; j < max; j++) {
-			        $("#card" + j).removeClass("next_active");
-			        $("#card" + j).addClass("next");
-			    }
-			    $("#card" + i).addClass("next_active");
-			    $("#cid").val(id);
-			    //document.getElementById("step3").disabled = false;
-			};
-			
-</script>
 <script type="text/javascript">
 $.ajax({
 			    type: "get", //请求方式  
-			    url: "UserCtrl?action=getorder&user_id=<%=value%>", //发送请求地址  
+			    url: "UserCtrl?action=getorderbyid&order_id=<%=order_id%>", //发送请求地址  
 			    dataType: "json",
 			    data: { //发送给数据库的数据  
 			    },
 			    //请求成功后的回调函数有两个参数  
 			    success: function(data) {
-			        var objs = eval(data); //解析json对象  
-			        var o = objs.order;
-			    	
+			        var obj = eval(data); //解析json对象 
+			 
 			        //银行卡
-			        $.ajax({
-					    type: "get", //请求方式  
-					    url: "UserCtrl?action=getcard&user_id=<%=value%>", //发送请求地址  
-					    dataType: "json",
-					    data: { //发送给数据库的数据  
-					    },
-					    //请求成功后的回调函数有两个参数  
-					    success: function(data) {
-					        var objs = eval(data); //解析json对象  
-					        var obj = objs.card;
-					        var div = $("#tab3");
-					        for (var i = 0; i < obj.length; i++) {
-					            var id = obj[i].id;
-					            id=id.slice(id.length-4, id.length);
-					            var idmax='"'+obj[i].id+'"';
-					            var de_fault = "";
-								if (obj[i].de_fault == 1)
-									de_fault = "默认银行卡";
-								else
-									de_fault = "<a href='UserCtrl?action=setdefault_card&id="+obj[i].id+"'> 设为默认银行卡 </a> ";
-									
-					           if(o.card_id==obj[i].id)
-					            	div.append("<div onclick='c1(" + i + "," + (obj.length+1) + "," + idmax + ")' class='next_group' id='card" + i + "'><p class='card'><span id='cds" + i + "' style='display:none'>√</span> 持卡人:" + obj[i].name + "    尾号" + id + "   所属银行："+obj[i].bank+" 预留电话："+obj[i].phone+"<span id='setdf" + i +"'>" + de_fault + "</span></p><div>");
-					        }
-					       		
-					    }
-					});
-			         //
-			        
-			     	
+			         $("#cn").text(obj.c_name);$("#ci").text(obj.c_id);
+			         $("#cb").text(obj.c_bank);$("#ct").text(obj.c_phone);
+			        //地址
+			       	$("#ap").text(obj.a_province);$("#ac").text(obj.a_city);$("#ad").text(obj.a_dist);
+			       	$("#as").text(obj.a_street);$("#an").text(obj.a_name);$("#at").text(obj.a_telephone);
+			      	//商品信息
+					$("#name").text(obj.g_name);$("#sprice").text(obj.g_price);$("#tprice").text(obj.total);
+					$("#cc_total").text(obj.total);$("#ot").text(obj.transfee);
+					if(obj.status==1){$("#status").text("未付款");}
+					else if(obj.status==2){$("#status").text("待发货");}
+					else if(obj.status==3){$("#status").text("待收货");}
+					else if(obj.status==4){$("#status").text("待评价");}
+					else if(obj.status==5){$("#status").text("已退单");}
+					else if(obj.status==6){$("#status").text("已提醒发货");}
+					else if(obj.status==7){$("#status").text("交易结束");}		
 			    }
 			});
 </script>
@@ -239,7 +127,7 @@ $.ajax({
 	<div class="div_cart">
 			<table class="info_cart" id="address_top_table">
 				<tr>
-					<td><strong>选择收货地址</strong></td>
+					<td><strong>收货地址</strong></td>
 					<td></td>
 					<td align="right"><a href="jsp/address.jsp">管理收货地址</a></td>
 				</tr>
@@ -249,13 +137,14 @@ $.ajax({
 
 		<div class="div_cart" id="tab2">
 			<!-- 选择地址 -->
-
+			<div class="next_group" id="card" >
+			<p class="address"> 收货地址：:<span id="ap"> obj[i].province</span> <span id="ac">obj[i].city</span> <span id="ad">obj[i].dist</span><span id="as">obj[i].street</span> (<span id="an"> obj[i].name </span> 收) <span id="at"> obj[i].telephone </span> </p></div>
 		</div>
 
 	<div class="div_cart">
 			<table class="info_cart" id="address_top_table">
 				<tr>
-					<td><strong>选择支付方式</strong></td>
+					<td><strong>支付方式</strong></td>
 					<td></td>
 					<td align="right"><a href="jsp/card.jsp">管理银行卡</a></td>
 				</tr>
@@ -265,8 +154,10 @@ $.ajax({
 
 		<div class="div_cart" id="tab3">
 			<!-- 选择支付 -->
-
+			<div class="next_group" id="card" >
+			<p class="card" id="card_p">持卡人:<span id="cn">obj[i].name</span>     尾号<span id="ci">obj[i].id(4位)</span>   所属银行：<span id="cb">obj[i].bank</span> 预留电话：<span id="ct">obj[i].telephone</span></p></div>
 		</div>
+		
 		<div class="div_cart">
 			<table class="info_cart" id="goods_top_table">
 				<tr>
@@ -274,72 +165,44 @@ $.ajax({
 					<th>单价</th>
 					<th>数量</th>
 					<th>小计</th>
-					<th>操作</th>
+					<th>状态</th>
 				</tr>
 			</table>
 		</div>
 		
 		<div class="div_cart">
-			<form action="UserCtrl" method="post">
-				<input type="hidden" name="action" value="add_order"> 
-				<input	type="hidden" name="mode" id="mode" value="0"> 
-				<input type="hidden" name="address_id" id="aid" value="0">
-				 <input
-					type="hidden" name="card_id" id="cid" value="default"> 
-					<input type="hidden" name="user_id" id="uid" value="<%=value%>"> 
-					<input type="hidden" name="status" id="status" value="1"> 
-					<input type="hidden" name="arr_v" id="arr_v" value="<%=array_v%>">
-				<input type="hidden" name="arr_n" id="number" value="<%=array_n%>">
-				<input type="hidden" name="transfee" id="transfee" value="0">
-				<input type="hidden" name="arr_g" id="arr_g" value="<%=array_g%>">
-				<input type="hidden" name="arr_s" id="arr_s" value="<%=array_s%>">
-
+			
 				<div class="">
 					<ul class="ul_cart">
 						<li class="ul_cart_goods"><img class="ul_cart_goods_img">
-							<a href="Pagectrl?id=<%=array_g%>"><label id="name">加载中。。。</label></a>
+							<a href="Pagectrl?id=1"><label id="name">加载中。。。</label></a>
 						</li>
 						<li class="ul_cart_price"><strong id="sprice">单价</strong></li>
 						<li class="ul_cart_num">
-							<table>
-								<tr>
-									<td rowspan="2">数量:</td>
-									<td rowspan="2"><input type="text" width="50px" id="num"
-										class="number" value="1" onchange="numberchange()"
-										onkeyup="this.value=this.value.replace(/\D/g,'+')">
-									</td>
-									<td><input type="button" value="+" class="btn"
-										onclick="numberadd()">
-									</td>
-									<td rowspan="2"></td>
-									<td rowspan="2"></td>
-								</tr>
-								<tr>
-									<td><input type="button" value="-" class="btn"
-										onclick="numberreduce()">
-									</td>
-								</tr>
-							</table>
+							&nbsp;&nbsp;&nbsp;&nbsp;<label id="num"	class="number" >11</label>
 						</li>
 						<li class="ul_cart_total" id="tprice">￥小计</li>
 						<li class="ul_cart_do">
 						<p>
+						&nbsp;
+						</p>
+						<p>
+						<strong id="status">代付款。。。</strong>
 						</p>
 						</li>
 					</ul>
 				</div>
 				<div class="next_bottom" align="right">
 					<table>
-					<tr><th>全程包邮  邮费：￥0<th></tr>
+					<tr><th>全程包邮  邮费：￥<label id="ot">0</label><th></tr>
 						<tr>
 							<th colspan="3">共计：￥<label id="cc_total">总价</label>
-							</th>
-							<th colspan="2"><input type="submit" id="last" value="下单" disabled>
-							</th>
+						</tr>
+						<tr>
+							<th colspan="3"><a href="jsp/order.jsp"><button>返回</button></a></label>
 						</tr>
 					</table>
 				</div>
-			</form>
 		</div>
 	</div>
 </body>

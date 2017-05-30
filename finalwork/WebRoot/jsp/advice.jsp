@@ -45,6 +45,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    }
         };  
   	</script>
+  	 <script type="text/javascript">
+    function check(){
+    	if($("#tag").val()!="")
+    		document.getElementById("limit").disabled=false;
+    	else
+    		document.getElementById("limit").disabled=true;
+    }
+    </script>
   </head>
   
   <body>
@@ -118,39 +126,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 	<div class="div1">
 	<form action="UserCtrl" method="post">
-		<input type="hidden" name="id" value="<%=value%>">
-		<input type="hidden" name="action" value="cPassword">
+		<input type="hidden" name="action" value="add_advice">
 	
-    	<table class="info">
-    	<tr>	
-    		<th colspan="2">更改密码</th>
-    		</tr>
-    	<tr>
-    		<td>原本密码</td><td><input type="password" id="old-password" name="password0" placeholder="请输入原登录密码"></td>
-    		</tr>
-    	<tr>
-    		<td>新的密码</td><td><input type="password" id="new-password" name="password1" placeholder="由数字、字母组合"></td>
-    		</tr>
-    	<tr>
-    		<td>确认密码</td><td><input type="password" id="confirm-password" placeholder="请再次输入上面的密码" onchange="check()"></td>
-    		</tr>
-    	<tr>
-    		<th colspan="2"><input type="submit" value="保存修改" id="limit">
-</th>
-    		</tr>
-    		<script language="javascript" type="text/javascript"> 
-    		function check(){
-					if(document.getElementById("new-password").value!=document.getElementById("confirm-password").value)
-					{
-						document.getElementById("limit").disabled=true;
-						alert("两次密码不同！");
-					}else{
-						document.getElementById("limit").disabled=false;
-					}
-				}
-			</script>
+    	<table class="info_advice">
+    	
+	    	<tr>	
+	    		<th colspan="2">反馈建议</th>
+	    	</tr>
+	    	
+	    	<tr><th><br></th></tr>
+	    	
+	    	<tr>
+	    		<td>意见类型：</td><td><input type="text" id="tag" name="tag" onchange="check()" placeholder="请输入意见的类型"></td>
+	    	</tr>
+	    		
+	    	<tr><th><br></th></tr>
+	    		
+	    	<tr>
+	    		<td>意见内容：</td><td><textarea style="width:300px;height:300px;" id="details" name="details" placeholder="输入您的意见，协助我们提供您更好的服务"></textarea></td>
+	    	</tr>
+	    		
+	    	<tr><th><br></th></tr>
+	    	
+	    	<tr>
+	    		<th colspan="2"><input type="submit" value="反馈意见" id="limit" disabled></th>
+	    	</tr>
     	</table>
     </form>
     </div>
+   
   </body>
 </html>
