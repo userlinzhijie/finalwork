@@ -46,7 +46,7 @@ public class Uploadctrl extends HttpServlet {
 		String user = (String)request.getParameter("user_id");
 		
 		// 为了简单，后面也直接就以fileName作为保存文件的名称
-		String fileName = request.getParameter("picture")+".jpg";
+		String fileName = request.getParameter("picture");
 		Part part = request.getPart("file");
 		// 将文件保存到项目下的uploads文件夹下，为了简单这里没写判断目录是否存在及创建目录的操作，要先确保该目录已经存在
 		part.write(getServletContext().getRealPath("/img") + "/" + fileName);

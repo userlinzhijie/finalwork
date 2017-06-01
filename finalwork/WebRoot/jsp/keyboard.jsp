@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.net.*" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -20,6 +21,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="css/styles.css" rel="stylesheet" type="text/css" >
 	<link href="css/keyboard.css" rel="stylesheet" type="text/css" >
 	<link href="./css/selectlist.css" rel="stylesheet" type="text/css">
+	<%Cookie[] cookies = null;
+		cookies = request.getCookies();
+		String value="";
+		for (int i = 0; i < cookies.length; i++) {
+			String name = URLDecoder.decode(cookies[i].getName(), "utf-8");
+			if (name.equals("user_id")) {
+				value = URLDecoder.decode(cookies[i].getValue(), "utf-8");
+			}
+		}		
+	 %>
 	<script type="text/javascript" src="js/jquery-1.11.1.js"></script> 
 	
 	<script language="javascript" type="text/javascript">
@@ -36,10 +47,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    	}
           };  
   	</script>
-  	
-  	<script type="text/javascript">
-	
-	</script>
 
   </head>
   
@@ -69,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </li>
     <li class="subme">
           <a href="">店铺中心</a>
-	          <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="">下架货物</a></div>
+	         <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="Underctrl?userid=<%=value %>">下架货物</a></div>
     </li>
     <li class="subme">
           <a href="">购物车</a>
@@ -88,8 +95,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	<p align = "center">
  	<input type = "text" name = "search"><input type = "submit" value = "搜索"></p><br>
  	</form>
- 	<form action = "Pagectrl?order=desc&type=${type}&search=${search}" method="post">
- 	<p align = "center"><input type = "submit" value="价格↓" ></form>
+ 	<p align = "center"><a href="Pagectrl?order=desc&type=${type}&search=${search}"><input type = "submit" value="价格↓" ></a>
+ 	<a href="Pagectrl?order=asc&type=${type}&search=${search}"><input type = "submit" value="价格↑" ></a>
+ 	</form>
  	<br>
  	<div>
 	 	<div class="div0"><br>
@@ -109,7 +117,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 		<table class="shoplist" >
 	 			<tr>
 	 			<c:forEach var="shop" items="${pageBean.data}" varStatus="vs">	
-	 			<c:if test = "${vs.count>=2}"><c:if test = "${(vs.count % 2)==1}">
+	 			<c:if test = "${vs.count>=4}"><c:if test = "${(vs.count % 4)==1}">
 	 				<tr>
 	 			</c:if></c:if>		
 				<td>
@@ -120,9 +128,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<tr>
 					<td style="text-align:left">¥<c:out value="${shop.price}" /></td></tr>
 					<tr>
-					<td><c:out value="${shop.name}" /></td></tr>
-					<tr>
-					<td style="text-align:right">店铺名</td></tr>
+					<td title="${shop.name}"><c:out value="${shop.name}" /></td></tr>
 					</table></a>
 				</td>
 				</c:forEach>
@@ -133,15 +139,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<c:choose>
     		<c:when test = "${pageBean.curPage==1}">首页 上一页</c:when>
     		<c:otherwise>
-    			<a href="Pagectrl?page=1">首页</a>
-    			<a href="Pagectrl?page=${pageBean.curPage-1}">上一页</a>
+    			<a href="Pagectrl?page=1&type=${pageBean.data[0].type}">首页</a>
+    			<a href="Pagectrl?page=${pageBean.curPage-1}&type=${pageBean.data[0].type}">上一页</a>
     		</c:otherwise>
     	</c:choose>
     	<c:choose>
     		<c:when test="${pageBean.curPage==pageBean.totalPages}">下一页 尾页</c:when>
     		<c:otherwise>
-    			<a href="Pagectrl?page=${pageBean.curPage+1}">下一页</a>
-    			<a href="Pagectrl?page=${pageBean.totalPages}">尾页</a>
+    			<a href="Pagectrl?page=${pageBean.curPage+1}&type=${pageBean.data[0].type}">下一页</a>
+    			<a href="Pagectrl?page=${pageBean.totalPages}&type=${pageBean.data[0].type}">尾页</a>
     		</c:otherwise>
     	</c:choose>
 	 		</div>

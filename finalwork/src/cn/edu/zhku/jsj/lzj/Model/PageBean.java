@@ -6,7 +6,7 @@ public class PageBean {
 	private int curPage;
 	private int totalPages;
 	private int totalRows;
-	private int pageSize = 6;
+	private int pageSize = 8;
 	@SuppressWarnings("rawtypes")
 	private List data;
 	

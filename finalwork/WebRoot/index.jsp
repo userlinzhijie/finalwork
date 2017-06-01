@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.net.*" %>
 <%
 String path = request.getContextPath();
@@ -103,7 +104,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </li>
     <li class="subme">
          <a href="jsp/shopinfo.jsp">店铺中心</a>
-	     <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="Pagectrl?userid=<%=value %>">下架货物</a></div>
+	     <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="Underctrl?userid=<%=value %>">下架货物</a></div>
     </li>
     <li class="subme">
           <a href="jsp/cart.jsp">购物车</a>
@@ -116,9 +117,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </li>
  	</ul><br>
 	<!-- 下层分割线 -->
- 	<form action = "index.jsp" method="post">
- 	<p align = "center" >
- 	<input type = "text" name = "search"><input type = "submit" value = "搜索"><br>
+ 	<form action = "Pagectrl?page=1" method="post">
+ 	<p align = "center">
+ 	<input type = "text" name = "search"><input type = "submit" value = "搜索"></p><br>
  	</form><br><br>
  	<div>
 	 	<div class="div0"><br>
@@ -138,10 +139,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 	<div id="fade_focus">
 		<div class="loading">Loading...<br></div>
 		<ul id ="photo">
-		<li><a href="" ><img src="img/background.jpg" width="704" height="304" alt="xxx键盘" /></a></li>
-		<li><a href="" ><img src="img/background1.jpg" width="704" height="304" alt="xxx鼠标" /></a></li>
+		<li><a href="Pagectrl?id=1"><img src="img/k1.jpg" width="704" height="304" alt="彩色键盘" /></a></li>
+		<li><a href="Pagectrl?id=2"><img src="img/m1.jpg" width="704" height="304" alt="雷柏鼠标" /></a></li>
 		</ul>
 		</div></div>
 	</div>	
+	<c:if test = "${MSG!=null}">
+    			<script>alert("${MSG}");</script>
+    			<% session.setAttribute("MSG", null);%>
+    </c:if>
   </body>
 </html>

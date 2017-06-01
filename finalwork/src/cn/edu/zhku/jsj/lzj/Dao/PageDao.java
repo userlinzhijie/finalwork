@@ -16,7 +16,7 @@ public class PageDao {
             PageBean pageBean = new PageBean();             
 			ArrayList list = new ArrayList();   
             int pageNum = page;   
-            pageBean=this.setPageBean(pageBean);
+            pageBean=this.setTypePageBean(pageBean,type);
             pageBean.setCurPage(pageNum); 
             pageNum=pageBean.getCurPage();
             Connection con=ConnectionManager.getConnection();  
@@ -79,6 +79,30 @@ public class PageDao {
         }  
         return pageBean;
     }
+	
+	public int getTypeCount(String type) throws Exception {  
+        int ret = 0;  
+        Connection con=ConnectionManager.getConnection();  
+        Statement stmt = con.createStatement();  
+        String strSql = "select * from goods where type = '"+type+"'";
+        ResultSet rs = stmt.executeQuery(strSql);  
+        while (rs.next()) {  
+            ret++;  
+        }  
+        return ret;  
+    }  
+	
+	public PageBean setTypePageBean(PageBean pageBean,String type) throws Exception {  
+        pageBean.setTotalRows(this.getTypeCount(type));  
+        if (pageBean.getTotalRows() % pageBean.getPageSize() == 0) { 
+            pageBean.setTotalPages(pageBean.getTotalRows()/ pageBean.getPageSize());  
+        } else {  
+        	pageBean.setTotalPages(pageBean.getTotalRows() / pageBean.getPageSize() + 1);  
+        }  
+        return pageBean;
+    }
+	
+	
 	
 	public int getSearchCount(String search) throws Exception {  
         int ret = 0;  
@@ -194,13 +218,44 @@ public class PageDao {
         }  
 	}  
 	
+	//得到排序页面的页数数据
+	public int getOrderCount(String type,String search) throws Exception {  
+        int ret = 0;  
+        Connection con=ConnectionManager.getConnection();  
+        Statement stmt = con.createStatement();  
+        String strSql="select * from goods order by price ";
+        if(type!="")
+        {
+        	strSql = "select * from goods  where type = '"+type+"' order by price ";
+        }
+        if(search!="")
+        {
+        	strSql = "select * from goods  where name like '%"+search+"%' order by price ";
+        }
+        ResultSet rs = stmt.executeQuery(strSql);  
+        while (rs.next()) {  
+            ret++;  
+        }  
+        return ret;  
+    }  
+	
+	public PageBean setOrderPageBean(PageBean pageBean,String type,String search) throws Exception {  
+        pageBean.setTotalRows(this.getOrderCount(type,search));  
+        if (pageBean.getTotalRows() % pageBean.getPageSize() == 0) { 
+            pageBean.setTotalPages(pageBean.getTotalRows()/ pageBean.getPageSize());  
+        } else {  
+        	pageBean.setTotalPages(pageBean.getTotalRows() / pageBean.getPageSize() + 1);  
+        }  
+        return pageBean;
+    }
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public PageBean getOrder(String order,String type,String search,int page) throws Exception {
 		try {  
             PageBean pageBean = new PageBean();             
 			ArrayList list = new ArrayList();   
             int pageNum = page;   
-            pageBean=this.setPageBean(pageBean);
+            pageBean=this.setOrderPageBean(pageBean,type,search);
             pageBean.setCurPage(pageNum); 
             pageNum=pageBean.getCurPage();
             String strSql=null;
@@ -209,19 +264,18 @@ public class PageDao {
     			throw new Exception("数据库连接不成功！");
     		}
             Statement stmt = con.createStatement();
-            if(type==null&&search==null)
+            if(type==""&&search=="")
             {
             	strSql = "select * from goods order by price "+order+" limit "+(pageNum-1) * pageBean.getPageSize()+","+pageBean.getPageSize();
             }
-            if(type!=null)
+            if(type!="")
             {
-            	strSql = "select * from goods  where type like '%"+type+"%' order by price "+order+" limit "+(pageNum-1) * pageBean.getPageSize()+","+pageBean.getPageSize();
+            	strSql = "select * from goods  where type = '"+type+"' order by price "+order+" limit "+(pageNum-1) * pageBean.getPageSize()+","+pageBean.getPageSize();
             }
-            if(search!=null)
+            if(search!="")
             {
             	strSql = "select * from goods  where name like '%"+search+"%' order by price "+order+" limit "+(pageNum-1) * pageBean.getPageSize()+","+pageBean.getPageSize();
             }
-            System.out.print(strSql);
             ResultSet rs = stmt.executeQuery(strSql);  
             while (rs.next()) {    
                     Keyboard kb=new Keyboard();  

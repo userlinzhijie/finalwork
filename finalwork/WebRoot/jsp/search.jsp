@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.net.*" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -21,7 +22,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="css/keyboard.css" rel="stylesheet" type="text/css" >
 	<link href="./css/selectlist.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="js/jquery-1.11.1.js"></script> 
-	
+	<%Cookie[] cookies = null;
+		cookies = request.getCookies();
+		String value="";
+		for (int i = 0; i < cookies.length; i++) {
+			String name = URLDecoder.decode(cookies[i].getName(), "utf-8");
+			if (name.equals("user_id")) {
+				value = URLDecoder.decode(cookies[i].getValue(), "utf-8");
+			}
+		}		
+	 %>
 	<script language="javascript" type="text/javascript">
 	  	window.onload=function(){
 	  	//折叠菜单函数
@@ -66,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </li>
     <li class="subme">
           <a href="">店铺中心</a>
-	          <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="">下架货物</a></div>
+	          <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="Underctrl?userid=<%=value %>">下架货物</a></div>
     </li>
     <li class="subme">
           <a href="jsp/cart.jsp">购物车</a>
@@ -117,9 +127,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<tr>
 					<td style="text-align:left">¥<c:out value="${shop.price}" /></td></tr>
 					<tr>
-					<td><c:out value="${shop.name}" /></td></tr>
-					<tr>
-					<td style="text-align:right">店铺名</td></tr>
+					<td title="${shop.name}"><c:out value="${shop.name}" /></td></tr>
 					</table></a>
 				</td>
 				</c:forEach>
@@ -132,15 +140,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<c:choose>
     		<c:when test = "${pageBean.curPage==1}">首页 上一页</c:when>
     		<c:otherwise>
-    			<a href="Pagectrl?page=1&order=desc&type=${type}&search=${search}">首页</a>
-    			<a href="Pagectrl?page=${pageBean.curPage-1}&order=desc&type=${type}&search=${search}">上一页</a>
+    			<a href="Pagectrl?page=1&order=${order}&search=${search}&type=${type}">首页</a>
+    			<a href="Pagectrl?page=${pageBean.curPage-1}&order=${order}&search=${search}&type=${type}">上一页</a>
     		</c:otherwise>
     	</c:choose>
     	<c:choose>
     		<c:when test="${pageBean.curPage==pageBean.totalPages}">下一页 尾页</c:when>
     		<c:otherwise>
-    			<a href="Pagectrl?page=${pageBean.curPage+1}&order=desc&type=${type}&search=${search}">下一页</a>
-    			<a href="Pagectrl?page=${pageBean.totalPages}&order=desc&type=${type}&search=${search}">尾页</a>
+    			<a href="Pagectrl?page=${pageBean.curPage+1}&search=${search}&order=${order}&type=${type}">下一页</a>
+    			<a href="Pagectrl?page=${pageBean.totalPages}&order=${order}&search=${search}&type=${type}">尾页</a>
     		</c:otherwise>
     	</c:choose>
 	 		</div>

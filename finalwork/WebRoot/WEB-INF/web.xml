@@ -115,11 +115,57 @@
     <servlet-name>ShopCtrl</servlet-name>
     <servlet-class>cn.edu.zhku.leo.Ctrl.ShopCtrl</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>Underctrl</servlet-name>
+    <servlet-class>cn.edu.zhku.jsj.lzj.Ctrl.Underctrl</servlet-class>
+  </servlet>
+
+
+
     <servlet-mapping>
     <servlet-name>ShopCtrl</servlet-name>
     <url-pattern>/ShopCtrl</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Underctrl</servlet-name>
+    <url-pattern>/Underctrl</url-pattern>
+  </servlet-mapping>
+
   
+  
+ <filter>
+ 	<filter-name>Shopfilter</filter-name>
+ 	<filter-class>cn.edu.zhku.jsj.lzj.filter.Shopfilter</filter-class>
+ </filter>
+ 
+  <filter>
+ 	<filter-name>Shoporderfilter</filter-name>
+ 	<filter-class>cn.edu.zhku.jsj.lzj.filter.Shoporderfilter</filter-class>
+ </filter>
+ 
+ <filter-mapping>
+  	<filter-name>Shopfilter</filter-name>
+  	<url-pattern>/jsp/shopinfo.jsp</url-pattern>
+ </filter-mapping>
+<filter-mapping>
+  	<filter-name>Shopfilter</filter-name>
+ 	<url-pattern>/jsp/undershop.jsp</url-pattern>
+</filter-mapping>
+<filter-mapping>
+  	<filter-name>Shopfilter</filter-name>	
+  	<url-pattern>/jsp/putonsale.jsp</url-pattern>
+ </filter-mapping>
+ 
+ <filter-mapping>
+  	<filter-name>Shoporderfilter</filter-name>	
+  	<url-pattern>/Shoporderctrl</url-pattern>
+ </filter-mapping>
+  <filter-mapping>
+  	<filter-name>Shoporderfilter</filter-name>	
+  	<url-pattern>/Underctrl</url-pattern>
+ </filter-mapping>
   
   
   	

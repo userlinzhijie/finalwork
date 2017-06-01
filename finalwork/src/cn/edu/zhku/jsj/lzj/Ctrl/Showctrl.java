@@ -27,7 +27,7 @@ public class Showctrl extends HttpServlet {
 			String id = request.getParameter("id");
 			try {
 				String pic = ss.toGetPic(id);
-				String filePath = getServletContext().getRealPath("/")+"img\\"+File.separator+pic;
+				String filePath = getServletContext().getRealPath("/")+"img\\"+File.separator+pic+".jpg";
 		        File file = new File(filePath);
 		        OutputStream outputStream = response.getOutputStream();
 		        FileInputStream fileInputStream = new FileInputStream(file);

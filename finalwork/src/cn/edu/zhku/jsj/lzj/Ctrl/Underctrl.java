@@ -11,9 +11,9 @@ import cn.edu.zhku.jsj.lzj.Service.PageService;
 
 
 @SuppressWarnings("serial")
-public class Pagectrl extends HttpServlet {
+public class Underctrl extends HttpServlet {
 	
-	public Pagectrl(){
+	public Underctrl(){
 		super();
 	}
 	
@@ -43,13 +43,33 @@ public class Pagectrl extends HttpServlet {
 			try {
 				request.setAttribute("pageBean",ps.goGetGoods(userid,curPage));
 				request.getRequestDispatcher("jsp/undershop.jsp").forward(request,response);
-				return;
 			} catch (Exception e) {
 			e.printStackTrace();
 			}
 		}
+		//排序显示
+		if(order!=null)
+		{
+			try {
+				request.setAttribute("order",order);
+				request.setAttribute("pageBean",ps.goGetOrder(order,type,search,curPage));
+				request.getRequestDispatcher("jsp/search.jsp").forward(request,response);
+			} catch (Exception e) {
+			e.printStackTrace();
+			}
+		}
+		//进入详细界面
+		if(id!=0)
+		{
+			try {	
+				request.setAttribute("pageBean",ps.goGetDetail(id));
+				request.getRequestDispatcher("jsp/detail.jsp").forward(request,response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		//进入搜索界面
-		if(search!=null&&order==null)
+		if(search!=null)
 		{
 			try {
 				request.setAttribute("search",search);
@@ -61,34 +81,8 @@ public class Pagectrl extends HttpServlet {
 				}
 				request.setAttribute("result",result);
 				request.getRequestDispatcher("jsp/search.jsp").forward(request,response);
-				return;
 			} catch (Exception e) {
 			e.printStackTrace();
-			}
-		}
-		//排序显示
-		if(order!=null)
-		{
-			try {
-				request.setAttribute("order",order);
-				request.setAttribute("type",type);
-				request.setAttribute("search",search);
-				request.setAttribute("pageBean",ps.goGetOrder(order,type,search,curPage));
-				request.getRequestDispatcher("jsp/search.jsp").forward(request,response);
-				return;
-			} catch (Exception e) {
-			e.printStackTrace();
-			}
-		}
-		//进入详细界面
-		if(id!=0)
-		{
-			try {	
-				request.setAttribute("pageBean",ps.goGetDetail(id));
-				request.getRequestDispatcher("jsp/detail.jsp").forward(request,response);
-				return;
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
 		}
 		//常规进入
@@ -98,7 +92,6 @@ public class Pagectrl extends HttpServlet {
 				request.setAttribute("type",type);
 				request.setAttribute("pageBean",ps.goGetResult(curPage,type));
 				request.getRequestDispatcher("jsp/keyboard.jsp").forward(request,response);
-				return;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

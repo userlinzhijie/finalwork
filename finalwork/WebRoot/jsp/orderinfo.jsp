@@ -39,7 +39,27 @@
 	int order_id = Integer.parseInt(request.getParameter("id"));
 %>
 
+
+
+<script language="javascript" type="text/javascript">
+	  	window.onload=function(){
+	  	//折叠菜单函数
+        var lis = document.getElementsByClassName("subme");
+	    for(var i=0; i<lis.length; i++){
+		        lis[i].onmouseover = function(){
+		            this.getElementsByClassName("submenu")[0].style.display = "block";
+		        };
+		        lis[i].onmouseout = function(){
+		            this.getElementsByClassName("submenu")[0].style.display = "none";
+		        };
+	    	}
+          };  
+  	</script>
+
+
 <script type="text/javascript">
+
+	
 $.ajax({
 			    type: "get", //请求方式  
 			    url: "UserCtrl?action=getorderbyid&order_id=<%=order_id%>", //发送请求地址  
@@ -49,6 +69,8 @@ $.ajax({
 			    //请求成功后的回调函数有两个参数  
 			    success: function(data) {
 			        var obj = eval(data); //解析json对象 
+			        
+			         document.getElementById("g_img").src = "Showctrl?id="+obj.goods_id;
 			 
 			        //银行卡
 			         $("#cn").text(obj.c_name);$("#ci").text(obj.c_id);
@@ -72,7 +94,7 @@ $.ajax({
 </head>
 
 
-<body>
+<body background="img/background2.jpg">
 	<div id="Header">
 		<div id="logo">
 			<p align="right">&nbsp;
@@ -99,24 +121,23 @@ $.ajax({
 	</script>
 	<p align="center" class="ziti">订单详情</p>
 	<ul id="ul1">
-		<li class="subme"><a href="jsp/login.jsp">店铺订单</a>
-			<div class="submenu">
-				<a href="#">01 </a><a href="#">02 </a><a href="#">03</a>
-			</div>
-		</li>
-		<li class="subme"><a href="">店铺中心</a>
-			<div class="submenu">
-				<a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a
-					href="">下架货物</a>
-			</div>
-		</li>
-		<li class="subme"><a href="jsp/cart.jsp">购物车</a>
-		</li>
-		<li class="subme"><a href="jsp/info.jsp">我的中心</a>
-		</li>
-		<li class="subme"><a href="">首页</a>
-		</li>
-	</ul>
+    <li class="subme">
+          <a href="Shoporderctrl?user_id=<%=value %>">店铺订单</a>     
+    </li>
+    <li class="subme">
+         <a href="jsp/shopinfo.jsp">店铺中心</a>
+	     <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="Underctrl?userid=<%=value %>">下架货物</a></div>
+    </li>
+    <li class="subme">
+          <a href="jsp/cart.jsp">购物车</a>
+    </li>
+    <li class="subme">
+          <a href="jsp/info.jsp">我的中心</a>
+    </li>
+    <li class="subme">
+          <a href="#">首页</a>
+    </li>
+ 	</ul>
 	<br>
 	<br>
 	<br>
@@ -174,7 +195,7 @@ $.ajax({
 			
 				<div class="">
 					<ul class="ul_cart">
-						<li class="ul_cart_goods"><img class="ul_cart_goods_img">
+						<li class="ul_cart_goods"><img class="ul_cart_goods_img" src="" id="g_img">
 							<a href="Pagectrl?id=1"><label id="name">加载中。。。</label></a>
 						</li>
 						<li class="ul_cart_price"><strong id="sprice">单价</strong></li>

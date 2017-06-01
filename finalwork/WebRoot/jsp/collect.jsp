@@ -34,6 +34,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 			
 	 %>
+	 
+	 <script language="javascript" type="text/javascript">
+	  	window.onload=function(){
+	  	//折叠菜单函数
+        var lis = document.getElementsByClassName("subme");
+	    for(var i=0; i<lis.length; i++){
+		        lis[i].onmouseover = function(){
+		            this.getElementsByClassName("submenu")[0].style.display = "block";
+		        };
+		        lis[i].onmouseout = function(){
+		            this.getElementsByClassName("submenu")[0].style.display = "none";
+		        };
+	    	}
+          };  
+  	</script>
   	<script language="javascript" type="text/javascript">
 	$.ajax({  
         type:"get",//请求方式  
@@ -61,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
 
   
-  <body>
+  <body background="img/background2.jpg">
     <div id="Header">
   	<div id="logo">
   	<p align ="right" >&nbsp;<p> 
@@ -81,26 +96,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </script>
  	<p align = "center" class = "ziti">收藏</p>
  	<ul id="ul1">
-	    <li class="subme">
-	          <a href="jsp/login.jsp">店铺订单</a>
-	          <div class ="submenu"><a href="#">01 </a><a href="#">02 </a><a href="#">03</a></div>        
-	    </li>
-	    <li class="subme">
-	          <a href="">店铺中心</a>
-	          <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="">下架货物</a></div>
-	    </li>
-	    <li class="subme">
-	          <a href="jsp/cart.jsp">购物车</a>
-	       
-	    </li>
-	    <li class="subme">
-	          <a href="jsp/info.jsp">我的中心</a>
-	         
-	    </li>
-	    <li class="subme">
-	          <a href="">首页</a>
-	    </li>
-    </ul><br><br><br>
+    <li class="subme">
+          <a href="Shoporderctrl?user_id=<%=value %>">店铺订单</a>     
+    </li>
+    <li class="subme">
+         <a href="jsp/shopinfo.jsp">店铺中心</a>
+	     <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="Underctrl?userid=<%=value %>">下架货物</a></div>
+    </li>
+    <li class="subme">
+          <a href="jsp/cart.jsp">购物车</a>
+    </li>
+    <li class="subme">
+          <a href="jsp/info.jsp">我的中心</a>
+    </li>
+    <li class="subme">
+          <a href="#">首页</a>
+    </li>
+ 	</ul><br><br><br>
     	<table class="hovertable">
 			<tr>  
 			    <th>我的中心</th>  

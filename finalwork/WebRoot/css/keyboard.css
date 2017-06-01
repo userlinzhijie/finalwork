@@ -31,7 +31,9 @@
 		width:40px;
 		height:30px;
 		text-align:center;	
-		word-wrap:break-word;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		overflow: hidden;
 }
 
 .pic{

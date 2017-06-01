@@ -106,7 +106,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </li>
 	    <li class="subme">
 	          <a href="jsp/shopinfo.jsp">店铺中心</a>
-	          <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="Pagectrl?userid=<%=value %>">下架货物</a></div>
+	         <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="Underctrl?userid=<%=value %>">下架货物</a></div>
 	    </li>
 	    <li class="subme">
 	          <a href="jsp/cart.jsp">购物车</a>
@@ -131,7 +131,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    <td><a href="jsp/putonsale.jsp">上架商品</a></td>  
 			</tr>  
 			<tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">  
-			    <td><a href="Pagectrl?userid=<%=value %>">下架商品</a></td>  
+			    <td><a href="Underctrl?userid=<%=value %>">下架商品</a></td>  
 			</tr>   
 		</table>
     	

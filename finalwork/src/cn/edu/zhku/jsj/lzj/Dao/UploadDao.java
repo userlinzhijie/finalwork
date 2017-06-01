@@ -29,7 +29,7 @@ public class UploadDao {
 		String details= keyboard.getDetails();
 		String picture =keyboard.getPicture();
 		String user=keyboard.getUser();
-		String sql ="insert into goods values(0,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";  
+		String sql ="insert into goods values(0,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,0)";  
 	    PreparedStatement pstmt = conn.prepareStatement(sql);
 	    pstmt.setString(1,user);
 	    pstmt.setString(2,brand);

@@ -32,8 +32,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				value = URLDecoder.decode(cookies[i].getValue(), "utf-8");
 			}
 		}
-			
+	
 	 %>
+	 
+	 <script language="javascript" type="text/javascript">
+	  	window.onload=function(){
+	  	//折叠菜单函数
+        var lis = document.getElementsByClassName("subme");
+	    for(var i=0; i<lis.length; i++){
+		        lis[i].onmouseover = function(){
+		            this.getElementsByClassName("submenu")[0].style.display = "block";
+		        };
+		        lis[i].onmouseout = function(){
+		            this.getElementsByClassName("submenu")[0].style.display = "none";
+		        };
+	    	}
+          };  
+  	</script>
 	 <script language="javascript" type="text/javascript">
 	 function arr_change(){
 			$.ajax({  
@@ -112,11 +127,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          	total=obj[i].price*obj[i].number;
          	cc_total=cc_total+total;
 			str3=str3.concat(total+"_");
-         	//table.append('<tr><th><a href="Pagectrl?id='+obj[i].goods_id+'">'+obj[i].name+'</a></th><th>￥'+obj[i].price+'</th><th>'+obj[i].number+'</th><th>￥'+obj[i].price*obj[i].number+'</th><th><a href="UserCtrl?action=add_collect&user_id=<%=value%>&goods_id='+obj[i].goods_id+'">收藏</a>/<a href="UserCtrl?action=del_cart&id='+obj[i].id+'">删除</a></th></tr>');
          	
             var part= '<table><tr><td rowspan="2">数量:</td><td rowspan="2"><input type="text" width="50px" id="num'+i+'" class="number"  value="'+obj[i].number+'" onchange="numberchange('+i+')" onkeyup="this.value=this.value.replace(/\D/g,'+')"></td><td><input type="button" value="+" class="btn" onclick="numberadd('+i+')"></td><td rowspan="2"></td><td rowspan="2"></td></tr><tr><td><input type="button" value="-" class="btn" onclick="numberreduce('+i+')"></td></tr></table>';
          	
-            div.append('<div class=""><ul class="ul_cart"><li class="ul_cart_goods"><img class="ul_cart_goods_img"><a href="Pagectrl?id='+obj[i].goods_id+'">'+obj[i].name+'</a></li><li class="ul_cart_price"><strong>￥'+obj[i].price+'</strong></li><li class="ul_cart_num">'+part+'</li><li class="ul_cart_total" id="price'+i+'">￥'+obj[i].price*obj[i].number+'</li><li class="ul_cart_do"><p><a href="UserCtrl?action=add_collect&user_id=<%=value%>&goods_id='+obj[i].goods_id+'">收藏</a></p><br><p><a href="UserCtrl?action=del_cart&id='+obj[i].id+'">删除</a></p></li></ul></div>');
+            div.append('<div class=""><ul class="ul_cart"><li class="ul_cart_goods"><img class="ul_cart_goods_img" src="Showctrl?id='+obj[i].goods_id+'"><a href="Pagectrl?id='+obj[i].goods_id+'">'+obj[i].name+'</a></li><li class="ul_cart_price"><strong>￥'+obj[i].price+'</strong></li><li class="ul_cart_num">'+part+'</li><li class="ul_cart_total" id="price'+i+'">￥'+obj[i].price*obj[i].number+'</li><li class="ul_cart_do"><p><a href="UserCtrl?action=add_collect&user_id=<%=value%>&goods_id='+obj[i].goods_id+'">收藏</a></p><br><p><a href="UserCtrl?action=del_cart&id='+obj[i].id+'">删除</a></p></li></ul></div>');
             
          	str=str.concat(obj[i].goods_id+'_');
          	str1=str1.concat(obj[i].number+'_');
@@ -143,7 +157,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
 
   
-  <body>
+  <body background="img/background2.jpg">
     <div id="Header">
   	<div id="logo">
   	<p align ="right" >&nbsp;<p> 
@@ -163,24 +177,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </script>
  	<p align = "center" class = "ziti">购物车</p>
  	<ul id="ul1">
-	    <li class="subme">
-	          <a href="jsp/login.jsp">店铺订单</a>
-	          <div class ="submenu"><a href="#">01 </a><a href="#">02 </a><a href="#">03</a></div>        
-	    </li>
-	    <li class="subme">
-	          <a href="">店铺中心</a>
-	          <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="">下架货物</a></div>
-	    </li>
-	    <li class="subme">
-	          <a href="jsp/cart.jsp">购物车</a>
-	    </li>
-	    <li class="subme">
-	          <a href="jsp/info.jsp">我的中心</a>
-	    </li>
-	    <li class="subme">
-	          <a href="">首页</a>
-	    </li>
-    </ul><br><br><br>
+    <li class="subme">
+          <a href="Shoporderctrl?user_id=<%=value %>">店铺订单</a>     
+    </li>
+    <li class="subme">
+         <a href="jsp/shopinfo.jsp">店铺中心</a>
+	     <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="Underctrl?userid=<%=value %>">下架货物</a></div>
+    </li>
+    <li class="subme">
+          <a href="jsp/cart.jsp">购物车</a>
+    </li>
+    <li class="subme">
+          <a href="jsp/info.jsp">我的中心</a>
+    </li>
+    <li class="subme">
+          <a href="#">首页</a>
+    </li>
+ 	</ul><br><br><br>
     	
     	
     	<div class="Content">
