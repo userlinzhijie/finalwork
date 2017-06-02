@@ -70,26 +70,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	<p align = "center" class = "ziti">购物系统</p>
 	<!-- 上层分割线 -->
 	<ul id="ul1">
-    <li class="subme">
-          <a href="">店铺订单</a>
-          <div class ="submenu"><a href="#">01 </a><a href="#">02 </a><a href="#">03</a></div>        
-    </li>
-    <li class="subme">
-          <a href="">店铺中心</a>
+	    <li class="subme">
+	          <a href="Shoporderctrl?user_id=<%=value%>">店铺订单</a>       
+	    </li>
+	    <li class="subme">
+	          <a href="jsp/shopinfo.jsp">店铺中心</a>
 	          <div class ="submenu"><a href="jsp/shopinfo.jsp">店铺信息</a><a href="jsp/putonsale.jsp">上架货物</a><a href="Underctrl?userid=<%=value %>">下架货物</a></div>
-    </li>
-    <li class="subme">
-          <a href="jsp/cart.jsp">购物车</a>
-        
-    </li>
-    <li class="subme">
-          <a href="jsp/info.jsp">我的中心</a>
-	    
-    </li>
-    <li class="subme">
-          <a href="#">首页</a>
-    </li>
- 	</ul><br>
+	    </li>
+	    <li class="subme">
+	          <a href="jsp/cart.jsp">购物车</a>
+	        
+	    </li>
+	    <li class="subme">
+	          <a href="jsp/info.jsp">我的中心</a>
+	        
+	    </li>
+	    <li class="subme">
+	          <a href="">首页</a>
+	    </li>
+    </ul><br>
 	<!-- 下层分割线 -->
  	<form action = "Pagectrl?page=1" method="post">
  	<p align = "center" >

@@ -102,7 +102,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<c:forEach var="order" items="${pageBean.data}" varStatus="vs">
     	<c:if test = "${order.status!=9&&order.status!=89}">
     	<tr>
-    	<td class="short"><c:out value="${order.id}"/></td>
+    	<td class="short"><a href="jsp/orderinfo.jsp?id=${order.id }"><c:out value="${order.id}"/></a></td>
     	<td class="long"><c:out value="${order.goods}" /></td>
     	<td class="short"><c:out value="${order.number}" /></td>
     	<td>￥<c:out value="${order.total}" /></td>
