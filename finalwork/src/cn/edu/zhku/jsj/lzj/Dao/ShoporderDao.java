@@ -29,7 +29,7 @@ public class ShoporderDao {
     		}
             Statement stmt = con.createStatement(); 
             Statement newstmt = con.createStatement(); 
-            String strSql = "select * from `order` where seller_id = '"+id+"' limit "+(pageNum-1) * pageBean.getPageSize()+","+pageBean.getPageSize();       
+            String strSql = "select * from `order` where seller_id = '"+id+"'";       
             String goods_id=null;
             ResultSet rs = stmt.executeQuery(strSql);  
             while (rs.next()) { 

@@ -331,7 +331,7 @@ $.ajax({
 						<tr>
 							<th colspan="3">共计：￥<label id="cc_total">总价</label>
 							</th>
-							<th colspan="2"><input type="submit" id="last" value="下单" disabled>
+							<th colspan="2"><input type="submit" id="last" value="下单" >
 							</th>
 						</tr>
 					</table>
